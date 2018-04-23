@@ -22,6 +22,7 @@ class App extends Component {
             <Navbar.Brand>
               <a href="#home">Scheduler</a>
             </Navbar.Brand>
+            <Navbar.Toggle/>
           </Navbar.Header>
           <Navbar.Collapse>
           <Nav>
