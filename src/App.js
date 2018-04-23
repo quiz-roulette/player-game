@@ -1,0 +1,65 @@
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import './App.css';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import {SignInComponent,SignUpComponent,CalendarComponent,ScheduleComponent,ScheduleListComponent} from './Components'
+
+class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      loginStatus: false,
+      username: ""
+    }
+    document.title = "Scheduler"
+  }
+  render() {
+    return (
+      <div className="App">
+        <Navbar collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="#home">Scheduler</a>
+            </Navbar.Brand>
+          </Navbar.Header>
+          <Navbar.Collapse>
+          <Nav>
+            <NavItem eventKey={1} href="/calendarview">
+              Calendar
+            </NavItem>
+          </Nav>
+          <Nav hidden={this.state.loginStatus} pullRight>
+            <NavItem eventKey={1} href="/login">
+              Login
+            </NavItem>
+            <NavItem eventKey={2} href="/signup">
+              Sign up
+            </NavItem>
+          </Nav>
+          <Nav hidden={!this.state.loginStatus} pullRight>
+            <NavItem eventKey={1} href="/profile">
+              {this.state.username}
+            </NavItem>
+          </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <Router>
+          <div>
+            <Switch>
+              <Route path="/" exact component={CalendarComponent} />
+              <Route path="/calendarview" exact component={CalendarComponent} />
+              <Route path="/schedule" exact component={ScheduleListComponent} />
+              <Route path="/login" exact component={SignInComponent} />
+              <Route path="/signup" exact component={SignUpComponent} />
+              <Redirect from="/old-match" to="/will-match" />
+              <Route path="/schedule/:id" component={ScheduleComponent} />
+            </Switch>
+          </div>
+        </Router>
+      </div>
+    );
+  }
+}
+
+export default App;
