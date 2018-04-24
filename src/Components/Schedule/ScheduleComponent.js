@@ -1,6 +1,54 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Col, Radio, FormControl, Checkbox, ControlLabel, Button } from 'react-bootstrap';
+import Server from '../API/server'
+
 class ScheduleComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.handleStartDateTimeChange = this.handleStartDateTimeChange.bind(this);
+        this.handleEndDateTimeChange = this.handleEndDateTimeChange.bind(this);
+        const { match: { params } } = props;
+        this.state = {
+            Id: params.id,
+            Customer: "CustomerName2",
+            Roles: "Company: APAC Head, Company: Admin Head",
+            ClientPartner: "1451370",
+            ISO: "Travel Industry, Manufacturing Industry",
+            Start: 1524360492816,
+            End: 1524360504859,
+            FollowUp: "yes, 29th April 12pm",
+            Solution: "Robotics, SMU Smart City - Elderly, SIA"
+        }
+
+        Server.getScheduleById(params.id).then((res) => {
+            var newdata = res.data;
+            var startdate = new Date(newdata.Start).toISOString();
+            var startdotindex = startdate.indexOf('.');
+            startdate = startdate.substring(0,startdotindex)
+            var enddate = new Date(newdata.End).toISOString();
+            var enddotindex = enddate.indexOf('.');
+            enddate = enddate.substring(0,enddotindex)
+            this.setState({
+                Customer: newdata.Customer,
+                Roles: newdata.Roles,
+                ClientPartner: newdata.ClientPartner,
+                ISO: newdata.ISO,
+                Start: startdate,
+                End: enddate,
+                FollowUp: newdata.FollowUp,
+                Solution: newdata.Solution
+            })
+        })
+    }
+
+    handleStartDateTimeChange(event){
+        this.setState({ Start: event.target.value})
+    }
+
+    handleEndDateTimeChange(event){
+        this.setState({ Start: event.target.value})
+    }
+
     render() {
         return (<Form horizontal>
             <FormGroup controlId="formControlsText">
@@ -8,7 +56,7 @@ class ScheduleComponent extends Component {
                     Customer
               </Col>
                 <Col sm={8}>
-                    <FormControl type="text" placeholder="Tata Consultancy Serviec" />
+                    <FormControl type="text" value={this.state.Customer} placeholder="Tata Consultancy Serviec" />
                 </Col>
             </FormGroup>
             <FormGroup controlId="formControlsText">
@@ -16,7 +64,7 @@ class ScheduleComponent extends Component {
                     Roles
               </Col>
                 <Col sm={8}>
-                    <FormControl type="text" placeholder="Smit: Intern, Jian Ming: Intern" />
+                    <FormControl type="text" value={this.state.Roles} placeholder="Smit: Intern, Jian Ming: Intern" />
                 </Col>
             </FormGroup>
             <FormGroup controlId="formControlsText">
@@ -24,7 +72,7 @@ class ScheduleComponent extends Component {
                     Client Partner
               </Col>
                 <Col sm={8}>
-                    <FormControl type="text" placeholder="Jay" />
+                    <FormControl type="text" value={this.state.ClientPartner} placeholder="Jay" />
                 </Col>
             </FormGroup>
             <FormGroup controlId="formControlsText">
@@ -32,7 +80,7 @@ class ScheduleComponent extends Component {
                     ISO
               </Col>
                 <Col sm={8}>
-                    <FormControl type="text" placeholder="Manufacturing" />
+                    <FormControl type="text" value={this.state.ISO} placeholder="Manufacturing" />
                 </Col>
             </FormGroup>
             <FormGroup controlId="formControlsText">
@@ -40,7 +88,7 @@ class ScheduleComponent extends Component {
                     Start
               </Col>
                 <Col sm={8}>
-                    <input type="datetime-local" />
+                    <input type="datetime-local" value={this.state.Start} onChange={this.handleStartDateTimeChange}/>
                 </Col>
             </FormGroup>
             <FormGroup controlId="formControlsText">
@@ -48,7 +96,7 @@ class ScheduleComponent extends Component {
                     End
               </Col>
                 <Col sm={8}>
-                    <input type="datetime-local" />
+                    <input type="datetime-local" value={this.state.End} onChange={this.handleEndDateTimeChange}/>
                 </Col>
             </FormGroup>
             <FormGroup controlId="formControlsText">
@@ -64,7 +112,7 @@ class ScheduleComponent extends Component {
                         </Radio>
                 </Col>
                 <Col sm={4}>
-                    <FormControl type="text" placeholder="Notes" />
+                    <FormControl type="text" placeholder="Notes" value={this.state.FollowUp}/>
                 </Col>
             </FormGroup>
 
@@ -73,7 +121,7 @@ class ScheduleComponent extends Component {
                     Solution
               </Col>
                 <Col sm={8}>
-                    <FormControl componentClass="textarea" placeholder="solutions presented" />
+                    <FormControl componentClass="textarea" value={this.state.Solution} placeholder="solutions presented" />
                 </Col>
             </FormGroup>
 

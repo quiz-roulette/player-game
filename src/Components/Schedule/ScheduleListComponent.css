@@ -1,0 +1,12 @@
+.listgroup{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.scheduleend,.schedulestart{
+    color: gray;
+}
+
+.scheduleend{
+    float: right;
+}
