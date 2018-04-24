@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Col,FormControl, Checkbox,ControlLabel,Button } from 'react-bootstrap';
+import { withRouter } from "react-router-dom";
 import Server from '../API/server'
 
 class SignUpComponent extends Component{
@@ -18,12 +19,14 @@ class SignUpComponent extends Component{
     }
 
     handleSignup(event){
+        event.preventDefault();
         if(this.state.userName !== "" && this.state.Email !== "" &&
         this.state.Password !==""){
-            Server.SignUp(this.state.userName,this.state.Email,this.state.Password).then((res) => {
+            Server.signup(this.state.userName,this.state.Password,this.state.Emai).then((res) => {
                 localStorage.setItem("l","true");
                 localStorage.setItem("u",this.state.userName);
                 localStorage.setItem("p",this.state.Password);
+                this.props.history.push("/schedule");
             })
         }
         
@@ -63,7 +66,7 @@ class SignUpComponent extends Component{
 
             <FormGroup controlId="formHorizontalText">
                 <Col componentClass={ControlLabel} sm={2}>
-                    userName
+                    Employer Id:
                 </Col>
                 <Col sm={10}>
                     <FormControl type="text" placeholder="userName" onChange={this.handleuserName}/>
@@ -87,7 +90,7 @@ class SignUpComponent extends Component{
 
             <FormGroup>
                 <Col smOffset={2} sm={10}>
-                    <Button type="submit" onSubmit={this.handleSignup}>Sign up</Button>
+                    <Button type="submit" onClick={this.handleSignup}>Sign up</Button>
                 </Col>
             </FormGroup>
         </Form>
@@ -95,4 +98,4 @@ class SignUpComponent extends Component{
     }
 }
 
-export default SignUpComponent;
+export default withRouter(SignUpComponent);

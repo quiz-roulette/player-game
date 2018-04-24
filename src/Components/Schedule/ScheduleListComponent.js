@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { withRouter } from "react-router-dom";
+import { Panel, Button, Glyphicon, Row, Col } from 'react-bootstrap';
 import Server from '../API/server'
 import './ScheduleListComponent.css'
 
@@ -11,9 +12,17 @@ class ScheduleListComponent extends Component {
         }
         Server.getScheduleByClient(localStorage.getItem("u")).then((res) => {
             console.log(res.data);
-            this.setState({ schedulelist: res.data})
-            
+            this.setState({ schedulelist: res.data })
+
         })
+    }
+
+    handleEdit(event) {
+        this.props.history.push("/schedule/" + event);
+    }
+
+    handleSend(event) {
+        console.log(event);
     }
 
     render() {
@@ -22,15 +31,37 @@ class ScheduleListComponent extends Component {
             element.Start = new Date(element.Start)
             element.End = new Date(element.End)
             rows.push(
-            <ListGroupItem key={element.Id} href={'/schedule/'+element.Id}>
-                <h4>{element.Customer}</h4>
-                <span className="schedulestart">Start: {element.Start.toString()}</span> <span className="scheduleend">End: {element.End.toString()}</span>
-            </ListGroupItem>)
+                <Panel bsStyle="info" key={element.Id} href={'/schedule/' + element.Id}>
+                    <Panel.Heading>
+                        <Panel.Title className="paneltitle" componentClass="h3">
+                            <Row className="show-grid">
+                                <Col xs={6} md={4}>
+                                    {element.Customer}
+                                </Col>
+                                <Col className="alignright" xs={12} md={8}>
+                                    <Glyphicon className="gly" glyph="pencil" onClick={() => this.handleEdit(element.Id)} />
+                                    &nbsp;&nbsp;&nbsp;
+                                    <Glyphicon className="gly" glyph="envelope" onClick={() => this.handleSend(element.Id)} />
+                                </Col>
+                            </Row>
+                        </Panel.Title>
+                    </Panel.Heading>
+                    <Panel.Body><span className="schedulestart">Start: {element.Start.toString()}</span> <span className="scheduleend">End: {element.End.toString()}</span></Panel.Body>
+                </Panel>)
         })
-        return (<ListGroup className="listgroup">
+        if(rows.length > 0) return this.renderWithList(rows);
+        else return this.renderNoList();
+    }
+
+    renderNoList() {
+        return (<h4>No List Found</h4>);
+    }
+
+    renderWithList(rows) {
+        return (<div className="listgroup">
             {rows}
-        </ListGroup>);
+        </div>);
     }
 }
 
-export default ScheduleListComponent;
+export default withRouter(ScheduleListComponent);

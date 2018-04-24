@@ -10,3 +10,14 @@
 .scheduleend{
     float: right;
 }
+
+.buttontitle{
+    text-align: right;
+}
+.alignright{
+    text-align: right;
+}
+
+.gly,.sendreportbtn{
+    display: inline-block;
+}

@@ -69,7 +69,7 @@ class SignInComponent extends Component {
         return (<Form horizontal>
             <FormGroup controlId="formHorizontalText">
                 <Col componentClass={ControlLabel} sm={2}>
-                    Username
+                    Employer Id:
                 </Col>
                 <Col sm={10}>
                     <FormControl type="text" placeholder="userName" onChange={this.handleuserName} />
