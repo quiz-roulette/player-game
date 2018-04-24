@@ -14,6 +14,14 @@ class App extends Component {
     }
     document.title = "Scheduler"
   }
+
+  updateLoginStatus(val){
+    console.log("Parent: ", val);
+    this.setState((props,prev) => {
+      loginStatus: val
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -51,7 +59,7 @@ class App extends Component {
               <Route path="/" exact component={CalendarComponent} />
               <Route path="/calendarview" exact component={CalendarComponent} />
               <Route path="/schedule" exact component={ScheduleListComponent} />
-              <Route path="/login" exact component={SignInComponent} />
+              <Route path="/login" exact component={SignInComponent} UpdateLoginStatus={this.updateLoginStatus}/>
               <Route path="/signup" exact component={SignUpComponent} />
               <Redirect from="/old-match" to="/will-match" />
               <Route path="/schedule/:id" component={ScheduleComponent} />

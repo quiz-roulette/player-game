@@ -6,17 +6,17 @@ class Server {
     }
     
     static signin(username, password){
-        return axios.get("https://bcsechdularapp.azurewebsites.net"+"/authenticate?username="+username+"&password="+password);
+        return axios.post("https://bcsechdularapp.azurewebsites.net"+"/authenticate",{Username: username, Password: password});
     }
 
     static signup(username, password, email){
-        return axios.post("https://bcsechdularapp.azurewebsites.net"+"/authenticate",{Username: username, Password: password, Email: email});
+        return axios.post("https://bcsechdularapp.azurewebsites.net"+"/addUser",{Username: username, Password: password, Email: email});
     }
 
     static getAllSchedule(){
         return axios.get("https://bcsechdularapp.azurewebsites.net"+"/getallschedule");
     }
-
+    
     static getScheduleByClient(clientPartner){
         return axios.get("https://bcsechdularapp.azurewebsites.net"+"/getschedulebyclientpartner?clientpartner="+clientPartner);
     }
