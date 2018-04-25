@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Col, Radio, FormControl, Checkbox, ControlLabel, Button } from 'react-bootstrap';
+import { withRouter } from "react-router-dom";
 import Server from '../API/server'
 
 class ScheduleComponent extends Component {
@@ -7,27 +8,37 @@ class ScheduleComponent extends Component {
         super(props);
         this.handleStartDateTimeChange = this.handleStartDateTimeChange.bind(this);
         this.handleEndDateTimeChange = this.handleEndDateTimeChange.bind(this);
+        this.handleClientPartnerChange = this.handleClientPartnerChange.bind(this);
+        this.handleCustomerChange = this.handleCustomerChange.bind(this);
+        this.handleFollowUpChange = this.handleFollowUpChange.bind(this);
+        this.handleISOChange = this.handleISOChange.bind(this);
+        this.handleRoleChange = this.handleRoleChange.bind(this);
+        this.handleSolutionChange = this.handleScheduleSubmission.bind(this);
+        this.handleScheduleSubmission = this.handleScheduleSubmission.bind(this);
+
         const { match: { params } } = props;
+        var id = params.id == "new" ? null : params.id
+
         this.state = {
-            Id: params.id,
-            Customer: "CustomerName2",
-            Roles: "Company: APAC Head, Company: Admin Head",
-            ClientPartner: "1451370",
-            ISO: "Travel Industry, Manufacturing Industry",
-            Start: 1524360492816,
-            End: 1524360504859,
-            FollowUp: "yes, 29th April 12pm",
-            Solution: "Robotics, SMU Smart City - Elderly, SIA"
+            Id: id,
+            Customer: "",
+            Roles: "",
+            ClientPartner: "",
+            ISO: "",
+            Start: 0,
+            End: 0,
+            FollowUp: "",
+            Solution: ""
         }
 
         Server.getScheduleById(params.id).then((res) => {
             var newdata = res.data;
             var startdate = new Date(newdata.Start).toISOString();
             var startdotindex = startdate.indexOf('.');
-            startdate = startdate.substring(0,startdotindex)
+            startdate = startdate.substring(0, startdotindex)
             var enddate = new Date(newdata.End).toISOString();
             var enddotindex = enddate.indexOf('.');
-            enddate = enddate.substring(0,enddotindex)
+            enddate = enddate.substring(0, enddotindex)
             this.setState({
                 Customer: newdata.Customer,
                 Roles: newdata.Roles,
@@ -41,13 +52,55 @@ class ScheduleComponent extends Component {
         })
     }
 
-    handleStartDateTimeChange(event){
-        this.setState({ Start: event.target.value})
+    handleStartDateTimeChange(event) {
+        this.setState({ Start: event.target.value })
     }
 
-    handleEndDateTimeChange(event){
-        this.setState({ Start: event.target.value})
+    handleEndDateTimeChange(event) {
+        this.setState({ End: event.target.value })
     }
+
+    handleCustomerChange(event) {
+        this.setState({ Customer: event.target.value })
+    }
+    handleRoleChange(event) {
+        this.setState({ Roles: event.target.value })
+    }
+    handleClientPartnerChange(event) {
+        this.setState({ ClientPartner: event.target.value })
+    }
+    handleISOChange(event) {
+        this.setState({ ISO: event.target.value })
+    }
+    handleFollowUpChange(event) {
+        this.setState({ FollowUp: event.target.value })
+    }
+    handleSolutionChange(event) {
+        this.setState({ Solution: event.target.value })
+    }
+    handleScheduleSubmission(event) {
+        event.preventDefault();
+        var startDate = new Date(this.state.Start);
+        var endDate = new Date(this.state.End);
+        this.setState({ Start: startDate.getTime() });
+        this.setState({ End: endDate.getTime() });
+        if (this.state.Customer != "") {
+            if (this.state.Id != null) {
+                Server.updateSchedule(this.state).then((res) => {
+                    console.log(res);
+                    this.props.history.push("/schedule");
+                })
+            }
+            else {
+                Server.addSchedule(this.state).then((res) => {
+                    console.log(res);
+                    this.props.history.push("/schedule");
+                })
+            }
+        }
+    }
+
+
 
     render() {
         return (<Form horizontal>
@@ -56,7 +109,7 @@ class ScheduleComponent extends Component {
                     Customer
               </Col>
                 <Col sm={8}>
-                    <FormControl type="text" value={this.state.Customer} placeholder="Tata Consultancy Serviec" />
+                    <FormControl type="text" value={this.state.Customer} onChange={this.handleCustomerChange} placeholder="Tata Consultancy Serviec" />
                 </Col>
             </FormGroup>
             <FormGroup controlId="formControlsText">
@@ -64,7 +117,7 @@ class ScheduleComponent extends Component {
                     Roles
               </Col>
                 <Col sm={8}>
-                    <FormControl type="text" value={this.state.Roles} placeholder="Smit: Intern, Jian Ming: Intern" />
+                    <FormControl type="text" value={this.state.Roles} onChange={this.handleRoleChange} placeholder="Smit: Intern, Jian Ming: Intern" />
                 </Col>
             </FormGroup>
             <FormGroup controlId="formControlsText">
@@ -72,7 +125,7 @@ class ScheduleComponent extends Component {
                     Client Partner
               </Col>
                 <Col sm={8}>
-                    <FormControl type="text" value={this.state.ClientPartner} placeholder="Jay" />
+                    <FormControl type="text" value={this.state.ClientPartner} onChange={this.handleClientPartnerChange} placeholder="Jay" />
                 </Col>
             </FormGroup>
             <FormGroup controlId="formControlsText">
@@ -80,7 +133,7 @@ class ScheduleComponent extends Component {
                     ISO
               </Col>
                 <Col sm={8}>
-                    <FormControl type="text" value={this.state.ISO} placeholder="Manufacturing" />
+                    <FormControl type="text" value={this.state.ISO} onChange={this.handleISOChange} placeholder="Manufacturing" />
                 </Col>
             </FormGroup>
             <FormGroup controlId="formControlsText">
@@ -88,7 +141,7 @@ class ScheduleComponent extends Component {
                     Start
               </Col>
                 <Col sm={8}>
-                    <input type="datetime-local" value={this.state.Start} onChange={this.handleStartDateTimeChange}/>
+                    <input type="datetime-local" value={this.state.Start} onChange={this.handleStartDateTimeChange} />
                 </Col>
             </FormGroup>
             <FormGroup controlId="formControlsText">
@@ -96,7 +149,7 @@ class ScheduleComponent extends Component {
                     End
               </Col>
                 <Col sm={8}>
-                    <input type="datetime-local" value={this.state.End} onChange={this.handleEndDateTimeChange}/>
+                    <input type="datetime-local" value={this.state.End} onChange={this.handleEndDateTimeChange} />
                 </Col>
             </FormGroup>
             <FormGroup controlId="formControlsText">
@@ -112,7 +165,7 @@ class ScheduleComponent extends Component {
                         </Radio>
                 </Col>
                 <Col sm={4}>
-                    <FormControl type="text" placeholder="Notes" value={this.state.FollowUp}/>
+                    <FormControl type="text" value={this.state.FollowUp} onChange={this.handleFollowUpChange} placeholder="Notes" />
                 </Col>
             </FormGroup>
 
@@ -121,17 +174,17 @@ class ScheduleComponent extends Component {
                     Solution
               </Col>
                 <Col sm={8}>
-                    <FormControl componentClass="textarea" value={this.state.Solution} placeholder="solutions presented" />
+                    <FormControl componentClass="textarea" value={this.state.Solution} onChange={this.handleSolutionChange} placeholder="solutions presented" />
                 </Col>
             </FormGroup>
 
             <FormGroup>
                 <Col smOffset={2} sm={8}>
-                    <Button type="submit">Save</Button>
+                    <Button type="submit" onClick={this.handleScheduleSubmission} >Save</Button>
                 </Col>
             </FormGroup>
         </Form>)
     }
 }
 
-export default ScheduleComponent;
+export default withRouter(ScheduleComponent);

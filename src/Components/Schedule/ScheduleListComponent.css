@@ -21,3 +21,7 @@
 .gly,.sendreportbtn{
     display: inline-block;
 }
+
+.newbutton{
+    float: right;
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter,Link } from "react-router-dom";
 import { Panel, Button, Glyphicon, Row, Col } from 'react-bootstrap';
 import Server from '../API/server'
 import './ScheduleListComponent.css'
@@ -54,11 +54,19 @@ class ScheduleListComponent extends Component {
     }
 
     renderNoList() {
-        return (<h4>No List Found</h4>);
+        return (<div className="listgroup">
+        <Link to='/schedule/new' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>
+            <Button className="newbutton">New</Button>
+        </Link><br/><br/>
+        <p>No Schedule Found.</p>
+    </div>);
     }
 
     renderWithList(rows) {
         return (<div className="listgroup">
+        <Link to='/schedule/new' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>
+            <Button className="newbutton">New</Button>
+        </Link><br/><br/>
             {rows}
         </div>);
     }
