@@ -32,6 +32,10 @@ class Server {
     static updateSchedule(schedule){
         return axios.post("https://bcsechdularapp.azurewebsites.net"+"/updateschedule",schedule);
     }
+
+    static sendReport(id){
+        return axios.get("https://bcsechdularapp.azurewebsites.net"+"/sendreport/"+id);
+    }
 }
 
 export default Server;

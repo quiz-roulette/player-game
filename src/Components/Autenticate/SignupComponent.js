@@ -22,7 +22,7 @@ class SignUpComponent extends Component{
         event.preventDefault();
         if(this.state.userName !== "" && this.state.Email !== "" &&
         this.state.Password !==""){
-            Server.signup(this.state.userName,this.state.Password,this.state.Emai).then((res) => {
+            Server.signup(this.state.userName,this.state.Password,this.state.Email).then((res) => {
                 localStorage.setItem("l","true");
                 localStorage.setItem("u",this.state.userName);
                 localStorage.setItem("p",this.state.Password);

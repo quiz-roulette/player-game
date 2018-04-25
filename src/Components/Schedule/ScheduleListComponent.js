@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter,Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { Panel, Button, Glyphicon, Row, Col } from 'react-bootstrap';
 import Server from '../API/server'
 import './ScheduleListComponent.css'
@@ -8,7 +8,9 @@ class ScheduleListComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            schedulelist: []
+            schedulelist: [],
+            loading: false,
+            loadingMesage: ""
         }
         Server.getScheduleByClient(localStorage.getItem("u")).then((res) => {
             console.log(res.data);
@@ -22,7 +24,13 @@ class ScheduleListComponent extends Component {
     }
 
     handleSend(event) {
-        console.log(event);
+        this.setState({ loading: true });
+        this.setState({ loadingMesage: "Sending Report" });
+        Server.sendReport(event).then((res) => {
+            alert(res.data);
+            this.setState({ loading: false });
+            this.setState({ loadingMesage: "" });
+        })
     }
 
     render() {
@@ -49,24 +57,26 @@ class ScheduleListComponent extends Component {
                     <Panel.Body><span className="schedulestart">Start: {element.Start.toString()}</span> <span className="scheduleend">End: {element.End.toString()}</span></Panel.Body>
                 </Panel>)
         })
-        if(rows.length > 0) return this.renderWithList(rows);
+        if (rows.length > 0) return this.renderWithList(rows);
         else return this.renderNoList();
     }
 
     renderNoList() {
         return (<div className="listgroup">
-        <Link to='/schedule/new' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>
-            <Button className="newbutton">New</Button>
-        </Link><br/><br/>
-        <p>No Schedule Found.</p>
-    </div>);
+            {this.state.loadingMesage}
+            <Link to='/schedule/new' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>
+                <Button className="newbutton">New</Button>
+            </Link><br /><br />
+            <p>No Schedule Found.</p>
+        </div>);
     }
 
     renderWithList(rows) {
         return (<div className="listgroup">
-        <Link to='/schedule/new' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>
-            <Button className="newbutton">New</Button>
-        </Link><br/><br/>
+            {this.state.loadingMesage}
+            <Link to='/schedule/new' style={{ textDecoration: 'none', textDecorationColor: 'black' }}>
+                <Button className="newbutton">New</Button>
+            </Link><br /><br />
             {rows}
         </div>);
     }
