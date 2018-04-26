@@ -30,26 +30,27 @@ class ScheduleComponent extends Component {
             FollowUp: "",
             Solution: ""
         }
-
-        Server.getScheduleById(params.id).then((res) => {
-            var newdata = res.data;
-            var startdate = new Date(newdata.Start).toISOString();
-            var startdotindex = startdate.indexOf('.');
-            startdate = startdate.substring(0, startdotindex)
-            var enddate = new Date(newdata.End).toISOString();
-            var enddotindex = enddate.indexOf('.');
-            enddate = enddate.substring(0, enddotindex)
-            this.setState({
-                Customer: newdata.Customer,
-                Roles: newdata.Roles,
-                ClientPartner: newdata.ClientPartner,
-                ISO: newdata.ISO,
-                Start: startdate,
-                End: enddate,
-                FollowUp: newdata.FollowUp,
-                Solution: newdata.Solution
+        if (this.state.id != null) {
+            Server.getScheduleById(params.id).then((res) => {
+                var newdata = res.data;
+                var startdate = new Date(newdata.Start).toISOString();
+                var startdotindex = startdate.indexOf('.');
+                startdate = startdate.substring(0, startdotindex)
+                var enddate = new Date(newdata.End).toISOString();
+                var enddotindex = enddate.indexOf('.');
+                enddate = enddate.substring(0, enddotindex)
+                this.setState({
+                    Customer: newdata.Customer,
+                    Roles: newdata.Roles,
+                    ClientPartner: newdata.ClientPartner,
+                    ISO: newdata.ISO,
+                    Start: startdate,
+                    End: enddate,
+                    FollowUp: newdata.FollowUp,
+                    Solution: newdata.Solution
+                })
             })
-        })
+        }
     }
 
     handleStartDateTimeChange(event) {
