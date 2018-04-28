@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, FormGroup, Col, FormControl, Checkbox, ControlLabel, Button } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import Server from '../API/server'
+import './Common.css';
 
 class SignInComponent extends Component {
     constructor(props) {
@@ -66,60 +67,66 @@ class SignInComponent extends Component {
     }
 
     renderForm() {
-        return (<Form horizontal>
+        return (
+        <div className="authenticateform">
+        <Form horizontal>
             <FormGroup controlId="formHorizontalText">
-                <Col componentClass={ControlLabel} sm={2}>
+                <Col componentClass={ControlLabel} sm={3}>
                     Employer Id:
                 </Col>
-                <Col sm={10}>
-                    <FormControl type="text" placeholder="userName" onChange={this.handleuserName} />
+                <Col sm={9}>
+                    <FormControl type="text" placeholder="employee id" onChange={this.handleuserName} />
                 </Col>
             </FormGroup>
 
             <FormGroup controlId="formHorizontalPassword">
-                <Col componentClass={ControlLabel} sm={2}>
+                <Col componentClass={ControlLabel} sm={3}>
                     Password
                 </Col>
-                <Col sm={10}>
+                <Col sm={9}>
                     <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
                 </Col>
             </FormGroup>
 
             <FormGroup>
-                <Col smOffset={2} sm={10}>
+                <Col smOffset={3} sm={8}>
                     <Button onClick={this.handleLogIn}>Sign in</Button>
                 </Col>
             </FormGroup>
         </Form>
+        </div>
         );
     }
 
     renderLoading() {
-        return (<Form horizontal>
+        return (
+            <div className="authenticateform">
+        <Form horizontal>
             <FormGroup controlId="formHorizontalText">
-                <Col componentClass={ControlLabel} sm={2}>
-                    Username
+                <Col componentClass={ControlLabel} sm={3}>
+                    Employer Id
                 </Col>
-                <Col sm={10}>
-                    <FormControl type="text" placeholder="userName" onChange={this.handleuserName} />
+                <Col sm={9}>
+                    <FormControl type="text" placeholder="employer id" onChange={this.handleuserName} />
                 </Col>
             </FormGroup>
 
             <FormGroup controlId="formHorizontalPassword">
-                <Col componentClass={ControlLabel} sm={2}>
+                <Col componentClass={ControlLabel} sm={3}>
                     Password
                 </Col>
-                <Col sm={10}>
+                <Col sm={9}>
                     <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
                 </Col>
             </FormGroup>
 
             <FormGroup>
-                <Col smOffset={2} sm={10}>
+                <Col smOffset={2} sm={9}>
                     <Button type="submit" disabled>Loading</Button>
                 </Col>
             </FormGroup>
-        </Form>)
+        </Form>
+        </div>)
     }
 }
 

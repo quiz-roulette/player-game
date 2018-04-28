@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Col,FormControl, Checkbox,ControlLabel,Button } from 'react-bootstrap';
+import { Form, FormGroup, Col, FormControl, Checkbox, ControlLabel, Button } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import Server from '../API/server'
+import './Common.css'
 
-class SignUpComponent extends Component{
-    constructor(){
+class SignUpComponent extends Component {
+    constructor() {
         super();
         this.handleSignup = this.handleSignup.bind(this);
         this.handleuserName = this.handleuserName.bind(this);
@@ -14,87 +15,109 @@ class SignUpComponent extends Component{
         this.state = {
             userName: "",
             Password: "",
-            Email: ""
+            Email: "",
+            ConfirmPassword: ""
         };
     }
 
-    handleSignup(event){
+    handleSignup(event) {
         event.preventDefault();
-        if(this.state.userName !== "" && this.state.Email !== "" &&
-        this.state.Password !==""){
-            Server.signup(this.state.userName,this.state.Password,this.state.Email).then((res) => {
-                localStorage.setItem("l","true");
-                localStorage.setItem("u",this.state.userName);
-                localStorage.setItem("p",this.state.Password);
-                this.props.history.push("/schedule");
-            })
+        if (this.state.userName !== "" && this.state.Email !== "" &&
+            this.state.Password !== "") {
+            if (this.state.Password === this.state.ConfirmPassword) {
+                Server.signup(this.state.userName, this.state.Password, this.state.Email).then((res) => {
+                    localStorage.setItem("l", "true");
+                    localStorage.setItem("u", this.state.userName);
+                    localStorage.setItem("p", this.state.Password);
+                    this.props.history.push("/schedule");
+                })
+            }
         }
-        
+
     }
 
-    handleuserName(event){
+    handleuserName(event) {
         const un = event.target.value;
         this.setState((prevState, props) => ({
             userName: un
         }));
     }
 
-    handleEmail(event){
+    handleEmail(event) {
         const em = event.target.value;
         this.setState((prevState, props) => ({
             Email: em
         }));
     }
 
-    handlePassword(event){
+    handlePassword(event) {
         const pw = event.target.value;
         this.setState((prevState, props) => ({
             Password: pw
         }));
     }
 
+    handleConfirmPassword(event) {
+        const pw = event.target.value;
+        this.setState((prevState, props) => ({
+            ConfirmPassword: pw
+        }));
+    }
+
     render() {
-        return (<Form horizontal>
+        return (
+        <div className="authenticateform">
+        <Form horizontal>
             <FormGroup controlId="formHorizontalEmail">
-                <Col componentClass={ControlLabel} sm={2}>
+                <Col componentClass={ControlLabel} sm={3}>
                     Email
                 </Col>
-                <Col sm={10}>
-                    <FormControl type="email" placeholder="Email" onChange={this.handleEmail}/>
+                <Col sm={9}>
+                    <FormControl type="email" placeholder="Email" onChange={this.handleEmail} />
                 </Col>
             </FormGroup>
 
             <FormGroup controlId="formHorizontalText">
-                <Col componentClass={ControlLabel} sm={2}>
-                    Employer Id:
+                <Col componentClass={ControlLabel} sm={3}>
+                    Employer Id
                 </Col>
-                <Col sm={10}>
-                    <FormControl type="text" placeholder="userName" onChange={this.handleuserName}/>
+                <Col sm={9}>
+                    <FormControl type="text" placeholder="employee id" onChange={this.handleuserName} />
                 </Col>
             </FormGroup>
 
             <FormGroup controlId="formHorizontalPassword">
-                <Col componentClass={ControlLabel} sm={2}>
+                <Col componentClass={ControlLabel} sm={3}>
                     Password
                 </Col>
-                <Col sm={10}>
-                    <FormControl type="password" placeholder="Password" onChange={this.handlePassword}/>
+                <Col sm={9}>
+                    <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
                 </Col>
             </FormGroup>
 
-            <FormGroup>
-                <Col smOffset={2} sm={10}>
+            <FormGroup controlId="formHorizontalPassword">
+                <Col componentClass={ControlLabel} sm={3}>
+                    ConfirmPassword
+                </Col>
+                <Col sm={9}>
+                    <FormControl type="password" placeholder="Confirm Password" onChange={this.handleConfirmPassword} />
+                </Col>
+            </FormGroup>
+
+            {/* <FormGroup>
+                <Col smOffset={2} sm={9}>
                     <Checkbox>Remember me</Checkbox>
                 </Col>
-            </FormGroup>
+            </FormGroup> */}
 
             <FormGroup>
-                <Col smOffset={2} sm={10}>
+                <Col smOffset={6} sm={2}>
                     <Button type="submit" onClick={this.handleSignup}>Sign up</Button>
                 </Col>
             </FormGroup>
         </Form>
-         ); 
+        </div>
+        );
     }
 }
 
