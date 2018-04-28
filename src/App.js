@@ -53,7 +53,7 @@ class App extends Component {
           </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <Router history={hashHistory}>
+        <Router>
           <div>
             <Switch>
               <Route path="/" exact component={CalendarComponent} />
