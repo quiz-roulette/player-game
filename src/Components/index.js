@@ -3,11 +3,14 @@ import SignUpComponent from './Autenticate/SignupComponent'
 import CalendarComponent from './Calendar/CalendarComponent'
 import ScheduleListComponent from './Schedule/ScheduleListComponent'
 import ScheduleComponent from './Schedule/ScheduleComponent'
-
+import PasswordComponent from './Autenticate/PasswordComponent'
+import ResetComponent from './Autenticate/ResetComponent'
 export{
     SignInComponent,
     SignUpComponent,
     CalendarComponent,
     ScheduleComponent,
-    ScheduleListComponent
+    ScheduleListComponent,
+    PasswordComponent,
+    ResetComponent	
 }

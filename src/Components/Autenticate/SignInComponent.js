@@ -3,6 +3,7 @@ import { Form, FormGroup, Col, FormControl, Checkbox, ControlLabel, Button } fro
 import { withRouter } from "react-router-dom";
 import Server from '../API/server'
 import './Common.css';
+import { Link } from 'react-router-dom'
 
 class SignInComponent extends Component {
     constructor(props) {
@@ -87,7 +88,11 @@ class SignInComponent extends Component {
                     <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
                 </Col>
             </FormGroup>
-
+		<FormGroup>
+		<Col smOffset={2} sm={9}>
+                    <Link to='/forgetPassword'>Forget Password</Link>
+                </Col>
+	    </FormGroup>
             <FormGroup>
                 <Col smOffset={3} sm={8}>
                     <Button onClick={this.handleLogIn}>Sign in</Button>
@@ -119,7 +124,11 @@ class SignInComponent extends Component {
                     <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
                 </Col>
             </FormGroup>
-
+	    <FormGroup>
+		<Col smOffset={2} sm={9}>
+                    <Link to='/forgetPassword'>Forget Password</Link>
+                </Col>
+	    </FormGroup>
             <FormGroup>
                 <Col smOffset={2} sm={9}>
                     <Button type="submit" disabled>Loading</Button>

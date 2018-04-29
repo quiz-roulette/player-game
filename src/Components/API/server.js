@@ -36,6 +36,12 @@ class Server {
     static sendReport(id){
         return axios.get("https://bcsechdularapp.azurewebsites.net"+"/sendreport/"+id);
     }
+    static getAccountByName(id){
+        return axios.get("https://bcsechdularapp.azurewebsites.net"+"/forgetPassword/"+id);
+    }
+    static ResetAccountPassword(password,code){
+        return axios.post("https://bcsechdularapp.azurewebsites.net"+"/resetPassword",{Password: password, Code: code});
+    }
 }
 
 export default Server;

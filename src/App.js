@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import {SignInComponent,SignUpComponent,CalendarComponent,ScheduleComponent,ScheduleListComponent} from './Components'
+import {SignInComponent,SignUpComponent,CalendarComponent,ScheduleComponent,ScheduleListComponent,PasswordComponent,ResetComponent} from './Components'
 
 class App extends Component {
   constructor(){
@@ -63,6 +63,8 @@ class App extends Component {
               <Route path="/signup" exact component={SignUpComponent} />
               <Redirect from="/old-match" to="/will-match" />
               <Route path="/schedule/:id" component={ScheduleComponent} />
+	      <Route path='/forgetPassword' component={PasswordComponent}/>
+	      <Route path="/resetPassword/:uniquecode" component={ResetComponent}/>
             </Switch>
           </div>
         </Router>

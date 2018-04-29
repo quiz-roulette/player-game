@@ -11,6 +11,7 @@ class SignUpComponent extends Component {
         this.handleuserName = this.handleuserName.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
+	this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
 
         this.state = {
             userName: "",
