@@ -69,73 +69,73 @@ class SignInComponent extends Component {
 
     renderForm() {
         return (
-        <div className="authenticateform">
-        <Form horizontal>
-            <FormGroup controlId="formHorizontalText">
-                <Col componentClass={ControlLabel} sm={3}>
-                    Employer Id:
-                </Col>
-                <Col sm={9}>
-                    <FormControl type="text" placeholder="employee id" onChange={this.handleuserName} />
-                </Col>
-            </FormGroup>
+            <div className="authenticateform">
+                <Form horizontal>
+                    <FormGroup controlId="formHorizontalText">
+                        <Col componentClass={ControlLabel} sm={3}>
+                            Employer Id:
+                        </Col>
+                        <Col sm={9}>
+                            <FormControl type="text" placeholder="employee id" onChange={this.handleuserName} />
+                        </Col>
+                    </FormGroup>
 
-            <FormGroup controlId="formHorizontalPassword">
-                <Col componentClass={ControlLabel} sm={3}>
-                    Password
-                </Col>
-                <Col sm={9}>
-                    <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
-                </Col>
-            </FormGroup>
-		<FormGroup>
-		<Col smOffset={2} sm={9}>
-                    <Link to='/forgetPassword'>Forget Password</Link>
-                </Col>
-	    </FormGroup>
-            <FormGroup>
-                <Col smOffset={3} sm={8}>
-                    <Button onClick={this.handleLogIn}>Sign in</Button>
-                </Col>
-            </FormGroup>
-        </Form>
-        </div>
+                    <FormGroup controlId="formHorizontalPassword">
+                        <Col componentClass={ControlLabel} sm={3}>
+                            Password
+                        </Col>
+                        <Col sm={9}>
+                            <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup>
+                        <Col smOffset={2} sm={9}>
+                            <Link to='/forgetPassword'>Forget Password</Link>
+                        </Col>
+                    </FormGroup>
+                    <FormGroup>
+                        <Col smOffset={3} sm={8}>
+                            <Button onClick={this.handleLogIn}>Sign in</Button>
+                        </Col>
+                    </FormGroup>
+                </Form>
+            </div>
         );
     }
 
     renderLoading() {
         return (
             <div className="authenticateform">
-        <Form horizontal>
-            <FormGroup controlId="formHorizontalText">
-                <Col componentClass={ControlLabel} sm={3}>
-                    Employer Id
+                <Form horizontal>
+                    <FormGroup controlId="formHorizontalText">
+                        <Col componentClass={ControlLabel} sm={3}>
+                            Employer Id
                 </Col>
-                <Col sm={9}>
-                    <FormControl type="text" placeholder="employer id" onChange={this.handleuserName} />
-                </Col>
-            </FormGroup>
+                        <Col sm={9}>
+                            <FormControl type="text" placeholder="employer id" onChange={this.handleuserName} />
+                        </Col>
+                    </FormGroup>
 
-            <FormGroup controlId="formHorizontalPassword">
-                <Col componentClass={ControlLabel} sm={3}>
-                    Password
+                    <FormGroup controlId="formHorizontalPassword">
+                        <Col componentClass={ControlLabel} sm={3}>
+                            Password
                 </Col>
-                <Col sm={9}>
-                    <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
-                </Col>
-            </FormGroup>
-	    <FormGroup>
-		<Col smOffset={2} sm={9}>
-                    <Link to='/forgetPassword'>Forget Password</Link>
-                </Col>
-	    </FormGroup>
-            <FormGroup>
-                <Col smOffset={2} sm={9}>
-                    <Button type="submit" disabled>Loading</Button>
-                </Col>
-            </FormGroup>
-        </Form>
-        </div>)
+                        <Col sm={9}>
+                            <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup>
+                        <Col smOffset={2} sm={9}>
+                            <Link to='/forgetPassword'>Forget Password</Link>
+                        </Col>
+                    </FormGroup>
+                    <FormGroup>
+                        <Col smOffset={2} sm={9}>
+                            <Button type="submit" disabled>Loading</Button>
+                        </Col>
+                    </FormGroup>
+                </Form>
+            </div>)
     }
 }
 

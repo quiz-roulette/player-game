@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Col, FormControl, Checkbox, ControlLabel, Button } from 'react-bootstrap';
-import { withRouter,Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import Server from '../API/server'
 import './Common.css';
 
@@ -41,27 +41,27 @@ class PasswordComponent extends Component {
                 console.log('N', res);
                 if (res.data === true || res.data === "true") {
                     // this.props.history.push("/");
-                    this.setState({ status: 'success'});
+                    this.setState({ status: 'success' });
                 }
                 else {
-                    this.setState({ status: 'failure'});
+                    this.setState({ status: 'failure' });
                 }
             }).catch((err) => {
-                this.setState({ status: 'failure'});
+                this.setState({ status: 'failure' });
             })
         }
-        else{
-            this.setState({ status: 'failure'});
+        else {
+            this.setState({ status: 'failure' });
         }
     }
     render() {
-        if(this.state.status == "new"){
+        if (this.state.status == "new") {
             return this.renderForm();
         }
-        else if(this.state.status == "success"){
+        else if (this.state.status == "success") {
             return this.renderSuccess();
         }
-        else{
+        else {
             return this.renderFailure();
         }
     }
@@ -78,7 +78,7 @@ class PasswordComponent extends Component {
                         </Col>
                         <Col componentClass={ControlLabel} sm={3}>
                             New Password
-                </Col>
+                        </Col>
                         <Col sm={9}>
                             <FormControl type="password" placeholder="Password" onChange={this.handleNewPassword} />
                         </Col>
@@ -86,7 +86,7 @@ class PasswordComponent extends Component {
                     <FormGroup controlId="formHorizontalPassword">
                         <Col componentClass={ControlLabel} sm={3}>
                             ConfirmPassword
-                </Col>
+                        </Col>
                         <Col sm={9}>
                             <FormControl type="password" placeholder="Confirm Password" onChange={this.handleConfirmPassword} />
                         </Col>
