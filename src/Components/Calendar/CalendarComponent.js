@@ -45,7 +45,7 @@ class CalendarComponent extends Component {
                     }}
                     aspectRatio={1}
                     defaultDate={date}
-                    defaultView="agendaWeek"
+                    defaultView="month"
                     navLinks={true} // can click day/week names to navigate views
                     editable={true}
                     eventLimit={true} // allow "more" link when too many events
