@@ -2,4 +2,12 @@
     width: 95%;
     margin: auto;
     text-align: center;
+    background-repeat: no-repeat;
+    background-repeat: space;
+    background-color: transparent;
+}
+
+.tatalogo{
+    height: 10%;
+    width: 20%;
 }
