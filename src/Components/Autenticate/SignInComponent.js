@@ -88,11 +88,12 @@ class SignInComponent extends Component {
                             <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
                         </Col>
                     </FormGroup>
-                    <FormGroup>
-                        <Col xs={6} md={4}>
+                    <FormGroup controlId="formHorizontalPassword">
+                        <Col xsHidden componentClass={ControlLabel} sm={3}></Col>
+                        <Col xs={6} sm={3}>
                             <Link to='/forgetPassword'>Forget Password</Link>
                         </Col>
-                        <Col xs={6} md={4} className="floatright">
+                        <Col xs={6} sm={6} className="floatright">
                             <Link to='/signup'>Create Account</Link>
                         </Col>
                     </FormGroup>

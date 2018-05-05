@@ -4,15 +4,13 @@
     text-align: center;
     background: transparent;
 }
+.img-responsive{
+    margin: auto;
+}
 
 .title{
     text-align: center;
     clear:left; 
-}
-
-.tatalogo{
-    /* height: 5%;
-    width: 10%; */
 }
 
 /*
