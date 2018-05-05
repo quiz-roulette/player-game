@@ -6,6 +6,7 @@ import ScheduleComponent from './Schedule/ScheduleComponent'
 import PasswordComponent from './Autenticate/PasswordComponent'
 import ResetComponent from './Autenticate/ResetComponent'
 import HomeComponent from './Home/HomeComponent'
+import NotFoundComponent from './NotFound/NotFoundComponent'
 
 export{
     SignInComponent,
@@ -15,5 +16,6 @@ export{
     ScheduleListComponent,
     PasswordComponent,
     ResetComponent,
-    HomeComponent
+    HomeComponent,
+    NotFoundComponent
 }

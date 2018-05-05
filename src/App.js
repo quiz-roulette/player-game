@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { SignInComponent, SignUpComponent, CalendarComponent, ScheduleComponent, ScheduleListComponent, PasswordComponent, ResetComponent, HomeComponent } from './Components'
+import { SignInComponent, NotFoundComponent, SignUpComponent, CalendarComponent, ScheduleComponent, ScheduleListComponent, PasswordComponent, ResetComponent, HomeComponent } from './Components'
 
 class App extends Component {
   constructor() {
@@ -28,7 +28,7 @@ class App extends Component {
         <Navbar collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="/home"><p className="demo1">DT</p></a>
+              <a href="/home"><p>DT</p></a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
@@ -66,6 +66,8 @@ class App extends Component {
               <Route path="/schedule/:id" component={ScheduleComponent} />
               <Route path='/forgetPassword' component={PasswordComponent} />
               <Route path="/resetPassword/:uniquecode" component={ResetComponent} />
+              <Route path='/404' component={NotFoundComponent} />
+              <Redirect from='*' to='/404' />
             </Switch>
           </div>
         </Router>
