@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Col, FormControl, Checkbox, ControlLabel, Button } from 'react-bootstrap';
+import { Form, FormGroup, Col, FormControl, ControlLabel, Button } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import Server from '../API/server'
 import './Common.css';
@@ -17,6 +17,7 @@ class SignInComponent extends Component {
             Password: "",
             loading: false
         };
+
     }
 
     handleLogIn(event) {
@@ -99,7 +100,7 @@ class SignInComponent extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Col smOffset={3} sm={8}>
-                            <Button onClick={this.handleLogIn}>Sign in</Button>
+                            <Button onClick={this.handleLogIn}>Log in</Button>
                         </Col>
                     </FormGroup>
                 </Form>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Col, FormControl, Checkbox, ControlLabel, Button } from 'react-bootstrap';
+import { Form, FormGroup, Col, FormControl, ControlLabel, Button } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import Server from '../API/server'
 import './Common.css'
@@ -98,7 +98,7 @@ class SignUpComponent extends Component {
 
             <FormGroup controlId="formHorizontalPassword">
                 <Col componentClass={ControlLabel} sm={3}>
-                    ConfirmPassword
+                    Confirm Password
                 </Col>
                 <Col sm={9}>
                     <FormControl type="password" placeholder="Confirm Password" onChange={this.handleConfirmPassword} />

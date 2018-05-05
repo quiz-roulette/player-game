@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Col, FormControl, Checkbox, ControlLabel, Button } from 'react-bootstrap';
-import { withRouter, Link } from "react-router-dom";
+import { Form, FormGroup, Col, FormControl, ControlLabel, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import Server from '../API/server'
 import './Common.css';
 
@@ -54,10 +54,10 @@ class ResetPasswordComponent extends Component {
         }
     }
     render() {
-        if (this.state.status == "new") {
+        if (this.state.status === "new") {
             return this.renderForm();
         }
-        else if (this.state.status == "success") {
+        else if (this.state.status === "success") {
             return this.renderSuccess();
         }
         else {
@@ -92,7 +92,7 @@ class ResetPasswordComponent extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Col smOffset={3} sm={8}>
-                            <Button onClick={this.handleResetPassword}>Submit</Button>
+                            <Button onClick={this.handleResetPassword}>Reset</Button>
                         </Col>
                     </FormGroup>
                 </Form>

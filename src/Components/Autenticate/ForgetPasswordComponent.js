@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Col, FormControl, Checkbox, ControlLabel, Button } from 'react-bootstrap';
-import { withRouter,Link } from "react-router-dom";
+import { Form, FormGroup, Col, FormControl, ControlLabel, Button } from 'react-bootstrap';
 import Server from '../API/server'
 import './Common.css';
 
@@ -45,10 +44,10 @@ class ForgetPasswordComponent extends Component {
         }
     }
     render() {
-        if (this.state.status == "new") {
+        if (this.state.status === "new") {
             return this.renderForm();
         }
-        else if (this.state.status == "success") {
+        else if (this.state.status === "success") {
             return this.renderSuccess();
         }
         else {

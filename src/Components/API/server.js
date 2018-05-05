@@ -1,46 +1,47 @@
 import axios from 'axios';
 
 class Server {
-    constructor(){
-        var serverUrl = "https://bcsechdularapp.azurewebsites.net";
+
+    static URL(){
+        return "https://bcsechdularapp.azurewebsites.net";
     }
     
     static signin(username, password){
-        return axios.post("https://bcsechdularapp.azurewebsites.net"+"/authenticate",{Username: username, Password: password});
+        return axios.post(Server.URL()+"/authenticate",{Username: username, Password: password});
     }
 
     static signup(username, password, email){
-        return axios.post("https://bcsechdularapp.azurewebsites.net"+"/addUser",{Username: username, Password: password, Email: email});
+        return axios.post(Server.URL()+"/addUser",{Username: username, Password: password, Email: email});
     }
 
     static getAllSchedule(){
-        return axios.get("https://bcsechdularapp.azurewebsites.net"+"/getallschedule");
+        return axios.get(Server.URL()+"/getallschedule");
     }
     
     static getScheduleByClient(clientPartner){
-        return axios.get("https://bcsechdularapp.azurewebsites.net"+"/getschedulebyclientpartner?clientpartner="+clientPartner);
+        return axios.get(Server.URL()+"/getschedulebyclientpartner?clientpartner="+clientPartner);
     }
 
     static getScheduleById(id){
-        return axios.get("https://bcsechdularapp.azurewebsites.net"+"/getschedulebyid?id="+id);
+        return axios.get(Server.URL()+"/getschedulebyid?id="+id);
     }
 
     static addSchedule(schedule){
-        return axios.post("https://bcsechdularapp.azurewebsites.net"+"/addschedule",schedule);
+        return axios.post(Server.URL()+"/addschedule",schedule);
     }
 
     static updateSchedule(schedule){
-        return axios.post("https://bcsechdularapp.azurewebsites.net"+"/updateschedule",schedule);
+        return axios.post(Server.URL()+"/updateschedule",schedule);
     }
 
     static sendReport(id){
-        return axios.get("https://bcsechdularapp.azurewebsites.net"+"/sendreport/"+id);
+        return axios.get(Server.URL()+"/sendreport/"+id);
     }
     static getAccountByName(id){
-        return axios.get("https://bcsechdularapp.azurewebsites.net"+"/forgetPassword/"+id);
+        return axios.get(Server.URL()+"/forgetPassword/"+id);
     }
     static ResetAccountPassword(password,code){
-        return axios.post("https://bcsechdularapp.azurewebsites.net"+"/resetPassword",{Password: password, Code: code});
+        return axios.post(Server.URL()+"/resetPassword",{Password: password, Code: code});
     }
 }
 

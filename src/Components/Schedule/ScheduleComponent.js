@@ -86,8 +86,8 @@ class ScheduleComponent extends Component {
         var endDate = new Date(this.state.End);
         this.setState({ Start: startDate.getTime() });
         this.setState({ End: endDate.getTime() });
-        if (this.state.Customer != "") {
-            if (this.state.Id != null) {
+        if (this.state.Customer !== "") {
+            if (this.state.Id !== null) {
                 Server.updateSchedule(this.state).then((res) => {
                     console.log(res);
                     this.props.history.push("/schedule");
