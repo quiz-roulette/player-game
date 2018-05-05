@@ -54,7 +54,7 @@ class App extends Component {
           </Navbar.Collapse>
         </Navbar>
         <Router>
-          <div>
+          <div className="appbody">
             <Switch>
               <Route path="/" exact component={HomeComponent} />
               <Route path="/home" exact component={HomeComponent} />

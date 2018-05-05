@@ -18,8 +18,8 @@ class HomeComponent extends Component {
 
     render() {
         return (<Jumbotron className="jumbotron">
-            <img  className="tatalogo" src={Background}/>
-            <h1>Digital Tracker</h1>
+            <img  className="img-responsive" src={Background}/><br/>
+            <h1 className="title">Digital Tracker</h1>
             <p>
                 <Button bsStyle="primary" onClick={this.handleLearnMore} >Log In</Button>
             </p>
