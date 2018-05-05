@@ -4,7 +4,7 @@ import { withRouter,Link } from "react-router-dom";
 import Server from '../API/server'
 import './Common.css';
 
-class PasswordComponent extends Component {
+class ForgetPasswordComponent extends Component {
     constructor(props) {
         super(props);
 
@@ -108,4 +108,4 @@ class PasswordComponent extends Component {
     }
 }
 
-export default PasswordComponent;
+export default ForgetPasswordComponent;
