@@ -1,6 +1,6 @@
 
 .authenticateform{
-    width: 90%;
+    width: 95%;
     margin: auto;
     padding: 20px;
 }
@@ -17,6 +17,14 @@
 
 .floatright{
   text-align: right;
+}
+
+.footer{
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
 }
 
 /*
