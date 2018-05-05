@@ -64,7 +64,7 @@ class ForgetPasswordComponent extends Component {
                         <Col componentClass={ControlLabel} sm={3}>
                         </Col>
                         <Col sm={9}>
-                            <p style={{ color: 'red' }}>Please enter your employee ID to search for your account.</p>
+                            <p style={{ color: 'blue' }}>Please enter your employee ID to send reset password instructions.</p>
                         </Col>
                         <Col componentClass={ControlLabel} sm={3}>
                             Employee Id:
@@ -90,7 +90,7 @@ class ForgetPasswordComponent extends Component {
                     <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1" />
                     <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
                 </svg><br />
-                <p>Reset password link has been sent. Please check your email and follow the required steps.</p>
+                <p>Reset password link has been sent. Please check your email and follow the mentioned steps.</p>
             </div>);
     }
 
@@ -102,7 +102,7 @@ class ForgetPasswordComponent extends Component {
                     <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3" />
                     <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2" />
                 </svg><br />
-                <p>Something went wrong! Please try again later or contact the administrator</p>
+                <p>Something went wrong! Please try again later or contact the site administrator</p>
             </div>
         );
     }

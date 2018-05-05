@@ -4,7 +4,7 @@ import { withRouter, Link } from "react-router-dom";
 import Server from '../API/server'
 import './Common.css';
 
-class PasswordComponent extends Component {
+class ResetPasswordComponent extends Component {
     constructor(props) {
         super(props);
 
@@ -38,7 +38,6 @@ class PasswordComponent extends Component {
         console.log(this.state.newpassword);
         if (this.state.newpassword !== "" && this.state.newpassword === this.state.cfmpassword) {
             Server.ResetAccountPassword(this.state.newpassword, this.state.uniquecode).then((res) => {
-                console.log('N', res);
                 if (res.data === true || res.data === "true") {
                     // this.props.history.push("/");
                     this.setState({ status: 'success' });
@@ -74,7 +73,7 @@ class PasswordComponent extends Component {
                         <Col componentClass={ControlLabel} sm={3}>
                         </Col>
                         <Col sm={9}>
-                            <p style={{ color: 'red' }}>Please enter your new password for your account.</p>
+                            <p style={{ color: 'blue' }}>Enter the new password:</p>
                         </Col>
                         <Col componentClass={ControlLabel} sm={3}>
                             New Password
@@ -85,7 +84,7 @@ class PasswordComponent extends Component {
                     </FormGroup>
                     <FormGroup controlId="formHorizontalPassword">
                         <Col componentClass={ControlLabel} sm={3}>
-                            ConfirmPassword
+                            Confirm Password
                         </Col>
                         <Col sm={9}>
                             <FormControl type="password" placeholder="Confirm Password" onChange={this.handleConfirmPassword} />
@@ -126,4 +125,4 @@ class PasswordComponent extends Component {
     }
 }
 
-export default PasswordComponent;
+export default ResetPasswordComponent;

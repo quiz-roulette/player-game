@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { SignInComponent, NotFoundComponent, SignUpComponent, CalendarComponent, ScheduleComponent, ScheduleListComponent, ForgetPasswordComponent, ResetComponent, HomeComponent } from './Components'
+import { SignInComponent, NotFoundComponent, SignUpComponent, CalendarComponent, ScheduleComponent, ScheduleListComponent, ForgetPasswordComponent, ResetPasswordComponent, HomeComponent } from './Components'
 
 class App extends Component {
   constructor() {
@@ -65,7 +65,7 @@ class App extends Component {
               <Redirect from="/old-match" to="/will-match" />
               <Route path="/schedule/:id" component={ScheduleComponent} />
               <Route path='/forgetPassword' component={ForgetPasswordComponent} />
-              <Route path="/resetPassword/:uniquecode" component={ResetComponent} />
+              <Route path="/resetPassword/:uniquecode" component={ResetPasswordComponent} />
               <Route path='/404' component={NotFoundComponent} />
               <Redirect from='*' to='/404' />
             </Switch>

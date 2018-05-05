@@ -3,8 +3,8 @@ import SignUpComponent from './Autenticate/SignupComponent'
 import CalendarComponent from './Calendar/CalendarComponent'
 import ScheduleListComponent from './Schedule/ScheduleListComponent'
 import ScheduleComponent from './Schedule/ScheduleComponent'
-import ForgetPasswordComponent from './Autenticate/PasswordComponent'
-import ResetComponent from './Autenticate/ResetComponent'
+import ForgetPasswordComponent from './Autenticate/ForgetPasswordComponent'
+import ResetPasswordComponent from './Autenticate/ResetPasswordComponent'
 import HomeComponent from './Home/HomeComponent'
 import NotFoundComponent from './NotFound/NotFoundComponent'
 
@@ -15,7 +15,7 @@ export{
     ScheduleComponent,
     ScheduleListComponent,
     ForgetPasswordComponent,
-    ResetComponent,
+    ResetPasswordComponent,
     HomeComponent,
     NotFoundComponent
 }
