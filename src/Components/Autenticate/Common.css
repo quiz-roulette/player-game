@@ -1,6 +1,6 @@
 
 .authenticateform{
-    width: 550px;
+    width: 90%;
     margin: auto;
     padding: 20px;
 }
@@ -13,6 +13,10 @@
 
 .message p{
     text-align: center;
+}
+
+.floatright{
+  text-align: right;
 }
 
 /*

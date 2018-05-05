@@ -89,8 +89,11 @@ class SignInComponent extends Component {
                         </Col>
                     </FormGroup>
                     <FormGroup>
-                        <Col smOffset={2} sm={9}>
+                        <Col xs={6} md={4}>
                             <Link to='/forgetPassword'>Forget Password</Link>
+                        </Col>
+                        <Col xs={6} md={4} className="floatright">
+                            <Link to='/signup'>Create Account</Link>
                         </Col>
                     </FormGroup>
                     <FormGroup>
