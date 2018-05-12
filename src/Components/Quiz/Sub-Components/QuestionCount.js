@@ -4,7 +4,7 @@ function QuestionCount(props) {
 
   return (
     <div className="questionCount">
-      Question <span>{props.counter}</span> of <span>{props.total}</span>
+      Question <span>{props.counter}</span> of <span>{props.total}</span><span className="questionCount_result">{props.result}</span>
     </div>
   );
 

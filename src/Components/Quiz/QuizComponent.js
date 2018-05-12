@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import update from 'react-addons-update';
 import { Quiz, Result } from './Sub-Components'
 import quizQuestions from '../API/quizQuestion'
+import quizChoice from '../API/quizChoice'
+import quizCorrectChoice from '../API/quizCorrectChoice'
 import './QuizComponent.css';
 
 class QuizComponent extends Component {
@@ -11,24 +13,24 @@ class QuizComponent extends Component {
 
     this.state = {
       counter: 0,
-      questionId: 1,
+      questionId: 0,
       question: '',
-      answerOptions: [],
-      answer: '',
-      answersCount: {
-        Score: 0
-      },
-      result: ''
+      choice: [],
+      answer: -1,
+      result: 0,
+      score: 0
     };
 
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
   }
 
   componentWillMount() {
-    const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));
+    // const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));
+    console.log("counter",quizQuestions.length);
     this.setState({
-      question: quizQuestions[0].question,
-      answerOptions: shuffledAnswerOptions[0]
+      question: quizQuestions[0].Text,
+      questionId: quizQuestions[0].QuestionId,
+      answerOptions: quizChoice.filter(x => x.QuestionId === quizQuestions[0].QuestionId)
     });
   }
 
@@ -54,50 +56,47 @@ class QuizComponent extends Component {
   handleAnswerSelected(event) {
     this.setUserAnswer(event.currentTarget.value);
 
-    if (this.state.questionId < quizQuestions.length) {
-        setTimeout(() => this.setNextQuestion(), 300);
+    if (this.state.counter+1 < quizQuestions.length) {
+        setTimeout(() => this.setNextQuestion(), 600);
     } else {
-        setTimeout(() => this.setResults(this.getResults()), 300);
+        setTimeout(() => this.setResults(this.getResults()), 600);
     }
   }
 
   setUserAnswer(answer) {
-    const updatedAnswersCount = this.state.answersCount.Score + 10;
+    var updatedAnswersCount = this.state.score;
+    if(answer !== -1 && Number.parseInt(answer) === quizCorrectChoice.find(x => x.QuestionId === this.state.questionId).ChoiceId)
+      updatedAnswersCount = updatedAnswersCount + 50;
 
     this.setState({
-        answersCount: { Score: updatedAnswersCount},
-        answer: answer
+        score: updatedAnswersCount,
+        answer: quizCorrectChoice.find(x => x.QuestionId === this.state.questionId).ChoiceId
     });
   }
 
   setNextQuestion() {
     const counter = this.state.counter + 1;
-    const questionId = this.state.questionId + 1;
 
     this.setState({
         counter: counter,
-        questionId: questionId,
-        question: quizQuestions[counter].question,
-        answerOptions: quizQuestions[counter].answers,
-        answer: ''
+        questionId: quizQuestions[counter].QuestionId,
+        question: quizQuestions[counter].Text,
+        answerOptions: quizChoice.filter(x => x.QuestionId === quizQuestions[counter].QuestionId),
+        answer: -1
     });
   }
 
   getResults() {
-    const answersCount = this.state.answersCount;
-    const answersCountKeys = Object.keys(answersCount);
-    const answersCountValues = answersCountKeys.map((key) => answersCount[key]);
-    const maxAnswerCount = Math.max.apply(null, answersCountValues);
-
-    return answersCountKeys.filter((key) => answersCount[key] === maxAnswerCount);
+    // const answersCount = this.state.answersCount;
+    // const answersCountKeys = Object.keys(answersCount);
+    // const answersCountValues = answersCountKeys.map((key) => answersCount[key]);
+    // const maxAnswerCount = Math.max.apply(null, answersCountValues);
+    
+    return this.state.score;//answersCountKeys.filter((key) => answersCount[key] === maxAnswerCount);
   }
 
   setResults(result) {
-    if (result.length === 1) {
-      this.setState({ result: result[0] });
-    } else {
-      this.setState({ result: 'Undetermined' });
-    }
+    this.setState({ result: this.state.score });
   }
 
   renderQuiz() {
@@ -108,6 +107,7 @@ class QuizComponent extends Component {
         questionId={this.state.questionId}
         question={this.state.question}
         questionTotal={quizQuestions.length}
+        result={this.state.score}
         onAnswerSelected={this.handleAnswerSelected}
       />
     );
@@ -122,10 +122,6 @@ class QuizComponent extends Component {
   render() {
     return (
       <div className="Quiz">
-        <div className="Quiz-header">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
-          <h2>React Quiz</h2>
-        </div>
         {this.state.result ? this.renderResult() : this.renderQuiz()}
       </div>
     );

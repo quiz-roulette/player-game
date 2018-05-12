@@ -53,6 +53,10 @@
   font-size: 14px;
 }
 
+.questionCount_result{
+  float: right;
+}
+
 /* Question Component */
 .question {
   margin: 0;

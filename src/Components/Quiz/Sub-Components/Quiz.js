@@ -5,19 +5,19 @@ import {Question,AnswerOption,QuestionCount} from './index'
 function Quiz(props) {
 
   function renderAnswerOptions(key) {
-    console.log(key);
     return (
       <AnswerOption
-        key={key.content}
-        answerContent={key.content}
-        answerType={key.type}
+        key={key.ChoiceId}
+        answerContent={key.Text}
+        answerId = {key.ChoiceId}
+        // answerType={key.type}
         answer={props.answer}
         questionId={props.questionId}
         onAnswerSelected={props.onAnswerSelected}
       />
     );
   }
-
+  console.log(props);
   return (
     <ReactCSSTransitionGroup
       className="containerQuiz"
@@ -32,6 +32,7 @@ function Quiz(props) {
         <QuestionCount
           counter={props.questionId}
           total={props.questionTotal}
+          result = {props.result}
         />
         <Question content={props.question} />
         <ul className="answerOptions">

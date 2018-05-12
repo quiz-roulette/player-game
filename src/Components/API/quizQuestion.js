@@ -1,90 +1,35 @@
 var quizQuestions = [
     {
-        question: "What franchise would you rather play a game from?",
-        answers: [
-            {
-                type: "Microsoft",
-                content: "Halo"
-            },
-            {
-                type: "Nintendo",
-                content: "Pokemon"
-            },
-            {
-                type: "Sony",
-                content: "Uncharted"
-            }
-        ]
+        QuestionId: 161,
+        CategoryName: "Five Question Quiz",
+        Text: "What is Google?",
+        ImageUrl: null
     },
     {
-        question: "Which console would you prefer to play with friends?",
-        answers: [
-            {
-                type: "Microsoft",
-                content: "X-Box"
-            },
-            {
-                type: "Nintendo",
-                content: "Nintendo 64"
-            },
-            {
-                type: "Sony",
-                content: "Playstation 1"
-            }
-        ]
+        QuestionId: 162,
+        CategoryName: "Five Question Quiz",
+        Text: "What is Facebook",
+        ImageUrl: "https://i.imgur.com/prohfF0.jpg"
     },
     {
-        question: "Which of these racing franchises would you prefer to play a game from?",
-        answers: [
-            {
-                type: "Microsoft",
-                content: "Forza"
-            },
-            {
-                type: "Nintendo",
-                content: "Mario Kart"
-            },
-            {
-                type: "Sony",
-                content: "Gran Turismo"
-            }
-        ]
+        QuestionId: 163,
+        CategoryName: "Five Question Quiz",
+        Text: "What is 11+11",
+        ImageUrl: null
     },
     {
-        question: "Which of these games do you think is best?",
-        answers: [
-            {
-                type: "Microsoft",
-                content: "BioShock"
-            },
-            {
-                type: "Nintendo",
-                content: "The Legend of Zelda: Ocarina of Time"
-            },
-            {
-                type: "Sony",
-                content: "Final Fantasy VII"
-            }
-        ]
+        QuestionId: 164,
+        CategoryName: "Five Question Quiz",
+        Text: "What is 40+20",
+        ImageUrl: null
     },
     {
-        question: "What console would you prefer to own?",
-        answers: [
-            {
-                type: "Microsoft",
-                content: "X-Box One"
-            },
-            {
-                type: "Nintendo",
-                content: "Wii U"
-            },
-            {
-                type: "Sony",
-                content: "Playstation 4"
-            }
-        ]
+        QuestionId: 165,
+        CategoryName: "Five Question Quiz",
+        Text: "What is EBay?",
+        ImageUrl: null
     }
-  ];
+];
   
   export default quizQuestions;
   

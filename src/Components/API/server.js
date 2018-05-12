@@ -3,7 +3,7 @@ import axios from 'axios';
 class Server {
 
     static URL(){
-        return "https://bcsechdularapp.azurewebsites.net";
+        return "https://axperienceapp.azurewebsites.net";
     }
     
     static signin(username, password){
