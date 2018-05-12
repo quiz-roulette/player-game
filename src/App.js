@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect,withRouter } from 'react-router-dom';
-import { SignInComponent, NotFoundComponent, SignUpComponent, CalendarComponent, ScheduleComponent, ScheduleListComponent, ForgetPasswordComponent, ResetPasswordComponent, HomeComponent } from './Components'
+import { SignInComponent,QuizComponent, NotFoundComponent, SignUpComponent, CalendarComponent, ScheduleComponent, ScheduleListComponent, ForgetPasswordComponent, ResetPasswordComponent, HomeComponent } from './Components'
 
 
 class App extends Component {
@@ -49,6 +49,7 @@ class App extends Component {
               <Route path="/" exact component={HomeComponent} />
               <Route path="/home" exact component={HomeComponent} />
               <Route path="/calendarview" exact component={CalendarComponent} />
+              <Route path="/quiz" exact component={QuizComponent} />
               <Route path="/schedule" exact component={ScheduleListComponent} />
               <Route path="/login" exact component={SignInComponent} />
               <Route path="/signup" exact component={SignUpComponent} />

@@ -7,6 +7,7 @@ import ForgetPasswordComponent from './Autenticate/ForgetPasswordComponent'
 import ResetPasswordComponent from './Autenticate/ResetPasswordComponent'
 import HomeComponent from './Home/HomeComponent'
 import NotFoundComponent from './NotFound/NotFoundComponent'
+import QuizComponent from './Quiz/QuizComponent'
 
 export{
     SignInComponent,
@@ -17,5 +18,6 @@ export{
     ForgetPasswordComponent,
     ResetPasswordComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    QuizComponent
 }
