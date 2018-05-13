@@ -109,6 +109,7 @@ class QuizComponent extends Component {
         questionTotal={quizQuestions.length}
         result={this.state.score}
         onAnswerSelected={this.handleAnswerSelected}
+        counter = {this.state.counter}
       />
     );
   }

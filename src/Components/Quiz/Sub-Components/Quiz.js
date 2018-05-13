@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import {Question,AnswerOption,QuestionCount} from './index'
+import {Question,AnswerOption,QuestionCount,Progress} from './index'
 
 function Quiz(props) {
 
@@ -29,8 +29,9 @@ function Quiz(props) {
       transitionAppearTimeout={500}
     >
       <div key={props.questionId}>
+      <Progress score={props.result} counter={props.counter} total={props.questionTotal} />
         <QuestionCount
-          counter={props.questionId}
+          counter={props.counter}
           total={props.questionTotal}
           result = {props.result}
         />
