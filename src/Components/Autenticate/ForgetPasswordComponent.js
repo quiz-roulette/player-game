@@ -63,13 +63,13 @@ class ForgetPasswordComponent extends Component {
                         <Col componentClass={ControlLabel} sm={3}>
                         </Col>
                         <Col sm={9}>
-                            <p style={{ color: 'blue' }}>Please enter your employee ID to send reset password instructions.</p>
+                            <p style={{ color: 'blue' }}>Please enter your SIM ID to send reset password instructions.</p>
                         </Col>
                         <Col componentClass={ControlLabel} sm={3}>
-                            Employee Id:
+                            SIM ID:
                         </Col>
                         <Col sm={9}>
-                            <FormControl type="text" placeholder="employee id" onChange={this.handleuserName} />
+                            <FormControl type="text" placeholder="SIM ID" onChange={this.handleuserName} />
                         </Col>
                     </FormGroup>
                     <FormGroup>
