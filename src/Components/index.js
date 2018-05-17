@@ -6,6 +6,8 @@ import ResetPasswordComponent from './Autenticate/ResetPasswordComponent'
 import HomeComponent from './Home/HomeComponent'
 import NotFoundComponent from './NotFound/NotFoundComponent'
 import QuizComponent from './Quiz/QuizComponent'
+import AvatarSelectionComponent from './Avatar/AvatarSelectionComponent'
+import QuizListComponent from './Quiz/QuizListComponent'
 
 export{
     SignInComponent,
@@ -15,5 +17,7 @@ export{
     ResetPasswordComponent,
     HomeComponent,
     NotFoundComponent,
-    QuizComponent
+    QuizComponent,
+    AvatarSelectionComponent,
+    QuizListComponent
 }

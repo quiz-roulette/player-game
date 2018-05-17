@@ -3,36 +3,39 @@ import axios from 'axios';
 class Server {
 
     static URL(){
-        return "https://axperienceapp.azurewebsites.net";
+        return "https://axperienceapp.azurewebsites.net/api";
     }
     
     static signin(username, password){
-        return axios.post(Server.URL()+"/authenticate",{Username: username, Password: password});
+        return axios.post(Server.URL()+ '/authenticate?userId=' + username + '&userPassword=' + password);
     }
 
     static signup(username, password, email){
         return axios.post(Server.URL()+"/addUser",{Username: username, Password: password, Email: email});
     }
 
-    static getAllSchedule(){
-        return axios.get(Server.URL()+"/getallschedule");
-    }
-    
-    static getScheduleByClient(clientPartner){
-        return axios.get(Server.URL()+"/getschedulebyclientpartner?clientpartner="+clientPartner);
+    static getAvatars(){
+        return axios.get(Server.URL()+'/avatar');
     }
 
-    static getScheduleById(id){
-        return axios.get(Server.URL()+"/getschedulebyid?id="+id);
+    static getQuizList(){
+        return axios.get(Server.URL()+'/quiz');
     }
 
-    static addSchedule(schedule){
-        return axios.post(Server.URL()+"/addschedule",schedule);
+    static getQuizById(id){
+        var x = axios.get(Server.URL()+'/question');
+        var y = axios.get(Server.URL()+'/choice');
+        var z = axios.get(Server.URL()+'/correctchoice');
+        return Promise.all([x, y, z]);
     }
 
-    static updateSchedule(schedule){
-        return axios.post(Server.URL()+"/updateschedule",schedule);
+    static addQuizLog(quizlog){
+        return axios.post(Server.URL()+'/quizlog',quizlog);
     }
+
+    static updateUserScore(quizId,userId){}
+
+    static updateUser(user){}
 
     static sendReport(id){
         return axios.get(Server.URL()+"/sendreport/"+id);

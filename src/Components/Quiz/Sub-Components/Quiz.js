@@ -34,6 +34,7 @@ function Quiz(props) {
           counter={props.counter}
           total={props.questionTotal}
           result = {props.result}
+          timer = {props.timer}
         />
         <Question content={props.question} />
         <ul className="answerOptions">

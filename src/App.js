@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect,withRouter } from 'react-router-dom';
-import { SignInComponent,QuizComponent, NotFoundComponent, SignUpComponent, CalendarComponent, ForgetPasswordComponent, ResetPasswordComponent, HomeComponent } from './Components'
+import { SignInComponent,QuizComponent, AvatarSelectionComponent, QuizListComponent, NotFoundComponent, SignUpComponent, CalendarComponent, ForgetPasswordComponent, ResetPasswordComponent, HomeComponent } from './Components'
 
 
 class App extends Component {
   
   constructor() {
     super();
-    document.title = "Scheduler";
+    document.title = "Quiz It";
   }
 
   render() {
@@ -49,13 +49,15 @@ class App extends Component {
               <Route path="/" exact component={HomeComponent} />
               <Route path="/home" exact component={HomeComponent} />
               <Route path="/calendarview" exact component={CalendarComponent} />
-              <Route path="/quiz" exact component={QuizComponent} />
+              <Route path="/quiz/:id/:categoryname" exact component={QuizComponent} />
               <Route path="/login" exact component={SignInComponent} />
               <Route path="/signup" exact component={SignUpComponent} />
               <Redirect from="/old-match" to="/will-match" />
               <Route path='/forgetPassword' component={ForgetPasswordComponent} />
               <Route path="/resetPassword/:uniquecode" component={ResetPasswordComponent} />
               <Route path='/404' component={NotFoundComponent} />
+              <Route path='/avatar' component={AvatarSelectionComponent}/>
+              <Route path="/quizlist" component={QuizListComponent}/>
               <Redirect from='*' to='/404' />
             </Switch>
           </div>
