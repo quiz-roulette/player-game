@@ -10,7 +10,7 @@ class QuizListComponent extends Component {
 
         this.state = {
             QuizList: [],
-            endpoint: "https://axperience.herokuapp.com/:8881"
+            endpoint: "https://axperience.herokuapp.com/"
         }
 
         Server.getQuizList().then((res) => {
