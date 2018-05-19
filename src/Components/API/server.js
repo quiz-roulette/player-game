@@ -7,7 +7,7 @@ class Server {
     }
     
     static signin(username, password){
-        return axios.post(Server.URL()+ '/authenticate?userId=' + username + '&userPassword=' + password);
+        return axios.get(Server.URL()+ '/authenticate?userId=' + username + '&userPassword=' + password);
     }
 
     static signup(username, password, email){
