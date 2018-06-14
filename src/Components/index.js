@@ -8,7 +8,7 @@ import NotFoundComponent from './NotFound/NotFoundComponent'
 import QuizComponent from './Quiz/QuizComponent'
 import AvatarSelectionComponent from './Avatar/AvatarSelectionComponent'
 import QuizListComponent from './Quiz/QuizListComponent'
-
+import DashboardComponent from './Dashboard/DashboardComponent'
 export{
     SignInComponent,
     SignUpComponent,
@@ -19,5 +19,6 @@ export{
     NotFoundComponent,
     QuizComponent,
     AvatarSelectionComponent,
-    QuizListComponent
+    QuizListComponent,
+    DashboardComponent
 }

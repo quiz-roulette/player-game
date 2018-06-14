@@ -1,0 +1,45 @@
+
+/* https://stackoverflow.com/questions/39993244/line-drawing-animation-with-pure-css */
+
+  
+  .progressbar {
+    
+    width: 100%;
+    height: 50px;
+    border-radius: 4px;
+    padding: 10px;
+  }
+
+  .progressbar .progress {
+    position: relative;
+    background-color: green;
+    border-radius: 4px;
+    transition: width 3s ease-in-out;
+    height: 100%;
+  }
+
+  .progress .useravatar{
+      position: absolute;
+      right: 0;
+      bottom: 0;
+  }
+
+  .useravatar{
+      width: 40px;
+      height: 30px;
+  }
+
+  /* Winner / Finisher GIFs */
+  .status{
+    margin-top: 10px;
+    width: 40px;
+    height: 30px;
+  }
+
+  .username{
+      margin-top: 10px;
+  }
+
+  .footernote, .title{
+      text-align: center;
+  }

@@ -33,6 +33,14 @@ class Server {
         return axios.post(Server.URL()+'/quizlog',quizlog);
     }
 
+    static getQuizLog(quizId){
+        return axios.get(Server.URL()+'/quizlog?QuizId='+quizId);
+    }
+
+    static getQuestionCountForQuiz(quizId){
+        return axios.get(Server.URL()+'/getQuestionCountForQuiz?QuizId='+quizId);
+    }
+
     static updateUserScore(quizId,userId){}
 
     static updateUser(user){}

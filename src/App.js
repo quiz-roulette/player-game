@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect,withRouter } from 'react-router-dom';
-import { SignInComponent,QuizComponent, AvatarSelectionComponent, QuizListComponent, NotFoundComponent, SignUpComponent, CalendarComponent, ForgetPasswordComponent, ResetPasswordComponent, HomeComponent } from './Components'
+import { SignInComponent,QuizComponent, AvatarSelectionComponent, QuizListComponent, NotFoundComponent, SignUpComponent, CalendarComponent, ForgetPasswordComponent, ResetPasswordComponent, HomeComponent,DashboardComponent } from './Components'
 
 
 class App extends Component {
@@ -58,6 +58,7 @@ class App extends Component {
               <Route path='/404' component={NotFoundComponent} />
               <Route path='/avatar' component={AvatarSelectionComponent}/>
               <Route path="/quizlist" component={QuizListComponent}/>
+              <Route path="/dashboard/:quizid" component={DashboardComponent}/>
               <Redirect from='*' to='/404' />
             </Switch>
           </div>
