@@ -23,7 +23,8 @@ class QuizComponent extends Component {
       Questions: [],
       Choices: [],
       CorrectChoice: [],
-      timer: 0
+      timer: 0,
+      avatar: "https://axperienceapp.azurewebsites.net/avatar/bee"
     };
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
 
@@ -149,6 +150,7 @@ class QuizComponent extends Component {
         onAnswerSelected={this.handleAnswerSelected}
         counter={this.state.counter}
         timer={this.state.timer}
+        avatar={this.state.avatar}
       />
     );
   }

@@ -29,7 +29,7 @@ function Quiz(props) {
       transitionAppearTimeout={500}
     >
       <div key={props.questionId}>
-      <Progress score={props.result} counter={props.counter} total={props.questionTotal} />
+      <Progress score={props.result} counter={props.counter} total={props.questionTotal} avatar={props.avatar}/>
         <QuestionCount
           counter={props.counter}
           total={props.questionTotal}

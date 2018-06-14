@@ -3,6 +3,7 @@ import './DashboardComponent.css'
 import { Grid, Row, Col } from 'react-bootstrap'
 import socketIOClient from 'socket.io-client'
 import Server from '../API/server'
+import ProgressBarComponent from '../ProgressBarComponent/ProgressBarComponent'
 
 class DashboardComponent extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class DashboardComponent extends Component {
         this.state = {
             Results: [],
             QuizId: params.quizid,
-            QuestionCount: 0,
+            QuestionCount: 5,
             endpoint: "https://axperience.herokuapp.com/",
         }
 
@@ -52,14 +53,7 @@ class DashboardComponent extends Component {
                         <span >{this.state.Results[i].QuizUserId}</span>
                     </Col>
                     <Col xs={6} md={10}>
-                        <div className="progressbar">
-                            <div className="progress" style={{ width: percentage + '%' }} key={i} >
-                                <img className="useravatar" src={
-                                                            this.state.Results[i].Avatar ? 
-                                                            this.state.Results[i].Avatar : 
-                                                            "https://axperienceapp.azurewebsites.net/avatar/bee"} />
-                            </div>
-                        </div>
+                        <ProgressBarComponent percentage={percentage} avatar={this.state.Results[i].Avatar} key={i} />
                     </Col>
                     <Col xsHidden md={1}>
                         <img className="status" src={
@@ -85,7 +79,7 @@ class DashboardComponent extends Component {
         // socket.on is another method that checks for incoming events from the server
         // This method is looking for the event 'change color'
         // socket.on takes a callback function for the first argument
-        if(!socket.disconnected){
+        if (!socket.disconnected) {
             socket.on('update quiz user result', (obj) => {
                 // setting the color of our button
                 obj.isSocket = true;
