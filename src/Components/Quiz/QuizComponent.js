@@ -18,6 +18,7 @@ class QuizComponent extends Component {
       question: '',
       choice: [],
       answer: -1,
+      answerSelected: -1,
       result: 0,
       score: 0,
       Questions: [],
@@ -84,7 +85,7 @@ class QuizComponent extends Component {
     this.setUserAnswer(event.currentTarget.value);
 
     if (this.state.counter + 1 < this.state.Questions.length) {
-      setTimeout(() => this.setNextQuestion(), 600);
+      setTimeout(() => this.setNextQuestion(), 3000);
     } else {
       setTimeout(() => this.setResults(this.getResults()), 600);
     }
@@ -109,7 +110,8 @@ class QuizComponent extends Component {
 
     this.setState({
       score: updatedAnswersCount,
-      answer: this.state.CorrectChoice.find(x => x.QuestionId === this.state.questionId).ChoiceId
+      answer: this.state.CorrectChoice.find(x => x.QuestionId === this.state.questionId).ChoiceId,
+      answerSelected: Number.parseInt(answer)
     });
   }
 
@@ -121,7 +123,8 @@ class QuizComponent extends Component {
       questionId: this.state.Questions[counter].QuestionId,
       question: this.state.Questions[counter].Text,
       answerOptions: this.state.Choices.filter(x => x.QuestionId === this.state.Questions[counter].QuestionId),
-      answer: -1
+      answer: -1,
+      answerSelected: -1
     });
   }
 
@@ -151,6 +154,7 @@ class QuizComponent extends Component {
         counter={this.state.counter}
         timer={this.state.timer}
         avatar={this.state.avatar}
+        answerSelected={this.state.answerSelected}
       />
     );
   }

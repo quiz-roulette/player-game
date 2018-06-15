@@ -13,20 +13,17 @@ function Quiz(props) {
         // answerType={key.type}
         answer={props.answer}
         questionId={props.questionId}
+        answerSelected = {props.answerSelected}
         onAnswerSelected={props.onAnswerSelected}
       />
     );
   }
   console.log(props);
   return (
-    <ReactCSSTransitionGroup
+    <div
       className="containerQuiz"
       component="div"
-      transitionName="fade"
-      transitionEnterTimeout={800}
-      transitionLeaveTimeout={500}
-      transitionAppear
-      transitionAppearTimeout={500}
+      transitionName="example"
     >
       <div key={props.questionId}>
       <Progress score={props.result} counter={props.counter} total={props.questionTotal} avatar={props.avatar}/>
@@ -41,7 +38,7 @@ function Quiz(props) {
           {props.answerOptions.map(renderAnswerOptions)}
         </ul>
       </div>
-    </ReactCSSTransitionGroup>
+    </div>
   );
 }
 

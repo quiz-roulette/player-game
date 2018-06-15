@@ -1,22 +1,33 @@
 import React from 'react';
 
 function AnswerOption(props) {
+  var backgroundColor;  
+  /**
+   * answer (correct answer)
+   * answerSelected (what user chose)
+   */
+  if (props.answer === props.answerId) {
+    backgroundColor = "#99ff99"
+  }
+  else if (props.answerSelected === props.answerId) {
+    backgroundColor = "#B2B2B2"
+  }
   return (
-    <li className="answerOption">
-      <input
-        type="radio"
+    <div className="answerOption" style={{
+      backgroundColor: backgroundColor
+    }}>
+      <input type="radio"
         className="radioCustomButton"
         name="radioGroup"
-        checked={props.answerId === props.answer}
         id={props.answerId}
         value={props.answerId}
-        disabled={props.answer !== -1}
         onChange={props.onAnswerSelected}
+        disabled={props.answer !== -1}
       />
       <label className="radioCustomLabel" htmlFor={props.answerId}>
         {props.answerContent}
       </label>
-    </li>
+    </div>
   );
 
 }

@@ -68,9 +68,10 @@
   border-top: 1px solid #eee;
 }
 
-.answerOption:hover {
+/* .answerOption:hover {
   background-color: #eefbfe;
-}
+} */
+
 
 .radioCustomButton {
     position: absolute;
@@ -94,9 +95,8 @@
     line-height: 1.5;
 }
 
-.radioCustomButton ~ .radioCustomLabel:before {
+/* .radioCustomButton ~ .radioCustomLabel:before {
     position: absolute;
-    /* top: 20px; */
     left: 18px;
     width: 28px;
     height: 28px;
@@ -107,14 +107,37 @@
     border: 1px solid #bbb;
     border-radius: 50%;
     transition: all 0.3s;
-}
+} */
 
-.radioCustomButton:checked ~ .radioCustomLabel:before {
+/* .radioCustomButton:checked ~ .radioCustomLabel:before {
     content: '';
     background: #8BC53F url(./svg/icon-check.svg) no-repeat;
     background-size: 27px;
     border-color: #8BC53F;
+} */
+
+.example-enter {
+  opacity: 0.01;
 }
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
 
 /* Animation */
 .fade-enter {
