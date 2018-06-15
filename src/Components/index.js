@@ -10,6 +10,8 @@ import AvatarSelectionComponent from './Avatar/AvatarSelectionComponent'
 import QuizListComponent from './Quiz/QuizListComponent'
 import DashboardComponent from './Dashboard/DashboardComponent'
 import ProgressBarComponent from './ProgressBarComponent/ProgressBarComponent'
+import AccountComponent from './Autenticate/AccountComponent'
+import ProfileComponent from './Autenticate/ProfileComponent'
 
 export{
     SignInComponent,
@@ -23,5 +25,7 @@ export{
     AvatarSelectionComponent,
     QuizListComponent,
     DashboardComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    AccountComponent,
+    ProfileComponent
 }

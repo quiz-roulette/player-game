@@ -17,7 +17,11 @@ class QuizListComponent extends Component {
         }
 
         this.setState({ loading: true})
-        Server.getQuizList().then((res) => {
+        this.updateQuizList();
+    }
+
+    updateQuizList(){
+        Server.getQuizByGroupByUserId(localStorage.getItem('u')).then((res) => {
             console.log(res.data);
             this.setState({
                 QuizList: res.data,
@@ -39,10 +43,7 @@ class QuizListComponent extends Component {
         socket.on('start quiz', (obj) => {
             // setting the color of our button
             obj.isSocket = true;
-            this.setState((prevState, props) => {
-                const newQL = prevState.QuizList.concat(obj);
-                return { QuizList: newQL };
-            });
+            this.updateQuizList();
         })
     }
 

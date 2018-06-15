@@ -29,7 +29,9 @@ class QuizComponent extends Component {
     };
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
 
-
+    if(!localStorage.getItem('u')){
+      this.props.history.push("/account");
+    }
   }
 
   componentWillMount() {
