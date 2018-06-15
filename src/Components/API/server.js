@@ -27,7 +27,7 @@ class Server {
     }
 
     static getQuizById(id){
-        var x = axios.get(Server.URL()+'/question');
+        var x = axios.get(Server.URL()+'/question?userid='+id);
         var y = axios.get(Server.URL()+'/choice');
         var z = axios.get(Server.URL()+'/correctchoice');
         return Promise.all([x, y, z]);

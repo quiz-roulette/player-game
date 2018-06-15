@@ -38,7 +38,7 @@ class QuizComponent extends Component {
     // const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));
     console.log("counter", this.state.Questions.length);
 
-    Server.getQuizById("").then((res) => {
+    Server.getQuizById(localStorage.getItem('u')).then((res) => {
       console.log(res[0].data)
       console.log(this.state.QuizId);
       var questions = res[0].data.filter((el) => el.CategoryName === this.state.CategoryName);
