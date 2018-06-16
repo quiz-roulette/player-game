@@ -95,7 +95,7 @@ class SignInComponent extends Component {
                             <Link to='/forgetPassword'>Forget Password</Link>
                         </Col>
                         <Col xs={6} sm={6} className="floatright">
-                            <Link to='/signup'>Create Account</Link>
+                            <Link to='/account'>Create Account</Link>
                         </Col>
                     </FormGroup>
                     <FormGroup>

@@ -22,6 +22,10 @@ class Server {
         return axios.get(Server.URL()+'/quiz');
     }
 
+    static getQuizListWithEnded(){
+        return axios.get(Server.URL()+'/getAllQuizWithEnded');
+    }
+
     static getQuizByGroupByUserId(userid){
         return axios.get(Server.URL()+'/quizbygroup?userid='+userid);
     }

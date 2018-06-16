@@ -12,16 +12,16 @@ class CalendarComponent extends Component {
         this.state = {
             events: []
         }
-        Server.getAllSchedule().then((res) => {
+        Server.getQuizListWithEnded().then((res) => {
             var data = res.data;
             console.log(res);
             var newevents = [];
             data.forEach(element => {
                 var obj = {
-                    title: element.Customer,
-                    start: new Date(element.Start),
-                    id: element.Id,
-                    end: new Date(element.End)
+                    title: element.QuizId,
+                    start: new Date(element.StartDateTime),
+                    id: element.QuizId,
+                    end: new Date(element.EndDateTime)
                 }
                 newevents.push(obj);
             });
