@@ -13,7 +13,7 @@ function Result(props) {
       transitionAppear
       transitionAppearTimeout={500}
     >
-      <div>
+      <div style={{textAlign: "center"}}>
         Your score is: <strong>{props.quizResult}</strong>!
       </div>
     </ReactCSSTransitionGroup>

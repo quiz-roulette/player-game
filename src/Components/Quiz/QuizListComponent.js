@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link,withRouter } from 'react-router-dom'
-import {Button } from 'react-bootstrap'
+import { Label } from 'react-bootstrap'
 import socketIOClient from 'socket.io-client'
 import Server from '../API/server'
 import './QuizListComponent.css'
@@ -74,15 +74,17 @@ class QuizListComponent extends Component {
 
     renderQuizList() {
         const quizList = [];
+    
         for (var i = 0; i < this.state.QuizList.length; i++) {
             const qId = this.state.QuizList[i].QuizId;
             const qCn = this.state.QuizList[i].CategoryName;
-            quizList.push(<div className="quizlistitem" key={i}>
-                                <Button bsStyle={this.state.QuizList[i].isSocket ? "primary": "default"} 
+            
+            quizList.push(
+                                <div className="quizlistitem" key={i} style={{borderColor: new Date(this.state.QuizList[i].StartDateTime).toDateString() === new Date().toDateString() ? "red": "cyan"}} 
                                         onClick={(e) => this.handleClick(qId,qCn)}>
                                     {this.state.QuizList[i].QuizId}
-                                </Button>
-                            </div>)
+                                </div>
+                            )
         }
         return (<div className="quizlist">
         <p>Currently Available Quiz</p>

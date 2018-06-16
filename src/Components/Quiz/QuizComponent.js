@@ -16,6 +16,7 @@ class QuizComponent extends Component {
       CategoryName: params.categoryname,
       QuizUserId: localStorage.getItem('u'),
       counter: 0,
+      questionCounter: 0,
       questionId: 0,
       question: '',
       choice: [],
@@ -46,19 +47,29 @@ class QuizComponent extends Component {
       console.log(this.state.QuizId);
       Server.getQuizLogSummationForUserByQuiz(localStorage.getItem('u'),this.state.QuizId).then((res1) => {
         console.log(res1);
-        if(res1.data.length > 0){
+        if(res[0].data.length === 0){
+          /**
+           * setting Questionid to -1 due to the render function checks for non zero question id
+           */
+          this.setState({ 
+            questionId: -1,
+            result: res1.data[0].Score });
+          return;
+        }
+        else if(res1.data.length > 0){
           var quizlog= res1.data[0];
           this.setState({
             counter: quizlog.QuestionCount,
             avatar: quizlog.Avatar,
             timer: quizlog.TimeTaken,
-            score: quizlog.Score,
+            score: quizlog.Score
           })
         }
         this.setState({
           Questions: res[0].data,
           Choices: res[1].data,
-          CorrectChoice: res[2].data
+          CorrectChoice: res[2].data,
+          questionTotal: res[0].data.length+quizlog.QuestionCount
         });
 
         this.setState({
@@ -99,7 +110,7 @@ class QuizComponent extends Component {
   handleAnswerSelected(event) {
     this.setUserAnswer(event.currentTarget.value);
 
-    if (this.state.counter + 1 < this.state.Questions.length) {
+    if (this.state.counter + 1 < this.state.questionTotal) {
       setTimeout(() => this.setNextQuestion(), 3000);
     } else {
       setTimeout(() => this.setResults(this.getResults()), 600);
@@ -134,12 +145,14 @@ class QuizComponent extends Component {
 
   setNextQuestion() {
     const counter = this.state.counter + 1;
+    const questionCounter = this.state.questionCounter + 1;
 
     this.setState({
       counter: counter,
-      questionId: this.state.Questions[counter].QuestionId,
-      question: this.state.Questions[counter].Text,
-      answerOptions: this.state.Choices.filter(x => x.QuestionId === this.state.Questions[counter].QuestionId),
+      questionCounter: questionCounter,
+      questionId: this.state.Questions[questionCounter].QuestionId,
+      question: this.state.Questions[questionCounter].Text,
+      answerOptions: this.state.Choices.filter(x => x.QuestionId === this.state.Questions[questionCounter].QuestionId),
       answer: -1,
       answerSelected: -1
     });
@@ -165,7 +178,7 @@ class QuizComponent extends Component {
         answerOptions={this.state.answerOptions}
         questionId={this.state.questionId}
         question={this.state.question}
-        questionTotal={this.state.Questions.length}
+        questionTotal={this.state.questionTotal}
         result={this.state.score}
         onAnswerSelected={this.handleAnswerSelected}
         counter={this.state.counter}

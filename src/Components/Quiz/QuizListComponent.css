@@ -5,4 +5,14 @@
 
 .quizlistitem{
     margin: 10px;
+    max-width: 100px;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: dotted;
+}
+
+.quizlistitem:hover{
+    border-style: solid;
 }
