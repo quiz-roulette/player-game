@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import update from 'react-addons-update';
 import { Quiz, Result } from './Sub-Components'
+import socketIOClient from 'socket.io-client'
 import Server from '../API/server'
 import './QuizComponent.css';
 
@@ -13,6 +14,7 @@ class QuizComponent extends Component {
     this.state = {
       QuizId: params.id,
       CategoryName: params.categoryname,
+      QuizUserId: localStorage.getItem('u'),
       counter: 0,
       questionId: 0,
       question: '',
@@ -25,11 +27,12 @@ class QuizComponent extends Component {
       Choices: [],
       CorrectChoice: [],
       timer: 0,
+      endpoint: "https://axperience.herokuapp.com/",
       avatar: "https://axperienceapp.azurewebsites.net/avatar/bee"
     };
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
 
-    if(!localStorage.getItem('u')){
+    if (!localStorage.getItem('u')) {
       this.props.history.push("/account");
     }
   }
@@ -38,28 +41,38 @@ class QuizComponent extends Component {
     // const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));
     console.log("counter", this.state.Questions.length);
 
-    Server.getQuizById(localStorage.getItem('u')).then((res) => {
+    Server.getQuizByUserIdAndQuizId(localStorage.getItem('u'),this.state.QuizId).then((res) => {
       console.log(res[0].data)
       console.log(this.state.QuizId);
-      var questions = res[0].data.filter((el) => el.CategoryName === this.state.CategoryName);
-
-      this.setState({
-        Questions: questions,
-        Choices: res[1].data,
-        CorrectChoice: res[2].data
-      });
-
-      this.setState({
-        question: this.state.Questions[0].Text,
-        questionId: this.state.Questions[0].QuestionId,
-        answerOptions: this.state.Choices.filter(x => x.QuestionId === this.state.Questions[0].QuestionId)
-      });
-
-      setInterval(() => {
-        this.setState((prevState, props) => {
-          return { timer: prevState.timer + 1 };
+      Server.getQuizLogSummationForUserByQuiz(localStorage.getItem('u'),this.state.QuizId).then((res1) => {
+        console.log(res1);
+        if(res1.data.length > 0){
+          var quizlog= res1.data[0];
+          this.setState({
+            counter: quizlog.QuestionCount,
+            avatar: quizlog.Avatar,
+            timer: quizlog.TimeTaken,
+            score: quizlog.Score,
+          })
+        }
+        this.setState({
+          Questions: res[0].data,
+          Choices: res[1].data,
+          CorrectChoice: res[2].data
         });
-      }, 1000);
+
+        this.setState({
+          question: this.state.Questions[0].Text,
+          questionId: this.state.Questions[0].QuestionId,
+          answerOptions: this.state.Choices.filter(x => x.QuestionId === this.state.Questions[0].QuestionId)
+        });
+
+        setInterval(() => {
+          this.setState((prevState, props) => {
+            return { timer: prevState.timer + 1 };
+          });
+        }, 1000);
+      })
     })
 
   }
@@ -94,22 +107,24 @@ class QuizComponent extends Component {
   }
 
   setUserAnswer(answer) {
+    const socket = socketIOClient(this.state.endpoint)
     var updatedAnswersCount = this.state.score;
     var newScore = 0;
     if (answer !== -1 && Number.parseInt(answer) === this.state.CorrectChoice.find(x => x.QuestionId === this.state.questionId).ChoiceId)
-      newScore = 50;
+      newScore = 250;
 
     var obj = {
       QuizId: this.state.QuizId,
-      QuizUserId: 'Up and On 4',
-      QuestionId : this.state.questionId,
-      ChoiceId : answer,
-      Score : newScore,
-      TimeTaken : this.state.timer 
+      QuizUserId: localStorage.getItem('u'),
+      QuestionId: this.state.questionId,
+      ChoiceId: answer,
+      Score: newScore,
+      TimeTaken: this.state.timer
     }
+      ;
     updatedAnswersCount += newScore;
-    Server.addQuizLog(obj).then((res) => { console.log("added")});
-
+    Server.addQuizLog(obj).then((res) => { console.log("added") });
+    socket.emit('update quiz user result', obj)
     this.setState({
       score: updatedAnswersCount,
       answer: this.state.CorrectChoice.find(x => x.QuestionId === this.state.questionId).ChoiceId,

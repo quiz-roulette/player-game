@@ -4,7 +4,7 @@ import ProgressBarComponent from '../../ProgressBarComponent/ProgressBarComponen
 function Progress(props) {
     return (
         <div>
-            <ProgressBarComponent percentage={(props.score/(props.total*50))*100} avatar={props.avatar}/>
+            <ProgressBarComponent percentage={(props.score/(props.total*250))*100} avatar={props.avatar}/>
         </div>
     )
 }

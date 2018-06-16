@@ -84,7 +84,9 @@ class QuizListComponent extends Component {
                                 </Button>
                             </div>)
         }
-        return (<div className="quizlist">{quizList}<br /></div>)
+        return (<div className="quizlist">
+        <p>Currently Available Quiz</p>
+        {quizList}<br /></div>)
     }
 }
 

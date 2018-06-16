@@ -34,7 +34,7 @@ class SignInComponent extends Component {
                     localStorage.setItem("l", "true");
                     localStorage.setItem("u", this.state.userName);
                     localStorage.setItem("p", this.state.Password);
-                    this.props.history.push("/quizlist");
+                    this.props.history.push("/account");
                 }
                 else {
                     //Handle

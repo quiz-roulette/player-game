@@ -33,12 +33,27 @@ class Server {
         return Promise.all([x, y, z]);
     }
 
+    static getQuizByUserIdAndQuizId(userid,quizid){
+        var x = axios.get(Server.URL()+'/question?userid='+userid+'&quizid='+quizid);
+        var y = axios.get(Server.URL()+'/choice');
+        var z = axios.get(Server.URL()+'/correctchoice');
+        return Promise.all([x, y, z]);
+    }
+
+    static getQuizLogSummationForUserByQuiz(userid,quizid){
+        return axios.get(Server.URL()+'/getQuizLogSummationForUserByQuiz?quizid='+quizid+'&userid='+userid);
+    }
+
     static addQuizLog(quizlog){
         return axios.post(Server.URL()+'/quizlog',quizlog);
     }
 
     static getQuizLog(quizId){
         return axios.get(Server.URL()+'/quizlog?QuizId='+quizId);
+    }
+
+    static getQuizLogByUserId(quizId,userid){
+        return axios.get(Server.URL()+'/quizlog?QuizId='+quizId+'&QuizUserId='+userid);
     }
 
     static getQuestionCountForQuiz(quizId){
