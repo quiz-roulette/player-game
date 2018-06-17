@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link,withRouter } from 'react-router-dom'
-import { Label } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import socketIOClient from 'socket.io-client'
 import Server from '../API/server'
 import './QuizListComponent.css'
@@ -68,8 +68,11 @@ class QuizListComponent extends Component {
     }
 
     handleClick(i,j){
-        
         this.props.history.push("/quiz/"+i+"/"+j);
+    }
+
+    handleDashboardClick(i){
+        this.props.history.push("/dashboard/"+i);
     }
 
     renderQuizList() {
@@ -80,9 +83,18 @@ class QuizListComponent extends Component {
             const qCn = this.state.QuizList[i].CategoryName;
             
             quizList.push(
-                                <div className="quizlistitem" key={i} style={{borderColor: new Date(this.state.QuizList[i].StartDateTime).toDateString() === new Date().toDateString() ? "red": "cyan"}} 
-                                        onClick={(e) => this.handleClick(qId,qCn)}>
-                                    {this.state.QuizList[i].QuizId}
+                                <div className="quizlistitem" key={i} style={{borderColor: new Date(this.state.QuizList[i].StartDateTime).toDateString() === new Date().toDateString() ? "maroon": "black"}} 
+                                        >
+                                    <h3 className="quizlistitemtitle">{this.state.QuizList[i].QuizId}</h3>
+                                    <div className="quizlistitemmid">
+                                        <span className="quizlistitemstartdate">{new Date(this.state.QuizList[i].StartDateTime).toDateString()}</span>
+                                        <span className="quizlistitemcategory">{qCn}</span>
+                                    </div>
+                                    <div className="quizlistitemfooter">
+                                    <Button  className="quizlistitemdashboardbtn" bsStyle="info" onClick={(e) => this.handleDashboardClick(qId)}>Dashboard</Button>
+                                        <Button className="quizlistitemplaybtn" bsStyle="primary" onClick={(e) => this.handleClick(qId,qCn)} >Play</Button>
+                                    </div>
+                                    <br/>
                                 </div>
                             )
         }

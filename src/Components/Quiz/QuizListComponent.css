@@ -1,11 +1,11 @@
 .quizlist{
     padding: 40px;
-    text-align: center;
 }
 
 .quizlistitem{
     margin: 10px;
-    max-width: 100px;
+    max-width: 33%;
+    min-width: 33%;
     color: black;
     padding: 10px;
     border-radius: 10px;
@@ -15,4 +15,21 @@
 
 .quizlistitem:hover{
     border-style: solid;
+}
+
+.quizlistitemtitle{
+    text-align: center;
+}
+
+.quizlistitemcategory,.quizlistitemplaybtn{
+    text-align: right;
+    float: right;
+}
+
+.quizlistitemstartdate,.quizlistitemdashboardbtn{
+    text-align: left;
+}
+
+.quizlistitemfooter{
+    margin-top: 20px;
 }
