@@ -28,6 +28,7 @@ class QuizComponent extends Component {
       Choices: [],
       CorrectChoice: [],
       timer: 0,
+      questionTotal: 0,
       endpoint: "https://axperience.herokuapp.com/",
       avatar: "https://axperienceapp.azurewebsites.net/avatar/bee"
     };
@@ -62,15 +63,16 @@ class QuizComponent extends Component {
             counter: quizlog.QuestionCount,
             avatar: quizlog.Avatar,
             timer: quizlog.TimeTaken,
-            score: quizlog.Score
+            score: quizlog.Score,
+            questionTotal: quizlog.QuestionCount
           })
         }
-        this.setState({
+        this.setState((prevState, props) => ({
           Questions: res[0].data,
           Choices: res[1].data,
           CorrectChoice: res[2].data,
-          questionTotal: res[0].data.length+quizlog.QuestionCount
-        });
+          questionTotal: res[0].data.length+prevState.questionTotal
+        }));
 
         this.setState({
           question: this.state.Questions[0].Text,

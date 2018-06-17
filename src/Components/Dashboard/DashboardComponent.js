@@ -43,13 +43,13 @@ class DashboardComponent extends Component {
             console.log(percentage);
             rows.push(
                 <Row className="show-grid">
-                    <Col xs={6} md={1} className="username">
+                    <Col xs={3} md={1} className="username">
                         <span >{this.state.Results[i].QuizUserId}</span>
                     </Col>
                     <Col xs={6} md={10}>
                         <ProgressBarComponent percentage={percentage} avatar={this.state.Results[i].Avatar} key={i} />
                     </Col>
-                    <Col xsHidden md={1}>
+                    <Col xs={3}  md={1}>
                         {
                             this.state.Results[i].Score >= winningScore ?
                             <img className="status" src="https://axperienceapp.azurewebsites.net/avatar/firework"/> :
