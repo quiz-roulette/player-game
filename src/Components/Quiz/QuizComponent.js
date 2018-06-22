@@ -4,6 +4,7 @@ import { Quiz, Result } from './Sub-Components'
 import socketIOClient from 'socket.io-client'
 import Server from '../API/server'
 import './QuizComponent.css';
+import { Link } from 'react-router-dom'
 
 class QuizComponent extends Component {
 
@@ -193,7 +194,9 @@ class QuizComponent extends Component {
 
   renderResult() {
     return (
+      <div>
       <Result quizResult={this.state.result} />
+      </div>
     );
   }
 

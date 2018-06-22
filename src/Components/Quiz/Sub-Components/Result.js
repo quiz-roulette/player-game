@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { BrowserRouter as Link } from 'react-router-dom';
 
 function Result(props) {
 
@@ -14,7 +15,8 @@ function Result(props) {
       transitionAppearTimeout={500}
     >
       <div style={{textAlign: "center"}}>
-        Your score is: <strong>{props.quizResult}</strong>!
+        Your score is: <strong>{props.quizResult}</strong>!<br/>
+        <img className="wavehand" src="https://image.flaticon.com/icons/svg/948/948423.svg" height='100'/><br/>
       </div>
     </ReactCSSTransitionGroup>
   );
