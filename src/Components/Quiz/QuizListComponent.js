@@ -99,7 +99,6 @@ class QuizListComponent extends Component {
                             )
         }
         return (<div className="quizlist">
-        <p>Currently Available Quiz</p>
         {quizList}<br /></div>)
     }
 }
