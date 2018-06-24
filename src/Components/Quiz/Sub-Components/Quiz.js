@@ -33,7 +33,7 @@ function Quiz(props) {
           result = {props.result}
           timer = {props.timer}
         />
-        <Question content={props.question} />
+        <Question content={props.question}  image={props.image}/>
         <ul className="answerOptions">
           {props.answerOptions.map(renderAnswerOptions)}
         </ul>

@@ -78,7 +78,8 @@ class QuizComponent extends Component {
         this.setState({
           question: this.state.Questions[0].Text,
           questionId: this.state.Questions[0].QuestionId,
-          answerOptions: this.state.Choices.filter(x => x.QuestionId === this.state.Questions[0].QuestionId)
+          answerOptions: this.state.Choices.filter(x => x.QuestionId === this.state.Questions[0].QuestionId),
+          image: this.state.Questions[0].ImageUrl,
         });
 
         setInterval(() => {
@@ -155,6 +156,7 @@ class QuizComponent extends Component {
       questionCounter: questionCounter,
       questionId: this.state.Questions[questionCounter].QuestionId,
       question: this.state.Questions[questionCounter].Text,
+      image: this.state.Questions[questionCounter].ImageUrl,
       answerOptions: this.state.Choices.filter(x => x.QuestionId === this.state.Questions[questionCounter].QuestionId),
       answer: -1,
       answerSelected: -1
@@ -183,6 +185,7 @@ class QuizComponent extends Component {
         question={this.state.question}
         questionTotal={this.state.questionTotal}
         result={this.state.score}
+        image={this.state.image}
         onAnswerSelected={this.handleAnswerSelected}
         counter={this.state.counter}
         timer={this.state.timer}

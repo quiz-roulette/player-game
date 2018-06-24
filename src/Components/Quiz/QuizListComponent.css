@@ -4,8 +4,8 @@
 
 .quizlistitem{
     margin: 10px;
-    max-width: 33%;
-    min-width: 33%;
+    width: 20vw;
+    height: 20vw;
     color: black;
     padding: 10px;
     border-radius: 10px;
