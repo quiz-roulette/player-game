@@ -27,6 +27,10 @@
     margin-top: -3em;
 }
 
+.logout-button{
+  float: right;
+}
+
 /*
 * Below code is for Cross and Tick animation
 */

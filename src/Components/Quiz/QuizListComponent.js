@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link,withRouter } from 'react-router-dom'
-import { Button } from 'react-bootstrap'
+import { Button,Col,Row,Grid } from 'react-bootstrap'
 import socketIOClient from 'socket.io-client'
 import Server from '../API/server'
 import './QuizListComponent.css'
@@ -82,7 +82,7 @@ class QuizListComponent extends Component {
             const qId = this.state.QuizList[i].QuizId;
             const qCn = this.state.QuizList[i].CategoryName;
             
-            quizList.push(
+            quizList.push(  <Col  sm={6} md={3}> 
                                 <div className="quizlistitem" key={i} style={{borderColor: new Date(this.state.QuizList[i].StartDateTime).toDateString() === new Date().toDateString() ? "maroon": "black"}} 
                                         >
                                     <h3 className="quizlistitemtitle">{this.state.QuizList[i].QuizId}</h3>
@@ -96,10 +96,14 @@ class QuizListComponent extends Component {
                                     </div>
                                     <br/>
                                 </div>
+                                </Col>
                             )
         }
-        return (<div className="quizlist">
-        {quizList}<br /></div>)
+        return (<Grid>
+            <Row className="show-grid">
+            {quizList}
+            </Row>
+            </Grid>)
     }
 }
 

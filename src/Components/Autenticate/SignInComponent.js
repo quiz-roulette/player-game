@@ -22,9 +22,7 @@ class SignInComponent extends Component {
 
     handleLogIn(event) {
         event.preventDefault();
-        // this.setState((props,prevState) =>{
-        //     loading: true
-        // });
+        this.setState({ loading: true})
         console.log(event);
         if (this.state.userName !== "" && this.state.Password !== "") {
             console.log(this.state);
@@ -34,13 +32,14 @@ class SignInComponent extends Component {
                     localStorage.setItem("l", "true");
                     localStorage.setItem("u", this.state.userName);
                     localStorage.setItem("p", this.state.Password);
+                    this.setState({ loading: false})
                     this.props.history.push("/account");
                 }
                 else {
-                    //Handle
+                    this.setState({ loading: false})
                 }
             }).catch((err) => {
-                //Handle
+                this.setState({ loading: false})
             })
         }
 
@@ -100,7 +99,7 @@ class SignInComponent extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Col smOffset={3} sm={8}>
-                            <Button onClick={this.handleLogIn}>Log in</Button>
+                            <Button onClick={this.handleLogIn} disabled={this.state.loading}>{this.state.loading ? "Loading..." : "Log in"}</Button>
                         </Col>
                     </FormGroup>
                 </Form>
