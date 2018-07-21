@@ -65,7 +65,8 @@
 
 /* AnswerOption Component */
 .answerOption {
-  border-top: 1px solid #eee;
+  border: 1px solid #eee;
+  margin: 10px;
 }
 
 /* .answerOption:hover {

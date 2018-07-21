@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Question,AnswerOption,QuestionCount,Progress} from './index'
+import { Row, Col, Grid } from 'react-bootstrap';
 
 function Quiz(props) {
 
@@ -34,9 +35,11 @@ function Quiz(props) {
           timer = {props.timer}
         />
         <Question content={props.question}  image={props.image}/>
-        <ul className="answerOptions">
+        <Grid>
+          <Row className="show-grid">
           {props.answerOptions.map(renderAnswerOptions)}
-        </ul>
+          </Row>
+        </Grid>
       </div>
     </div>
   );

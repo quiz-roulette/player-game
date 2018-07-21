@@ -1,4 +1,5 @@
 import React from 'react';
+import { Row, Col, Grid } from 'react-bootstrap';
 
 function AnswerOption(props) {
   var backgroundColor;  
@@ -13,7 +14,7 @@ function AnswerOption(props) {
     backgroundColor = "#B2B2B2"
   }
   return (
-    <div className="answerOption" style={{
+    <Col sm={6} md={3} className="answerOption" style={{
       backgroundColor: backgroundColor
     }}>
       <input type="radio"
@@ -27,7 +28,7 @@ function AnswerOption(props) {
       <label className="radioCustomLabel" htmlFor={props.answerId}>
         {props.answerContent}
       </label>
-    </div>
+    </Col>
   );
 
 }
