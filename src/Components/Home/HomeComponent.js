@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Jumbotron, Button } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import './HomeComponent.css'
+import { AnalyticsComponent } from '..';
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -15,12 +16,16 @@ class HomeComponent extends Component {
     }
 
     render() {
-        return (<Jumbotron className="jumbotron">
+        return (
+        <div>
+        <Jumbotron className="jumbotron">
             <h1 className="title">Quiz Roulette</h1>
             <p>
-                <Button bsStyle="primary" onClick={this.handleLearnMore} >Log In</Button>
+                <Button bsStyle="primary" onClick={this.handleLearnMore} >Play Now</Button>
             </p>
-        </Jumbotron>);
+        </Jumbotron>
+        <AnalyticsComponent/>
+        </div>);
     }
 }
 

@@ -77,6 +77,31 @@ class Server {
     static ResetAccountPassword(password,code){
         return axios.post(Server.URL()+"/resetPassword",{Password: password, Code: code});
     }
+
+    static getQuizOnMonth(){
+        return new Promise((resolve,reject) =>{
+            resolve({data: [{Month: 1, Count: 2},{Month: 2, Count: 3},{Month: 3, Count: 3},{Month: 4, Count: 2},{Month: 5,Count: 3},{Month: 6,Count: 2},{Month: 7,Count: 4}]})
+
+        })
+    }
+    
+    static getTotalQuizCount(){
+        return new Promise((resolve,reject) =>{
+            resolve({data: 19})
+        })
+    }
+    
+    static getUserOnMonth(){
+        return new Promise((resolve,reject) =>{
+            resolve({data: [{Month: 1, Count: 20},{Month: 2, Count: 25},{Month: 3, Count: 23},{Month: 4, Count: 19},{Month: 5,Count: 20},{Month: 6,Count: 25},{Month: 7,Count: 27}]})
+        })
+    }
+
+    static getTotalUserCount(){
+        return new Promise((resolve,reject) =>{
+            resolve({data: 159})
+        })
+    }
 }
 
 export default Server;

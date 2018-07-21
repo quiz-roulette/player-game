@@ -12,6 +12,7 @@ import DashboardComponent from './Dashboard/DashboardComponent'
 import ProgressBarComponent from './ProgressBarComponent/ProgressBarComponent'
 import AccountComponent from './Autenticate/AccountComponent'
 import ProfileComponent from './Autenticate/ProfileComponent'
+import AnalyticsComponent from './Analytics/AnalyticsComponent'
 
 export{
     SignInComponent,
@@ -27,5 +28,6 @@ export{
     DashboardComponent,
     ProgressBarComponent,
     AccountComponent,
-    ProfileComponent
+    ProfileComponent,
+    AnalyticsComponent
 }
