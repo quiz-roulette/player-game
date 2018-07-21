@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link,withRouter } from 'react-router-dom'
-import { Button,Col,Row,Grid } from 'react-bootstrap'
+import { Link, withRouter } from 'react-router-dom'
+import { Button, Col, Row, Grid } from 'react-bootstrap'
 import socketIOClient from 'socket.io-client'
 import Server from '../API/server'
 import './QuizListComponent.css'
@@ -13,20 +13,22 @@ class QuizListComponent extends Component {
         this.state = {
             QuizList: [],
             endpoint: "https://axperience.herokuapp.com/",
-            loading: false
+            loading: false,
+            SocketQuizIdList: []
         }
 
-        this.setState({ loading: true})
+        this.setState({ loading: true })
         this.updateQuizList();
     }
 
-    updateQuizList(){
+    updateQuizList() {
         Server.getQuizByGroupByUserId(localStorage.getItem('u')).then((res) => {
             console.log(res.data);
             this.setState({
                 QuizList: res.data,
                 loading: false
             });
+            
         }).catch((err) => {
             this.setState({
                 loading: false
@@ -43,7 +45,13 @@ class QuizListComponent extends Component {
         socket.on('start quiz', (obj) => {
             // setting the color of our button
             obj.isSocket = true;
+            console.log(obj);
+            var arr = [obj.QuizId]
+            this.setState((prevState, props) => {
+                return { SocketQuizIdList: prevState.SocketQuizIdList.concat(arr)};
+            });
             this.updateQuizList();
+            
         })
     }
 
@@ -59,51 +67,53 @@ class QuizListComponent extends Component {
     // }
 
     render() {
-        if(this.state.loading) return this.renderLoading();
+        if (this.state.loading) return this.renderLoading();
         else return this.renderQuizList();
     }
 
-    renderLoading(){
-        return (<LoadComponent/>)
+    renderLoading() {
+        return (<LoadComponent />)
     }
 
-    handleClick(i,j){
-        this.props.history.push("/quiz/"+i+"/"+j);
+    handleClick(i, j) {
+        this.props.history.push("/quiz/" + i + "/" + j);
     }
 
-    handleDashboardClick(i){
-        this.props.history.push("/dashboard/"+i);
+    handleDashboardClick(i) {
+        this.props.history.push("/dashboard/" + i);
     }
 
     renderQuizList() {
         const quizList = [];
-    
+        console.log(this.state);
         for (var i = 0; i < this.state.QuizList.length; i++) {
             const qId = this.state.QuizList[i].QuizId;
             const qCn = this.state.QuizList[i].CategoryName;
-            
-            quizList.push(  <Col  sm={6} md={3}> 
-                                <div className="quizlistitem" key={i} style={{borderColor: new Date(this.state.QuizList[i].StartDateTime).toDateString() === new Date().toDateString() ? "maroon": "black"}} 
-                                        >
-                                    <h3 className="quizlistitemtitle">{this.state.QuizList[i].QuizId}</h3>
-                                    <div className="quizlistitemmid">
-                                        <span className="quizlistitemstartdate">{new Date(this.state.QuizList[i].StartDateTime).toDateString()}</span>
-                                        <span className="quizlistitemcategory">{qCn}</span>
-                                    </div>
-                                    <div className="quizlistitemfooter">
-                                    <Button  className="quizlistitemdashboardbtn" bsStyle="info" onClick={(e) => this.handleDashboardClick(qId)}>Dashboard</Button>
-                                        <Button className="quizlistitemplaybtn" bsStyle="primary" onClick={(e) => this.handleClick(qId,qCn)} >Play</Button>
-                                    </div>
-                                    <br/>
-                                </div>
-                                </Col>
-                            )
+            var isSocket = this.state.SocketQuizIdList.includes(qId);
+            var classForSocket = "quizlistitem";
+            classForSocket += isSocket ? " animatequizitem" : "";
+            quizList.push(<Col sm={6} md={3}>
+                <div className={classForSocket} key={i} style={{ borderColor: new Date(this.state.QuizList[i].StartDateTime).toDateString() === new Date().toDateString() ? "maroon" : "black" }}
+                >
+                    <h3 className="quizlistitemtitle">{this.state.QuizList[i].QuizId}</h3>
+                    <div className="quizlistitemmid">
+                        <span className="quizlistitemstartdate">{new Date(this.state.QuizList[i].StartDateTime).toDateString()}</span>
+                        <span className="quizlistitemcategory">{qCn}</span>
+                    </div>
+                    <div className="quizlistitemfooter">
+                        <Button className="quizlistitemdashboardbtn" bsStyle="info" onClick={(e) => this.handleDashboardClick(qId)}>Dashboard</Button>
+                        <Button className="quizlistitemplaybtn" bsStyle="primary" onClick={(e) => this.handleClick(qId, qCn)} >Play</Button>
+                    </div>
+                    <br />
+                </div>
+            </Col>
+            )
         }
         return (<Grid>
             <Row className="show-grid">
-            {quizList}
+                {quizList}
             </Row>
-            </Grid>)
+        </Grid>)
     }
 }
 

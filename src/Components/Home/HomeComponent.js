@@ -12,7 +12,7 @@ class HomeComponent extends Component {
 
     handleLearnMore(event){
         event.preventDefault();
-        this.props.history.push("/login");
+        this.props.history.push("/account");
     }
 
     render() {
