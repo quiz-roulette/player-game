@@ -31,13 +31,18 @@ class QuizComponent extends Component {
       timer: 0,
       questionTotal: 0,
       endpoint: "https://axperience.herokuapp.com/",
-      avatar: "https://axperienceapp.azurewebsites.net/avatar/bee"
+      avatar: "https://axperienceapp.azurewebsites.net/avatar/bee",
+      fact: null
     };
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
 
     if (!localStorage.getItem('u')) {
       this.props.history.push("/account");
     }
+
+    setInterval(
+      this.getRandomFact()
+    ,50000)
   }
 
   componentWillMount() {
@@ -195,10 +200,19 @@ class QuizComponent extends Component {
     );
   }
 
+  getRandomFact(){
+    Server.getRandomFact().then((res) => {
+      console.log(res);
+      this.setState({
+        fact: res.data.Text
+      })
+    })
+  }
+
   renderResult() {
     return (
       <div>
-      <Result quizResult={this.state.result} />
+      <Result quizResult={this.state.result} fact={this.state.fact} />
       </div>
     );
   }
@@ -209,7 +223,9 @@ class QuizComponent extends Component {
 
   render() {
     if (this.state.questionId != 0) {
-      if (this.state.result) return this.renderResult();
+      if (this.state.result) {
+        return this.renderResult();
+      }
       else return this.renderQuiz();
     }
     else return this.renderLoading();

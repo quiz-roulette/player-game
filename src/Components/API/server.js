@@ -102,6 +102,10 @@ class Server {
             resolve({data: 159})
         })
     }
+
+    static getRandomFact(){
+        return axios.get(Server.URL()+"/getRandomFact");
+    }
 }
 
 export default Server;
