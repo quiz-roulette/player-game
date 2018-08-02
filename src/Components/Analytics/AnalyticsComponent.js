@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Bar, Pie } from 'react-chartjs-2';
+import { Bar, Pie, Line } from 'react-chartjs-2';
 import Server from '../API/server'
 import { Row, Col, Grid } from 'react-bootstrap';
 
@@ -86,9 +86,52 @@ class AnalyticsComponent extends Component {
                 }
             ]
         }
+
+        var regressionQuizData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+            datasets: [
+                {
+                    label: 'Users Per Month',
+                    borderColor: '#aeaeae',
+                    borderWidth: 2,
+                    backgroundColor: "#9ADBAD",
+                    data: [{
+                        x: 5,
+                        y: 5
+                    }, {
+                        x: 10,
+                        y: 7
+                    },{
+                        x: 9,
+                        y: 10
+                    }, {
+                        x: 10,
+                        y: 10
+                    },{
+                        x: 12,
+                        y: 11
+                    }, {
+                        x: 12,
+                        y: 12
+                    }]
+                }
+            ]
+        }
         return (
             <div>
                 <Grid>
+                <Row className="show-grid">
+                        <Col xs={12} md={12}>
+                           <Line
+                                data={regressionQuizData}
+                                width={200}
+                                height={300}
+                                options={{
+                                    maintainAspectRatio: false
+                                }}
+                            />
+                        </Col>
+                    </Row>
                     <Row className="show-grid">
                         <Col xs={4} md={4}>
                             <svg width="250" height="250">
