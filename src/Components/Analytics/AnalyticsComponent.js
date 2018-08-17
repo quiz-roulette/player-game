@@ -119,9 +119,10 @@ class AnalyticsComponent extends Component {
         }
         return (
             <div>
+                <h4 className="title">Analytics</h4>
                 <Grid>
                 <Row className="show-grid">
-                        <Col xs={12} md={12}>
+                        <Col xsHidden md={12}>
                            <Line
                                 data={regressionQuizData}
                                 width={200}
@@ -133,7 +134,7 @@ class AnalyticsComponent extends Component {
                         </Col>
                     </Row>
                     <Row className="show-grid">
-                        <Col xs={4} md={4}>
+                        <Col xs={12} md={4}>
                             <svg width="250" height="250">
                                 <circle cx="125" cy="125" r="100" fill="#278ECF" />
                                 <text x="50%" y="50%" textAnchor="middle" fill="white" fontSize="100px" fontFamily="Arial" dy=".3em">{this.state.totalQuiz}</text>
@@ -141,7 +142,7 @@ class AnalyticsComponent extends Component {
                                 Sorry, your browser does not support inline SVG.
                         </svg>
                         </Col>
-                        <Col xs={8} md={8}>
+                        <Col xsHidden md={8}>
                             <Bar
                                 data={monthlyQuizData}
                                 width={200}
@@ -153,7 +154,7 @@ class AnalyticsComponent extends Component {
                         </Col>
                     </Row>
                     <Row className="show-grid">
-                        <Col xs={8} md={8}>
+                        <Col xsHidden md={8}>
                             <Bar
                                 data={monthlyUserData}
                                 width={200}
@@ -163,7 +164,7 @@ class AnalyticsComponent extends Component {
                                 }}
                             />
                         </Col>
-                        <Col xs={4} md={4}>
+                        <Col xs={12} md={4}>
                             <svg width="250" height="250">
                                 <circle cx="125" cy="125" r="100" fill="#278ECF" />
                                 <text x="50%" y="50%" textAnchor="middle" fill="white" fontSize="100px" fontFamily="Arial" dy=".3em">{this.state.totalUser}</text>
