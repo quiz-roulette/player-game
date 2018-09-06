@@ -11,7 +11,7 @@ class AccountComponent extends Component {
     renderAuthenticate() {
         return (
             <div className="authenticateform">
-                <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
+                <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
                     <Tab eventKey={1} title="Sign In">
                         <SignInComponent />
                     </Tab>

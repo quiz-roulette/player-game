@@ -73,10 +73,10 @@ class SignInComponent extends Component {
                 <Form horizontal>
                     <FormGroup controlId="formHorizontalText">
                         <Col componentClass={ControlLabel} sm={3}>
-                            SIM ID:
+                            Username:
                         </Col>
                         <Col sm={9}>
-                            <FormControl type="text" placeholder="SIM ID" onChange={this.handleuserName} />
+                            <FormControl type="text" placeholder="Username" onChange={this.handleuserName} />
                         </Col>
                     </FormGroup>
 
@@ -91,10 +91,10 @@ class SignInComponent extends Component {
                     <FormGroup controlId="formHorizontalPassword">
                         <Col xsHidden componentClass={ControlLabel} sm={3}></Col>
                         <Col xs={6} sm={3}>
-                            <Link to='/forgetPassword'>Forget Password</Link>
+                            {/* <Link to='/forgetPassword'>Forget Password</Link> */}
                         </Col>
                         <Col xs={6} sm={6} className="floatright">
-                            <Link to='/account'>Create Account</Link>
+                            {/* <Link to='/account'>Create Account</Link> */}
                         </Col>
                     </FormGroup>
                     <FormGroup>

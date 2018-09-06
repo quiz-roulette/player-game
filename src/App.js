@@ -42,7 +42,7 @@ class App extends Component {
                 <Router>
                     <div className="appbody">
                         <Switch onChange="">
-                            <Route path="/" exact component={HomeComponent} />
+                            <Route path="/" exact component={AccountComponent} />
                             <Route path="/home" exact component={HomeComponent} />
                             <Route path="/calendarview" exact component={CalendarComponent} />
                             <Route path="/quiz/:id/:categoryname" exact component={QuizComponent} />
