@@ -63,8 +63,7 @@ class SignInComponent extends Component {
         }));
     }
     render() {
-        if (this.state.loading) return this.renderLoading();
-        else return this.renderForm();
+        return this.renderForm();
     }
 
     renderForm() {
@@ -76,7 +75,7 @@ class SignInComponent extends Component {
                             Username:
                         </Col>
                         <Col sm={9}>
-                            <FormControl type="text" placeholder="Username" onChange={this.handleuserName} />
+                            <FormControl type="text" placeholder="Username" disabled={this.state.loading} onChange={this.handleuserName} />
                         </Col>
                     </FormGroup>
 
@@ -85,7 +84,7 @@ class SignInComponent extends Component {
                             Password
                         </Col>
                         <Col sm={9}>
-                            <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
+                            <FormControl type="password" placeholder="Password" disabled={this.state.loading} onChange={this.handlePassword} />
                         </Col>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalPassword">
@@ -105,41 +104,6 @@ class SignInComponent extends Component {
                 </Form>
             </div>
         );
-    }
-
-    renderLoading() {
-        return (
-            <div className="authenticateform">
-                <Form horizontal>
-                    <FormGroup controlId="formHorizontalText">
-                        <Col componentClass={ControlLabel} sm={3}>
-                        SIM ID:
-                </Col>
-                        <Col sm={9}>
-                            <FormControl type="text" placeholder="employer id" onChange={this.handleuserName} />
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup controlId="formHorizontalPassword">
-                        <Col componentClass={ControlLabel} sm={3}>
-                            Password
-                </Col>
-                        <Col sm={9}>
-                            <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
-                        </Col>
-                    </FormGroup>
-                    <FormGroup>
-                        <Col smOffset={2} sm={9}>
-                            <Link to='/forgetPassword'>Forget Password</Link>
-                        </Col>
-                    </FormGroup>
-                    <FormGroup>
-                        <Col smOffset={2} sm={9}>
-                            <Button type="submit" disabled>Loading</Button>
-                        </Col>
-                    </FormGroup>
-                </Form>
-            </div>)
     }
 }
 

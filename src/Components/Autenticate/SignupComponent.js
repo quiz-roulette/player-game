@@ -11,7 +11,8 @@ class SignUpComponent extends Component {
         this.handleuserName = this.handleuserName.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
-	this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
+        this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
+        this.handleCodeChange = this.handleCodeChange.bind(this);
 
         this.state = {
             userName: "",
@@ -62,6 +63,13 @@ class SignUpComponent extends Component {
         const pw = event.target.value;
         this.setState((prevState, props) => ({
             ConfirmPassword: pw
+        }));
+    }
+
+    handleCodeChange(event){
+        const code = event.target.value;
+        this.setState((prevState, props) => ({
+            Code: code
         }));
     }
 
