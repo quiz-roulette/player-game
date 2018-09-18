@@ -101,7 +101,7 @@ class QuizListComponent extends Component {
                         <span className="quizlistitemcategory">{qCn}</span>
                     </div>
                     <div className="quizlistitemfooter">
-                        <Button className="quizlistitemdashboardbtn" bsStyle="info" onClick={(e) => this.handleDashboardClick(qId)}>Dashboard</Button>
+                        {/* <Button className="quizlistitemdashboardbtn" bsStyle="info" onClick={(e) => this.handleDashboardClick(qId)}>Dashboard</Button> */}
                         <Button className="quizlistitemplaybtn" bsStyle="primary" onClick={(e) => this.handleClick(qId, qCn)} >Play</Button>
                     </div>
                     <br />

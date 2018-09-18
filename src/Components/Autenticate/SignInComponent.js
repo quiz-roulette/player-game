@@ -32,7 +32,7 @@ class SignInComponent extends Component {
                     localStorage.setItem("l", "true");
                     localStorage.setItem("u", this.state.userName);
                     localStorage.setItem("p", this.state.Password);
-                    this.setState({ loading: false})
+                    // this.setState({ loading: false})
                     this.props.history.push("/account");
                 }
                 else {
