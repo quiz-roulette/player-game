@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button,Modal } from 'react-bootstrap';
+import { Button, Modal, Grid, Row, Col,DropdownButton,MenuItem, } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import './Common.css';
 import { QuizListComponent } from '../index';
@@ -27,36 +27,36 @@ class ProfileComponent extends Component {
         })
     }
 
-    handleLogout(event){
+    handleLogout(event) {
         localStorage.clear();
         this.props.history.push("/account");
     }
 
-    handleViewSchedule(event){
+    handleViewSchedule(event) {
         this.props.history.push("/quizlist");
     }
 
-    handleClose(event){
+    handleClose(event) {
         this.setState({
             show: false
         })
     }
 
-    handleChangeAvatar(event){
+    handleChangeAvatar(event) {
         this.setState({
             show: true
         })
     }
 
-    handleOnChangeAvatar(image){
+    handleOnChangeAvatar(image) {
         this.setState({
             selectedAvatarImage: image
         })
     }
 
-    handleConfirmSelection(event){
-        if(this.state.selectedAvatarImage != ''){
-            Server.updateUserAvatar(localStorage.getItem('u'),this.state.selectedAvatarImage).then((res) => {
+    handleConfirmSelection(event) {
+        if (this.state.selectedAvatarImage != '') {
+            Server.updateUserAvatar(localStorage.getItem('u'), this.state.selectedAvatarImage).then((res) => {
                 this.setState({
                     show: false
                 })
@@ -66,14 +66,14 @@ class ProfileComponent extends Component {
 
     render() {
         const rows = [];
-        if(this.state.avatars.length > 0){
+        if (this.state.avatars.length > 0) {
             this.state.avatars.forEach(element => {
                 rows.push(
                     <li className="avatarli">
-                        <input className="avatarinput" type='radio' value='1' name='radio' id={element.AvatarName} onChange={() => this.handleOnChangeAvatar(element.Image)}/>
-                        
+                        <input className="avatarinput" type='radio' value='1' name='radio' id={element.AvatarName} onChange={() => this.handleOnChangeAvatar(element.Image)} />
+
                         <label className="avatarlabel" for={element.AvatarName}>
-                            <img src={element.Image}/><br/>
+                            <img src={element.Image} /><br />
                             {element.AvatarName}
                         </label>
                     </li>
@@ -81,23 +81,43 @@ class ProfileComponent extends Component {
             });
         }
         return (<div className="authenticateform">
-        <Button className="logout-button" onClick={this.handleChangeAvatar}>Change Avatar</Button><Button className="logout-button" onClick={this.handleLogout}>Logout</Button>
-        <h1>Hi, {localStorage.getItem('u')}</h1>
-        <QuizListComponent/>
-        <Modal dialogClassName="custom-modal" show={this.state.show} onHide={this.handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Select Avatar</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <ul className="avatarul">
-                    {rows}
-                </ul>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.handleConfirmSelection}>Confirm</Button>
-            </Modal.Footer>
-          </Modal>
-    </div>);
+            <Grid>
+                <Row className="show-grid">
+                    <Col xs={6} md={8}>
+                        <h1>Hi, <br/>
+                            {localStorage.getItem('u')}
+                        </h1>
+                    </Col>
+                    <Col xs={6} md={4}>
+                        <DropdownButton
+                            bsStyle='default'
+                            title='Options'
+                            id={`dropdown-basic-options`}
+                            className="dropdown-button"
+                        >
+                            <MenuItem eventKey="1" onClick={this.handleChangeAvatar}>Change Avatar</MenuItem>
+                            <MenuItem eventKey="2" onClick={this.handleLogout}>Logout</MenuItem>
+                        </DropdownButton>
+                        {/* <Button className="logout-button" onClick={this.handleChangeAvatar}>Change Avatar</Button><Button className="logout-button" onClick={this.handleLogout}>Logout</Button> */}
+                    </Col>
+                </Row>
+            </Grid>
+
+            <QuizListComponent />
+            <Modal dialogClassName="custom-modal" show={this.state.show} onHide={this.handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Select Avatar</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ul className="avatarul">
+                        {rows}
+                    </ul>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={this.handleConfirmSelection}>Confirm</Button>
+                </Modal.Footer>
+            </Modal>
+        </div>);
     }
 }
 

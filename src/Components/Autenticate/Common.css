@@ -34,8 +34,9 @@
     margin-top: -3em;
 }
 
-.logout-button{
-  float: right;
+.dropdown-button{
+  margin-top: 20px;
+  margin-left: 10px;
 }
 
 .avatarul {
