@@ -39,7 +39,11 @@
 }
 
 .quizlistitemstartdate,.quizlistitemdashboardbtn{
-    text-align: left;
+	text-align: left;
+}
+
+.quizlistitemdashboardbtn{
+	visibility: hidden;
 }
 
 .quizlistitemfooter{

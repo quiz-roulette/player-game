@@ -38,6 +38,28 @@
   float: right;
 }
 
+.avatarul {
+  list-style: none;
+}
+.avatarli {
+  display: inline-block;
+  margin-right: 15px;
+}
+.avatarinput {
+  visibility:hidden;
+}
+.avatarlabel {
+  cursor: pointer;
+  text-align: center;
+}
+.avatarinput:checked + label {
+  border-style: solid;
+  border-color: orange;
+}
+.custom-modal{
+  width: 60% !important;
+}
+
 /*
 * Below code is for Cross and Tick animation
 */

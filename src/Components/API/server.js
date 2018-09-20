@@ -66,7 +66,10 @@ class Server {
 
     static updateUserScore(quizId,userId){}
 
-    static updateUser(user){}
+    //At the moment it only updates avatar
+    static updateUserAvatar(userId, avatarImage){
+        return axios.patch(Server.URL()+'/quizuser',{QuizUserId: userId, Avatar: avatarImage})
+    }
 
     static sendReport(id){
         return axios.get(Server.URL()+"/sendreport/"+id);
