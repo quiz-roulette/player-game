@@ -2,83 +2,93 @@ import axios from 'axios';
 
 class Server {
 
-    static URL(){
-        return "https://axperienceapp.azurewebsites.net/api";
+    static AxiosInstance(){
+        return axios.create({
+            //baseURL: 'https://digitaltrackerserver.azurewebsites.net',
+            baseURL: "https://axperienceapp.azurewebsites.net/api",
+            headers: { 
+                "Access-Control-Allow-Origin" : "*"
+            },
+            mode: 'no-cors'});
+    }
+
+    static URL() {
+        return "";
     }
     
     static signin(username, password){
-        return axios.get(Server.URL()+ '/authenticate?userId=' + username + '&userPassword=' + password);
+        return Server.AxiosInstance().get(Server.URL()+ '/authenticate?userId=' + username + '&userPassword=' + password);
     }
 
     static signup(username, password, email){
-        return axios.post(Server.URL()+"/addUser",{Username: username, Password: password, Email: email});
+        return Server.AxiosInstance().post(Server.URL()+"/addUser",{Username: username, Password: password, Email: email});
     }
 
     static getAvatars(){
-        return axios.get(Server.URL()+'/avatar');
+        return Server.AxiosInstance().get(Server.URL()+'/avatar');
     }
 
     static getQuizList(){
-        return axios.get(Server.URL()+'/quiz');
+        return Server.AxiosInstance().get(Server.URL()+'/quiz');
     }
 
     static getQuizListWithEnded(){
-        return axios.get(Server.URL()+'/getAllQuizWithEnded');
+        return Server.AxiosInstance().get(Server.URL()+'/getAllQuizWithEnded');
     }
 
     static getQuizByGroupByUserId(userid){
-        return axios.get(Server.URL()+'/quizbygroup?userid='+userid);
+        return Server.AxiosInstance().get(Server.URL()+'/quizbygroup?userid='+userid);
     }
 
     static getQuizById(id){
-        var x = axios.get(Server.URL()+'/question?userid='+id);
-        var y = axios.get(Server.URL()+'/choice');
-        var z = axios.get(Server.URL()+'/correctchoice');
+        var x = Server.AxiosInstance().get(Server.URL()+'/question?userid='+id);
+        var y = Server.AxiosInstance().get(Server.URL()+'/choice');
+        var z = Server.AxiosInstance().get(Server.URL()+'/correctchoice');
         return Promise.all([x, y, z]);
     }
 
     static getQuizByUserIdAndQuizId(userid,quizid){
-        var x = axios.get(Server.URL()+'/question?userid='+userid+'&quizid='+quizid);
-        var y = axios.get(Server.URL()+'/choice');
-        var z = axios.get(Server.URL()+'/correctchoice');
+        var x = Server.AxiosInstance().get(Server.URL()+'/question?userid='+userid+'&quizid='+quizid);
+        var y = Server.AxiosInstance().get(Server.URL()+'/choice');
+        var z = Server.AxiosInstance().get(Server.URL()+'/correctchoice');
         return Promise.all([x, y, z]);
     }
 
     static getQuizLogSummationForUserByQuiz(userid,quizid){
-        return axios.get(Server.URL()+'/getQuizLogSummationForUserByQuiz?quizid='+quizid+'&userid='+userid);
+        return Server.AxiosInstance().get(Server.URL()+'/getQuizLogSummationForUserByQuiz?quizid='+quizid+'&userid='+userid);
     }
 
     static addQuizLog(quizlog){
-        return axios.post(Server.URL()+'/quizlog',quizlog);
+        return Server.AxiosInstance().post(Server.URL()+'/quizlog',quizlog);
     }
 
     static getQuizLog(quizId){
-        return axios.get(Server.URL()+'/quizlog?QuizId='+quizId);
+        return Server.AxiosInstance().get(Server.URL()+'/quizlog?QuizId='+quizId);
     }
 
     static getQuizLogByUserId(quizId,userid){
-        return axios.get(Server.URL()+'/quizlog?QuizId='+quizId+'&QuizUserId='+userid);
+        return Server.AxiosInstance().get(Server.URL()+'/quizlog?QuizId='+quizId+'&QuizUserId='+userid);
     }
 
     static getQuestionCountForQuiz(quizId){
-        return axios.get(Server.URL()+'/getQuestionCountForQuiz?QuizId='+quizId);
+        return Server.AxiosInstance().get(Server.URL()+'/getQuestionCountForQuiz?QuizId='+quizId);
     }
 
     static updateUserScore(quizId,userId){}
 
     //At the moment it only updates avatar
     static updateUserAvatar(userId, avatarImage){
-        return axios.patch(Server.URL()+'/quizuser',{QuizUserId: userId, Avatar: avatarImage})
+        return Server.AxiosInstance().patch(Server.URL()+'/quizuser',{QuizUserId: userId, Avatar: avatarImage})
     }
 
     static sendReport(id){
-        return axios.get(Server.URL()+"/sendreport/"+id);
+        return Server.AxiosInstance().get(Server.URL()+"/sendreport/"+id);
     }
     static getAccountByName(id){
-        return axios.get(Server.URL()+"/forgetPassword/"+id);
+        return Server.AxiosInstance().get(Server.URL()+"/forgetPassword/"+id);
     }
     static ResetAccountPassword(password,code){
-        return axios.post(Server.URL()+"/resetPassword",{Password: password, Code: code});
+        return Server.AxiosInstance().post(Server.URL()+"/resetPassword",{Password: password, Code: code});
     }
 
     static getQuizOnMonth(){
@@ -107,7 +117,7 @@ class Server {
     }
 
     static getRandomFact(){
-        return axios.get(Server.URL()+"/getRandomFact");
+        return Server.AxiosInstance().get(Server.URL()+"/getRandomFact");
     }
 }
 
