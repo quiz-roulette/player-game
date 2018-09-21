@@ -14,31 +14,6 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Navbar collapseOnSelect>
-                    <Navbar.Header>
-                        <Navbar.Brand>
-                            <a href="/home"><p>QR</p></a>
-                        </Navbar.Brand>
-                        <Navbar.Toggle />
-                    </Navbar.Header>
-                    <Navbar.Collapse>
-                        <Nav>
-                            <NavItem eventKey={1} href="/calendarview">
-                                Calendar
-                    </NavItem>
-                        </Nav>
-                        <Nav pullRight>
-                            <NavItem eventKey={1} href="/account">
-                                Profile
-                    </NavItem>
-                        </Nav>
-                        {/* <Nav hidden={this.state.loginStatus === false} pullRight>
-                    <NavItem eventKey={1} onClick={this.handleLogout}>
-                        Logout
-                    </NavItem>
-                </Nav> */}
-                    </Navbar.Collapse>
-                </Navbar>
                 <Router>
                     <div className="appbody">
                         <Switch onChange="">

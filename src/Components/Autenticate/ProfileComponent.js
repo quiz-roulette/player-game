@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Grid, Row, Col,DropdownButton,MenuItem, } from 'react-bootstrap';
+import { Button, Modal, Grid, Row, Col, DropdownButton, MenuItem,Navbar, Nav, NavItem } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import './Common.css';
 import { QuizListComponent } from '../index';
@@ -80,44 +80,72 @@ class ProfileComponent extends Component {
                 )
             });
         }
-        return (<div className="authenticateform">
-            <Grid>
-                <Row className="show-grid">
-                    <Col xs={6} md={8}>
-                        <h1>Hi, <br/>
-                            {localStorage.getItem('u')}
-                        </h1>
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <DropdownButton
-                            bsStyle='default'
-                            title='Options'
-                            id={`dropdown-basic-options`}
-                            className="dropdown-button"
-                        >
-                            <MenuItem eventKey="1" onClick={this.handleChangeAvatar}>Change Avatar</MenuItem>
-                            <MenuItem eventKey="2" onClick={this.handleLogout}>Logout</MenuItem>
-                        </DropdownButton>
-                        {/* <Button className="logout-button" onClick={this.handleChangeAvatar}>Change Avatar</Button><Button className="logout-button" onClick={this.handleLogout}>Logout</Button> */}
-                    </Col>
-                </Row>
-            </Grid>
+        return (
+            <div>
+                <Navbar collapseOnSelect>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <a href="/home"><p>QR</p></a>
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
+                    <Navbar.Collapse>
+                        <Nav>
+                            <NavItem eventKey={1} href="/calendarview">
+                                Calendar
+                    </NavItem>
+                        </Nav>
+                        <Nav pullRight>
+                            <NavItem eventKey={1} href="/account">
+                                Profile
+                    </NavItem>
+                        </Nav>
+                        {/* <Nav hidden={this.state.loginStatus === false} pullRight>
+                    <NavItem eventKey={1} onClick={this.handleLogout}>
+                        Logout
+                    </NavItem>
+                </Nav> */}
+                    </Navbar.Collapse>
+                </Navbar>
+                <div className="authenticateform">
+                    <Grid>
+                        <Row className="show-grid">
+                            <Col xs={6} md={10}>
+                                <h1>Hi, <br />
+                                    {localStorage.getItem('u')}
+                                </h1>
+                            </Col>
+                            <Col xs={6} md={2}>
+                                <DropdownButton
+                                    bsStyle='default'
+                                    title='Options'
+                                    id={`dropdown-basic-options`}
+                                    className="dropdown-button"
+                                >
+                                    <MenuItem eventKey="1" onClick={this.handleChangeAvatar}>Change Avatar</MenuItem>
+                                    <MenuItem eventKey="2" onClick={this.handleLogout}>Logout</MenuItem>
+                                </DropdownButton>
+                                {/* <Button className="logout-button" onClick={this.handleChangeAvatar}>Change Avatar</Button><Button className="logout-button" onClick={this.handleLogout}>Logout</Button> */}
+                            </Col>
+                        </Row>
+                    </Grid>
 
-            <QuizListComponent />
-            <Modal dialogClassName="custom-modal" show={this.state.show} onHide={this.handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Select Avatar</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <ul className="avatarul">
-                        {rows}
-                    </ul>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={this.handleConfirmSelection}>Confirm</Button>
-                </Modal.Footer>
-            </Modal>
-        </div>);
+                    <QuizListComponent />
+                    <Modal dialogClassName="custom-modal" show={this.state.show} onHide={this.handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Select Avatar</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <ul className="avatarul">
+                                {rows}
+                            </ul>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={this.handleConfirmSelection}>Confirm</Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
+            </div>);
     }
 }
 
