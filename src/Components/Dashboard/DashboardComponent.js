@@ -5,6 +5,8 @@ import { Grid, Row, Col } from 'react-bootstrap'
 import socketIOClient from 'socket.io-client'
 import Server from '../API/server'
 import ProgressBarComponent from '../ProgressBarComponent/ProgressBarComponent'
+import { subscribeToResult,subscribeToOnlineUser } from '../API/socket';
+const users = [];
 
 class DashboardComponent extends Component {
     constructor(props) {
@@ -16,9 +18,28 @@ class DashboardComponent extends Component {
             QuizId: params.quizid,
             QuestionCount: 5,
             endpoint: "https://axperience.herokuapp.com/",
+            UserCount: 0
         }
         this.update();
 
+        subscribeToResult((err, result) => {
+            this.update();
+        });
+
+        subscribeToOnlineUser((err, result) => {
+            var found = false;
+            for(var i=0; i<users.length; i++){
+                if(users[i] === result.QuizUserId){
+                    found = true;
+                }
+            }
+            if(!found){
+                users.push(result.QuizUserId);
+                this.setState({
+                    UserCount: users.length
+                })
+            }
+        })
     }
     update() {
         Server.getQuizLog(this.state.QuizId).then((res) => {
@@ -62,7 +83,8 @@ class DashboardComponent extends Component {
         }
         return (
             <div>
-                <h4 className="title">{this.state.QuizId}</h4>
+                <h3 className="title">{this.state.QuizId}</h3>
+                <h6 className="title">Online Users: {this.state.UserCount}</h6>
                 <Grid>{rows}</Grid>
                 <br />
                 <p className="footernote">The winner is based on the algorithm to choose the best time and score.</p>
@@ -107,7 +129,7 @@ class DashboardComponent extends Component {
     </svg></span>);
     }
 
-    componentDidMount() {
+    /* componentDidMount() {
         const socket = socketIOClient(this.state.endpoint)
 
         // socket.on is another method that checks for incoming events from the server
@@ -135,7 +157,7 @@ class DashboardComponent extends Component {
             //     }));
             // }
         })
-    }
+    } **/
 
     /**
      * Returns a random integer between min (inclusive) and max (inclusive)

@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import './Common.css';
 import { QuizListComponent,QuizUserSummaryComponent } from '../index';
 import Server from '../API/server'
+import { emitOnlineUser } from '../API/socket';
 
 class ProfileComponent extends Component {
     constructor(props) {
@@ -24,7 +25,9 @@ class ProfileComponent extends Component {
             this.setState({
                 avatars: res.data
             })
-        })
+        });
+
+        emitOnlineUser({QuizUserId: localStorage.getItem('u')})
     }
 
     handleLogout(event) {
