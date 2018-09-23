@@ -218,7 +218,12 @@ class QuizComponent extends Component {
   }
 
   renderLoading() {
-    return (<h1>Loading...</h1>);
+    return (
+      <div className="loading-center">
+        <img src={this.state.avatar}/><br/>
+        <h5>Loading...</h5>
+      </div>
+    );
   }
 
   render() {
