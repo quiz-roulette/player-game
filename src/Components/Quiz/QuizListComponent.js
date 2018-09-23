@@ -28,7 +28,7 @@ class QuizListComponent extends Component {
                 QuizList: res.data,
                 loading: false
             });
-            
+
         }).catch((err) => {
             this.setState({
                 loading: false
@@ -48,10 +48,10 @@ class QuizListComponent extends Component {
             console.log(obj);
             var arr = [obj.QuizId]
             this.setState((prevState, props) => {
-                return { SocketQuizIdList: prevState.SocketQuizIdList.concat(arr)};
+                return { SocketQuizIdList: prevState.SocketQuizIdList.concat(arr) };
             });
             this.updateQuizList();
-            
+
         })
     }
 
@@ -109,11 +109,17 @@ class QuizListComponent extends Component {
             </Col>
             )
         }
-        return (<Grid>
-            <Row className="show-grid">
-                {quizList}
-            </Row>
-        </Grid>)
+        if (quizList.length > 0) {
+            return (<Grid>
+                <Row className="show-grid">
+                    {quizList}
+                </Row>
+            </Grid>)
+        }
+        else{
+            return (<h6>No Quiz Found.</h6>)
+        }
+
     }
 }
 
