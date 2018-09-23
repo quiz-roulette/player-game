@@ -13,6 +13,7 @@ import ProgressBarComponent from './ProgressBarComponent/ProgressBarComponent'
 import AccountComponent from './Autenticate/AccountComponent'
 import ProfileComponent from './Autenticate/ProfileComponent'
 import AnalyticsComponent from './Analytics/AnalyticsComponent'
+import QuizUserSummaryComponent from './QuizUserSummary/QuizUserSummaryComponent'
 
 export{
     SignInComponent,
@@ -29,5 +30,6 @@ export{
     ProgressBarComponent,
     AccountComponent,
     ProfileComponent,
-    AnalyticsComponent
+    AnalyticsComponent,
+    QuizUserSummaryComponent
 }

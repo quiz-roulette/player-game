@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, Grid, Row, Col, DropdownButton, MenuItem,Navbar, Nav, NavItem } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import './Common.css';
-import { QuizListComponent } from '../index';
+import { QuizListComponent,QuizUserSummaryComponent } from '../index';
 import Server from '../API/server'
 
 class ProfileComponent extends Component {
@@ -131,6 +131,7 @@ class ProfileComponent extends Component {
                     </Grid>
 
                     <QuizListComponent />
+                    <QuizUserSummaryComponent />
                     <Modal dialogClassName="custom-modal" show={this.state.show} onHide={this.handleClose}>
                         <Modal.Header closeButton>
                             <Modal.Title>Select Avatar</Modal.Title>
