@@ -121,8 +121,8 @@ class ProfileComponent extends Component {
                             <Col xs={6} md={2}>
                                 <DropdownButton
                                     bsStyle='default'
-                                    title='Options'
-                                    id={`dropdown-basic-options`}
+                                    title='Setting'
+                                    id={`dropdown-basic-setting`}
                                     className="dropdown-button"
                                 >
                                     <MenuItem eventKey="1" onClick={this.handleChangeAvatar}>Change Avatar</MenuItem>
