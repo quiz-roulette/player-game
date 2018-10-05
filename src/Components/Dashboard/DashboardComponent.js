@@ -46,7 +46,8 @@ class DashboardComponent extends Component {
             if (res.data) {
                 Server.getQuestionCountForQuiz(this.state.QuizId).then((res1) => {
                     console.log(res.data);
-                    res.data.sort(function (a, b) { return a.TimeTaken - b.TimeTaken && b.Score - a.Score });
+                    // res.data.sort(function (a, b) { return b.Score - a.Score });
+                    // res.data.sort(function(a,b){ return a.TimeTaken - b.TimeTaken});
                     console.log(res1.data);
                     this.setState((prevState, props) => ({
                         Results: res.data,
