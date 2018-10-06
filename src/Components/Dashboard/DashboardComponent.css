@@ -16,3 +16,8 @@
   .footernote, .title{
       text-align: center;
   }
+
+  .togglebutton{
+    float: right;
+    margin-right: 100px;
+  }
