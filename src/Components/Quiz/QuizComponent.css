@@ -30,14 +30,17 @@
 }
 
 .loading-center{
-    width: 300px;
-    height: 300px;
-    text-align: center;
-    line-height: 300px;
-}
+    background-image: url('../../assest/searching.gif');
+    /* Full height */
+    height: 40%; 
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 10%;
 
-.loading-center img{
-  vertical-align: middle;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 @media (min-width: 769px) {
