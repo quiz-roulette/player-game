@@ -98,7 +98,10 @@ class QuizListComponent extends Component {
                     <h3 className="quizlistitemtitle">{this.state.QuizList[i].QuizId}</h3>
                     <div className="quizlistitemmid">
                         <span className="quizlistitemstartdate">{new Date(this.state.QuizList[i].StartDateTime).toDateString()}</span>
-                        <span className="quizlistitemcategory">{qCn}</span>
+                        {/* <span className="quizlistitemcategory">{qCn}</span> */}
+                    </div>
+                    <div className="quizlistitemmid">
+                        <span className="quizlistitemstartdate">{qCn}</span>
                     </div>
                     <div className="quizlistitemfooter">
                         <Button className="quizlistitemdashboardbtn" bsStyle="default" onClick={(e) => this.handleDashboardClick(qId)}>Dashboard</Button>
