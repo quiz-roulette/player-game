@@ -5,7 +5,7 @@ import socketIOClient from 'socket.io-client'
 import Server from '../API/server'
 import './QuizComponent.css';
 import { Link } from 'react-router-dom'
-
+import Alert from 'react-s-alert';
 class QuizComponent extends Component {
 
   constructor(props) {
@@ -42,29 +42,30 @@ class QuizComponent extends Component {
 
     setInterval(
       this.getRandomFact()
-    ,50000)
+      , 50000)
   }
 
   componentWillMount() {
     // const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));
     console.log("counter", this.state.Questions.length);
 
-    Server.getQuizByUserIdAndQuizId(localStorage.getItem('u'),this.state.QuizId).then((res) => {
+    Server.getQuizByUserIdAndQuizId(localStorage.getItem('u'), this.state.QuizId).then((res) => {
       res[0].data = this.shuffleArray(res[0].data);
       console.log(this.state.QuizId);
-      Server.getQuizLogSummationForUserByQuiz(localStorage.getItem('u'),this.state.QuizId).then((res1) => {
+      Server.getQuizLogSummationForUserByQuiz(localStorage.getItem('u'), this.state.QuizId).then((res1) => {
         console.log(res1);
-        if(res[0].data.length === 0){
+        if (res[0].data.length === 0) {
           /**
            * setting Questionid to -1 due to the render function checks for non zero question id
            */
-          this.setState({ 
+          this.setState({
             questionId: -1,
-            result: res1.data[0].Score });
+            result: res1.data[0].Score
+          });
           return;
         }
-        else if(res1.data.length > 0){
-          var quizlog= res1.data[0];
+        else if (res1.data.length > 0) {
+          var quizlog = res1.data[0];
           this.setState({
             counter: quizlog.QuestionCount,
             avatar: quizlog.Avatar,
@@ -77,7 +78,7 @@ class QuizComponent extends Component {
           Questions: res[0].data,
           Choices: res[1].data,
           CorrectChoice: res[2].data,
-          questionTotal: res[0].data.length+prevState.questionTotal
+          questionTotal: res[0].data.length + prevState.questionTotal
         }));
 
         this.setState({
@@ -93,6 +94,12 @@ class QuizComponent extends Component {
           });
         }, 1000);
       })
+    }).catch((err) => {
+      Alert.error('Unable to set up quiz', {
+        position: 'bottom-right',
+        effect: 'slide',
+        timeout: 'none'
+      });
     })
 
   }
@@ -200,7 +207,7 @@ class QuizComponent extends Component {
     );
   }
 
-  getRandomFact(){
+  getRandomFact() {
     Server.getRandomFact().then((res) => {
       console.log(res);
       this.setState({
@@ -212,7 +219,7 @@ class QuizComponent extends Component {
   renderResult() {
     return (
       <div>
-      <Result quizResult={this.state.result} fact={this.state.fact} />
+        <Result quizResult={this.state.result} fact={this.state.fact} />
       </div>
     );
   }

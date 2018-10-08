@@ -3,6 +3,9 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { AccountComponent,AnalyticsComponent, QuizComponent, AvatarSelectionComponent, QuizListComponent, NotFoundComponent, SignUpComponent, CalendarComponent, ForgetPasswordComponent, ResetPasswordComponent, HomeComponent, DashboardComponent } from './Components'
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 
 class App extends Component {
 
@@ -36,6 +39,7 @@ class App extends Component {
                         </Switch>
                     </div>
                 </Router>
+                <Alert stack={{limit: 3}} />
             </div>
         );
     }

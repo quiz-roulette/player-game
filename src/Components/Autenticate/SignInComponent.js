@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import Server from '../API/server'
 import './Common.css';
 import { Link } from 'react-router-dom'
+import Alert from 'react-s-alert';
 
 class SignInComponent extends Component {
     constructor(props) {
@@ -33,14 +34,37 @@ class SignInComponent extends Component {
                     localStorage.setItem("u", this.state.userName);
                     // localStorage.setItem("p", this.state.Password);
                     // this.setState({ loading: false})
+                    Alert.info('You can change avatar under settings', {
+                        position: 'top-right',
+                        effect: 'bouncyflip',
+                        timeout: 'none'
+                    });
                     this.props.history.push("/account");
                 }
                 else {
                     this.setState({ loading: false})
+                    Alert.error('Either username or password is wrong', {
+                        position: 'top-right',
+                        effect: 'slide',
+                        timeout: 'none'
+                    });
                 }
             }).catch((err) => {
                 this.setState({ loading: false})
+                Alert.error('Either username or password is wrong', {
+                    position: 'top-right',
+                    effect: 'slide',
+                    timeout: 'none'
+                });
             })
+        }
+        else{
+            this.setState({ loading: false})
+            Alert.error('Username or Password cannot be empty', {
+                position: 'top-right',
+                effect: 'slide',
+                timeout: 'none'
+            });
         }
 
         // this.setState((props,prevState) =>{

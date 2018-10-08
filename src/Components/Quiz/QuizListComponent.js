@@ -5,6 +5,7 @@ import socketIOClient from 'socket.io-client'
 import Server from '../API/server'
 import './QuizListComponent.css'
 import LoadComponent from '../Helper/LoadComponent';
+import Alert from 'react-s-alert';
 
 class QuizListComponent extends Component {
     constructor(props) {
@@ -32,7 +33,12 @@ class QuizListComponent extends Component {
         }).catch((err) => {
             this.setState({
                 loading: false
-            })
+            });
+            Alert.error('Unable to retreive quiz', {
+                position: 'top-right',
+                effect: 'slide',
+                timeout: 'none'
+            });
         })
     }
 

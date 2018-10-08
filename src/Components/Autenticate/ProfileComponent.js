@@ -5,6 +5,7 @@ import './Common.css';
 import { QuizListComponent,QuizUserSummaryComponent } from '../index';
 import Server from '../API/server'
 import { emitOnlineUser } from '../API/socket';
+import Alert from 'react-s-alert';
 
 class ProfileComponent extends Component {
     constructor(props) {
