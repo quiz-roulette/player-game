@@ -2,13 +2,13 @@
 
 ## Features
 
--- login
--- calendar view
--- dashboard
--- quiz list
---- play quiz
---- result
--- summary of quiz score
+- login
+- calendar view
+- dashboard
+- quiz list
+  - play quiz
+  - result
+- summary of quiz score
 
 ## Technology Stack
 
