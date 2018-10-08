@@ -102,6 +102,24 @@ class QuizComponent extends Component {
       });
     })
 
+    const socket = socketIOClient(this.state.endpoint)
+    //Expecting {QuizId: quizid}
+    socket.on('stop quiz', (obj) => {
+  
+      var isEnded = this.state.QuizId === obj.QuizId ? true : false;
+      this.setState((prevState, props) => {
+        return { QuizEnded: isEnded };
+      });
+      if (isEnded) {
+        Alert.info('Quiz has been ended by Admin', {
+          position: 'top-right',
+          effect: 'slide',
+          timeout: 'none'
+        });
+        this.props.history.push("/account/");
+      }
+    })
+
   }
 
   shuffleArray(array) {
