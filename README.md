@@ -19,5 +19,5 @@
 
 ## Contributors
 
-- (Smit)[https://github.com/shah-smit]
-- (Xerxes)[https://github.com/XXerxesG]
+- [Smit](https://github.com/shah-smit)
+- [Xerxes](https://github.com/XXerxesG)
