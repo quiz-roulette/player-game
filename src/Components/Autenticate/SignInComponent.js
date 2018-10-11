@@ -36,7 +36,7 @@ class SignInComponent extends Component {
                     // this.setState({ loading: false})
                     Alert.info('You can change avatar under settings', {
                         position: 'top-right',
-                        effect: 'bouncyflip',
+                        effect: 'slide',
                         timeout: 'none'
                     });
                     this.props.history.push("/account");
