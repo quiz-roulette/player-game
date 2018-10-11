@@ -2,20 +2,20 @@
 
 ## Features
 
--- login
--- calendar view
--- dashboard
--- quiz list
---- play quiz
---- result
--- summary of quiz score
+- login
+- calendar view
+- dashboard
+- quiz list
+  - play quiz
+  - result
+- summary of quiz score
 
 ## Technology Stack
 
 - ReactJS (Front End)
 - NodeJS (Back End) @Axperience-Server
 - NodeJS (Socket - Real Time) @Axperience
-- SQL-Server (Microsoft Azure)
+- SQL-Server (Database - Microsoft Azure)
 
 ## Contributors
 
