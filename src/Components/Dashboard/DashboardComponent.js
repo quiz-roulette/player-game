@@ -6,6 +6,7 @@ import socketIOClient from 'socket.io-client'
 import Server from '../API/server'
 import ProgressBarComponent from '../ProgressBarComponent/ProgressBarComponent'
 import { subscribeToResult, subscribeToOnlineUser } from '../API/socket';
+import ideate from '../../assest/ideate.gif'
 const users = [];
 
 class DashboardComponent extends Component {
@@ -85,7 +86,7 @@ class DashboardComponent extends Component {
                         <Button className="togglebutton" bsStyle="link" onClick={this.handleViewClick} >{this.state.View === 'LIST' ? 'GRID' : 'LIST'}</Button>
                     </Col>
                 </Row>
-                {this.state.View === 'LIST' ? this.renderList() : this.renderTable()}
+                {this.state.Results.length > 0 ? (this.state.View === 'LIST' ? this.renderList() : this.renderTable()) : <img src={ideate} className="waiting-results"/>}
                 <br />
                 <p className="footernote">The winner is based on the algorithm to choose the best time and score.</p>
             </div>)
