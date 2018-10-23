@@ -20,8 +20,13 @@ class Server {
         return Server.AxiosInstance().get(Server.URL()+ '/authenticate?userId=' + username + '&userPassword=' + password);
     }
 
-    static signup(username, password, email){
-        return Server.AxiosInstance().post(Server.URL()+"/addUser",{Username: username, Password: password, Email: email});
+    static assignUserToGroup(groupname, userid) {
+        // console.log({ GName: groupname, UserId: userid });
+        return Server.AxiosInstance().post(Server.URL()+'api/quizusergroup_join', { GName: groupname, UserId: userid });
+    }
+
+    static signup(username, password){
+        return Server.AxiosInstance().post(Server.URL()+"/addFrontEndQuizUser",{QuizUserId: username, Password: password});
     }
 
     static getAvatars(){

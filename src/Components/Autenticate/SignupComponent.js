@@ -3,6 +3,7 @@ import { Form, FormGroup, Col, FormControl, ControlLabel, Button } from 'react-b
 import { withRouter } from "react-router-dom";
 import Server from '../API/server'
 import './Common.css'
+import Alert from 'react-s-alert';
 
 class SignUpComponent extends Component {
     constructor() {
@@ -24,18 +25,43 @@ class SignUpComponent extends Component {
 
     handleSignup(event) {
         event.preventDefault();
-        if (this.state.userName !== "" && this.state.Email !== "" &&
-            this.state.Password !== "") {
-            if (this.state.Password === this.state.ConfirmPassword) {
-                Server.signup(this.state.userName, this.state.Password, this.state.Email).then((res) => {
-                    localStorage.setItem("l", "true");
-                    localStorage.setItem("u", this.state.userName);
-                    localStorage.setItem("p", this.state.Password);
-                    this.props.history.push("/schedule");
-                })
+        this.setState({ loading: true})
+        var password = this.state.Password;
+        if (/@mymail.sim.edu.sg\s*$/.test(this.state.Email)) {
+            if (password === this.state.ConfirmPassword) {
+                if (password && password != "" && password.length >= 6 && password.length <= 10) {
+                    Server.signup(this.state.Email, password).then((res) => {
+                        localStorage.setItem("l", "true");
+                        localStorage.setItem("u", this.state.Email);
+                        this.props.history.push("/account");
+                    });
+                }
+                else {
+                    this.setState({ loading: false })
+                    Alert.error('Password must be atleast 6 letters and less than 10 letters', {
+                        position: 'top-right',
+                        effect: 'slide',
+                        timeout: 'none'
+                    });
+                }
+            }
+            else{
+                this.setState({ loading: false })
+                Alert.error('Password does not match', {
+                    position: 'top-right',
+                    effect: 'slide',
+                    timeout: 'none'
+                });
             }
         }
-
+        else {
+            this.setState({ loading: false })
+            Alert.error('Invalid Email address. It must be SIM mymail ID', {
+                position: 'top-right',
+                effect: 'slide',
+                timeout: 'none'
+            });
+        }
     }
 
     handleuserName(event) {
@@ -66,7 +92,7 @@ class SignUpComponent extends Component {
         }));
     }
 
-    handleCodeChange(event){
+    handleCodeChange(event) {
         const code = event.target.value;
         this.setState((prevState, props) => ({
             Code: code
@@ -75,57 +101,57 @@ class SignUpComponent extends Component {
 
     render() {
         return (
-        <div className="authenticateform">
-        <Form horizontal>
-            <FormGroup controlId="formHorizontalEmail">
-                <Col componentClass={ControlLabel} sm={3}>
-                    Email
+            <div className="authenticateform">
+                <Form horizontal>
+                    <FormGroup controlId="formHorizontalEmail">
+                        <Col componentClass={ControlLabel} sm={3} style={{textAlign: 'left'}}>
+                            Email
                 </Col>
-                <Col sm={9}>
-                    <FormControl type="email" placeholder="Email" onChange={this.handleEmail} />
-                </Col>
-            </FormGroup>
+                        <Col sm={9}>
+                            <FormControl type="email" placeholder="SIM Mymail ID" onChange={this.handleEmail} />
+                        </Col>
+                    </FormGroup>
 
-            <FormGroup controlId="formHorizontalText">
-                <Col componentClass={ControlLabel} sm={3}>
-                    SIM ID
+                    <FormGroup controlId="formHorizontalText">
+                        <Col componentClass={ControlLabel} sm={3} style={{textAlign: 'left'}}>
+                            SIM ID
                 </Col>
-                <Col sm={9}>
-                    <FormControl type="text" placeholder="SIM ID" onChange={this.handleuserName} />
-                </Col>
-            </FormGroup>
+                        <Col sm={9}>
+                            <FormControl type="text" placeholder="SIM ID" onChange={this.handleuserName} />
+                        </Col>
+                    </FormGroup>
 
-            <FormGroup controlId="formHorizontalPassword">
-                <Col componentClass={ControlLabel} sm={3}>
-                    Password
+                    <FormGroup controlId="formHorizontalPassword">
+                        <Col componentClass={ControlLabel} sm={3} style={{textAlign: 'left'}}>
+                            Password
                 </Col>
-                <Col sm={9}>
-                    <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
-                </Col>
-            </FormGroup>
+                        <Col sm={9}>
+                            <FormControl type="password" placeholder="Password" onChange={this.handlePassword} />
+                        </Col>
+                    </FormGroup>
 
-            <FormGroup controlId="formHorizontalPassword">
-                <Col componentClass={ControlLabel} sm={3}>
-                    Confirm Password
+                    <FormGroup controlId="formHorizontalPassword">
+                        <Col componentClass={ControlLabel} sm={3} style={{textAlign: 'left'}}>
+                            Confirm Password
                 </Col>
-                <Col sm={9}>
-                    <FormControl type="password" placeholder="Confirm Password" onChange={this.handleConfirmPassword} />
-                </Col>
-            </FormGroup>
+                        <Col sm={9}>
+                            <FormControl type="password" placeholder="Confirm Password" onChange={this.handleConfirmPassword} />
+                        </Col>
+                    </FormGroup>
 
-            {/* <FormGroup>
+                    {/* <FormGroup>
                 <Col smOffset={2} sm={9}>
                     <Checkbox>Remember me</Checkbox>
                 </Col>
             </FormGroup> */}
 
-            <FormGroup>
-                <Col smOffset={6} sm={2}>
-                    <Button type="submit" onClick={this.handleSignup}>Sign up</Button>
-                </Col>
-            </FormGroup>
-        </Form>
-        </div>
+                    <FormGroup>
+                        <Col smOffset={6} sm={2}>
+                            <Button type="submit" onClick={this.handleSignup}disabled={this.state.loading}>{this.state.loading ? "Loading..." : "Sign Up"}</Button>
+                        </Col>
+                    </FormGroup>
+                </Form>
+            </div>
         );
     }
 }

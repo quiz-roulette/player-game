@@ -15,10 +15,12 @@ class ProfileComponent extends Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
         this.handleConfirmSelection = this.handleConfirmSelection.bind(this);
-
+        var name = localStorage.getItem('u').match(/^([^@]*)@/);
+        if(name) name = name[1];
         this.state = {
             show: false,
             avatars: [],
+            DisplayName: name != null ? name : localStorage.getItem('u'),
             selectedAvatarImage: ''
         }
 
@@ -116,7 +118,7 @@ class ProfileComponent extends Component {
                         <Row className="show-grid">
                             <Col xs={6} md={10}>
                                 <h1>Hi, <br />
-                                    {localStorage.getItem('u')}
+                                    {this.state.DisplayName}
                                 </h1>
                             </Col>
                             <Col xs={6} md={2}>

@@ -105,7 +105,7 @@ class SignInComponent extends Component {
 
                     <FormGroup controlId="formHorizontalPassword">
                         <Col componentClass={ControlLabel} sm={3}>
-                            Password
+                            Password:
                         </Col>
                         <Col sm={9}>
                             <FormControl type="password" placeholder="Password" disabled={this.state.loading} onChange={this.handlePassword} />
