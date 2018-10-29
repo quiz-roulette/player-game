@@ -88,6 +88,12 @@ class QuizComponent extends Component {
           image: this.state.Questions[0].ImageUrl,
         });
 
+        Server.getQuizUserAvatar(localStorage.getItem('u')).then((res) => {
+          console.log('avatar found',res);
+          this.setState({
+            Avatar: res.data
+          })
+        })
         setInterval(() => {
           this.setState((prevState, props) => {
             return { timer: prevState.timer + 1 };

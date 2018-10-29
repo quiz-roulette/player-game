@@ -37,6 +37,10 @@ class Server {
         return Server.AxiosInstance().get(Server.URL()+'/QuizUserSummary?QuizUserId='+userid);
     }
 
+    static getQuizUserAvatar(userid){
+        return Server.AxiosInstance().get(Server.URL()+'/getQuizUserAvatar?QuizUserId='+userid);
+    }
+
     static getQuizList(){
         return Server.AxiosInstance().get(Server.URL()+'/quiz');
     }
