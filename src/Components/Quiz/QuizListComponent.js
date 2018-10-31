@@ -34,11 +34,11 @@ class QuizListComponent extends Component {
             this.setState({
                 loading: false
             });
-            Alert.error('Unable to retreive quiz', {
-                position: 'top-right',
-                effect: 'slide',
-                timeout: 'none'
-            });
+            // Alert.error('Unable to retreive quiz', {
+            //     position: 'top-right',
+            //     effect: 'slide',
+            //     timeout: 'none'
+            // });
         })
     }
 

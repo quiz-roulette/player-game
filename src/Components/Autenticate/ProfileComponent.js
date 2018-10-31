@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Modal, Grid, Row, Col, DropdownButton, MenuItem,Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Button, Modal, Grid, Row, Col, DropdownButton, MenuItem, Navbar, Nav, NavItem } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import './Common.css';
-import { QuizListComponent,QuizUserSummaryComponent } from '../index';
+import { QuizListComponent, QuizUserSummaryComponent } from '../index';
 import Server from '../API/server'
 import { emitOnlineUser } from '../API/socket';
 import Alert from 'react-s-alert';
@@ -16,12 +16,13 @@ class ProfileComponent extends Component {
         this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
         this.handleConfirmSelection = this.handleConfirmSelection.bind(this);
         var name = localStorage.getItem('u').match(/^([^@]*)@/);
-        if(name) name = name[1];
+        if (name) name = name[1];
         this.state = {
             show: false,
             avatars: [],
             DisplayName: name != null ? name : localStorage.getItem('u'),
-            selectedAvatarImage: ''
+            selectedAvatarImage: '',
+            UserAvatar: ''
         }
 
         Server.getAvatars().then((res) => {
@@ -30,7 +31,20 @@ class ProfileComponent extends Component {
             })
         });
 
-        emitOnlineUser({QuizUserId: localStorage.getItem('u')})
+        Server.getQuizUserAvatar(localStorage.getItem('u')).then((res) => {
+            if (res.data) {
+                this.setState({
+                    UserAvatar: res.data
+                })
+            }
+            else {
+                this.setState({
+                    show: true
+                })
+            }
+        })
+
+        emitOnlineUser({ QuizUserId: localStorage.getItem('u') })
     }
 
     handleLogout(event) {
@@ -43,9 +57,18 @@ class ProfileComponent extends Component {
     }
 
     handleClose(event) {
-        this.setState({
-            show: false
-        })
+        if (this.state.UserAvatar != '') {
+            this.setState({
+                show: false
+            })
+        }
+        else {
+            Alert.error('must select atleast one avatar', {
+                position: 'top-right',
+                effect: 'slide',
+                timeout: 'none'
+            });
+        }
     }
 
     handleChangeAvatar(event) {
@@ -62,6 +85,9 @@ class ProfileComponent extends Component {
 
     handleConfirmSelection(event) {
         if (this.state.selectedAvatarImage != '') {
+            this.setState({
+                UserAvatar: this.state.selectedAvatarImage
+            })
             Server.updateUserAvatar(localStorage.getItem('u'), this.state.selectedAvatarImage).then((res) => {
                 this.setState({
                     show: false
