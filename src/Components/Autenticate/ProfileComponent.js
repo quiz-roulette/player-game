@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Grid, Row, Col, DropdownButton, MenuItem, Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import './Common.css';
 import { QuizListComponent, QuizUserSummaryComponent } from '../index';
@@ -114,33 +114,17 @@ class ProfileComponent extends Component {
         }
         return (
             <div>
-                <Navbar collapseOnSelect>
-                    <Navbar.Header>
-                        <Navbar.Brand>
-                            <a href="/home"><p>QR</p></a>
-                        </Navbar.Brand>
-                        <Navbar.Toggle />
-                    </Navbar.Header>
-                    <Navbar.Collapse>
-                        <Nav>
-                            <NavItem eventKey={1} href="/calendarview">
-                                Calendar
-                    </NavItem>
-                        </Nav>
-                        <Nav pullRight>
-                            <NavItem eventKey={1} href="/account">
-                                Profile
-                    </NavItem>
-                        </Nav>
-                        {/* <Nav hidden={this.state.loginStatus === false} pullRight>
-                    <NavItem eventKey={1} onClick={this.handleLogout}>
-                        Logout
-                    </NavItem>
-                </Nav> */}
-                    </Navbar.Collapse>
-                </Navbar>
+                <div className="navbar">
+                    <ul>
+                        <li><a className="name">Hi, {this.state.DisplayName}</a></li>
+                        <div className="right">
+                            <li ><a onClick={this.handleChangeAvatar}>Change Avatar</a></li>
+                            <li ><a onClick={this.handleLogout}>Logout</a></li>
+                        </div>
+                    </ul>
+                </div>
                 <div className="authenticateform">
-                    <Grid>
+                    {/* <Grid>
                         <Row className="show-grid">
                             <Col xs={6} md={10}>
                                 <h1>Hi, <br />
@@ -155,12 +139,11 @@ class ProfileComponent extends Component {
                                     className="dropdown-button"
                                 >
                                     <MenuItem eventKey="1" onClick={this.handleChangeAvatar}>Change Avatar</MenuItem>
-                                    <MenuItem eventKey="2" onClick={this.handleLogout}>Logout</MenuItem>
+                                    <MenuItem eventKey="2"  >Logout</MenuItem>
                                 </DropdownButton>
-                                {/* <Button className="logout-button" onClick={this.handleChangeAvatar}>Change Avatar</Button><Button className="logout-button" onClick={this.handleLogout}>Logout</Button> */}
                             </Col>
                         </Row>
-                    </Grid>
+                    </Grid> */}
 
                     <QuizListComponent />
                     <QuizUserSummaryComponent />
