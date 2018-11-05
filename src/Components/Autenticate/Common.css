@@ -73,7 +73,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width:100px;
+  width:150px;
 }
 
 .navbar ul li {
@@ -81,7 +81,7 @@
 }
 
 .navbar ul li a {
-  display: block;
+  display: inline-block;
   color: white;
   text-align: center;
   padding: 14px 16px;
