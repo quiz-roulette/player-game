@@ -89,7 +89,7 @@ class QuizComponent extends Component {
         });
 
         Server.getQuizUserAvatar(localStorage.getItem('u')).then((res) => {
-          console.log('avatar found',res);
+          console.log('avatar found', res);
           this.setState({
             Avatar: res.data
           })
@@ -111,7 +111,7 @@ class QuizComponent extends Component {
     const socket = socketIOClient(this.state.endpoint)
     //Expecting {QuizId: quizid}
     socket.on('stop quiz', (obj) => {
-  
+
       var isEnded = this.state.QuizId === obj.QuizId ? true : false;
       this.setState((prevState, props) => {
         return { QuizEnded: isEnded };
@@ -149,12 +149,6 @@ class QuizComponent extends Component {
 
   handleAnswerSelected(event) {
     this.setUserAnswer(event.currentTarget.value);
-
-    if (this.state.counter + 1 < this.state.questionTotal) {
-      setTimeout(() => this.setNextQuestion(), 3000);
-    } else {
-      setTimeout(() => this.setResults(this.getResults()), 600);
-    }
   }
 
   setUserAnswer(answer) {
@@ -171,8 +165,8 @@ class QuizComponent extends Component {
       ChoiceId: answer,
       Score: newScore,
       TimeTaken: this.state.timer
-    }
-      ;
+    };
+
     updatedAnswersCount += newScore;
     Server.addQuizLog(obj).then((res) => { console.log("added") });
     socket.emit('update quiz user result', obj)
@@ -180,6 +174,14 @@ class QuizComponent extends Component {
       score: updatedAnswersCount,
       answer: this.state.CorrectChoice.find(x => x.QuestionId === this.state.questionId).ChoiceId,
       answerSelected: Number.parseInt(answer)
+    }, () => {
+      if (this.state.counter + 1 < this.state.questionTotal) {
+        setTimeout(() => {
+          this.setNextQuestion();
+        }, 500); 
+      } else {
+        this.setResults(this.getResults());
+      }
     });
   }
 
