@@ -19,7 +19,7 @@ function Result(props) {
         {props.winner === true ? renderFirework() : <img className="wavehand" src="https://image.flaticon.com/icons/svg/948/948423.svg" height='100' />}
       </div>
       <blockquote className="fact" hidden={props.fact === null}>
-        <p>{props.fact != null ? props.fact : ""}</p>
+        <p>{props.fact != null ? "Fun Fact: "+props.fact : ""}</p>
       </blockquote>
     </ReactCSSTransitionGroup>
   );
