@@ -20,7 +20,9 @@ class DashboardComponent extends Component {
             QuestionCount: 5,
             endpoint: "https://axperience.herokuapp.com/",
             UserCount: 0,
-            View: 'LIST'
+            View: 'LIST',
+            IsQueryServer: false,
+            SocketCall: false
         }
         this.update();
 
@@ -46,20 +48,26 @@ class DashboardComponent extends Component {
         this.handleViewClick = this.handleViewClick.bind(this);
     }
     update() {
-        Server.getQuizLog(this.state.QuizId).then((res) => {
-            if (res.data) {
-                Server.getQuestionCountForQuiz(this.state.QuizId).then((res1) => {
-                    console.log(res.data);
-                    // res.data.sort(function (a, b) { return b.Score - a.Score });
-                    // res.data.sort(function(a,b){ return a.TimeTaken - b.TimeTaken});
-                    console.log(res1.data);
-                    this.setState((prevState, props) => ({
-                        Results: res.data,
-                        QuestionCount: res1.data[0].Count
-                    }));
-                })
-            }
-        });
+        if (this.state.IsQueryServer === false) {
+            this.setState({ IsQueryServer: true});
+            Server.getQuizLog(this.state.QuizId).then((res) => {
+                if (res.data) {
+                    Server.getQuestionCountForQuiz(this.state.QuizId).then((res1) => {
+                        console.log(res.data);
+                        // res.data.sort(function (a, b) { return b.Score - a.Score });
+                        // res.data.sort(function(a,b){ return a.TimeTaken - b.TimeTaken});
+                        console.log(res1.data);
+                        this.setState((prevState, props) => ({
+                            Results: res.data,
+                            QuestionCount: res1.data[0].Count
+                        }));
+                    })
+                }
+                this.setState({ IsQueryServer: false});
+            }).catch((err) => {
+                this.setState({ IsQueryServer: false });
+            });
+        }
     }
 
     handleViewClick() {
@@ -77,16 +85,16 @@ class DashboardComponent extends Component {
                 <h6 className="title">Online Users: {this.state.UserCount}</h6>
                 <Row className="show-grid">
                     <Col xs={6} md={4}>
-                        
+
                     </Col>
-                    <Col xsHidden  md={4}>
-                        
+                    <Col xsHidden md={4}>
+
                     </Col>
                     <Col xs={6} md={4} >
                         <Button className="togglebutton" bsStyle="link" onClick={this.handleViewClick} >{this.state.View === 'LIST' ? 'GRID' : 'LIST'}</Button>
                     </Col>
                 </Row>
-                {this.state.Results.length > 0 ? (this.state.View === 'LIST' ? this.renderList() : this.renderTable()) : <img src={ideate} className="waiting-results"/>}
+                {this.state.Results.length > 0 ? (this.state.View === 'LIST' ? this.renderList() : this.renderTable()) : <img src={ideate} className="waiting-results" />}
                 <br />
                 <p className="footernote">The winner is based on the algorithm to choose the best time and score.</p>
             </div>)
