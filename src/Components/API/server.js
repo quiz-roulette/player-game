@@ -132,6 +132,10 @@ class Server {
     static getRandomFact(){
         return Server.AxiosInstance().get(Server.URL()+"/getRandomFact");
     }
+
+    static getBlank(){
+        return Server.AxiosInstance().get(Server.URL()+"/blank");
+    }
 }
 
 export default Server;
