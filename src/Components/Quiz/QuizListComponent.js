@@ -18,11 +18,11 @@ class QuizListComponent extends Component {
             SocketQuizIdList: []
         }
 
-        this.setState({ loading: true })
         this.updateQuizList();
     }
 
     updateQuizList() {
+        this.setState({ loading: true })
         Server.getQuizByGroupByUserId(localStorage.getItem('u')).then((res) => {
             console.log(res.data);
             this.setState({
@@ -73,7 +73,7 @@ class QuizListComponent extends Component {
     // }
 
     render() {
-        if (this.state.loading) return this.renderLoading();
+        if (this.state.loading === true) return this.renderLoading();
         else return this.renderQuizList();
     }
 
@@ -126,7 +126,7 @@ class QuizListComponent extends Component {
             </Grid>)
         }
         else{
-            return (<h6>No Quiz Found.</h6>)
+            return (<LoadComponent />)//return (<h6>No Quiz Found.</h6>)
         }
 
     }
