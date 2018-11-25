@@ -120,7 +120,7 @@ class SignInComponent extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Col smOffset={3} sm={8}>
-                            <Button onClick={this.handleLogIn} disabled={this.state.loading}>{this.state.loading ? "Submitting..." : "Submit"}</Button>
+                            <Button onClick={this.handleLogIn} disabled={this.state.loading}>{this.state.loading ? "Authenticating..." : "Play"}</Button>
                         </Col>
                     </FormGroup>
                 </Form>
