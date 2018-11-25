@@ -14,6 +14,7 @@ import AccountComponent from './Autenticate/AccountComponent'
 import ProfileComponent from './Autenticate/ProfileComponent'
 import AnalyticsComponent from './Analytics/AnalyticsComponent'
 import QuizUserSummaryComponent from './QuizUserSummary/QuizUserSummaryComponent'
+import OneTimeQuizComponent from './Autenticate/OneTimeQuizComponent'
 
 export{
     SignInComponent,
@@ -31,5 +32,6 @@ export{
     AccountComponent,
     ProfileComponent,
     AnalyticsComponent,
-    QuizUserSummaryComponent
+    QuizUserSummaryComponent,
+    OneTimeQuizComponent
 }

@@ -51,6 +51,7 @@ class QuizComponent extends Component {
 
     Server.getQuizByUserIdAndQuizId(localStorage.getItem('u'), this.state.QuizId).then((res) => {
       res[0].data = this.shuffleArray(res[0].data);
+      console.log(res);
       console.log(this.state.QuizId);
       Server.getQuizLogSummationForUserByQuiz(localStorage.getItem('u'), this.state.QuizId).then((res1) => {
         console.log(res1);

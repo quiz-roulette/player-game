@@ -136,6 +136,14 @@ class Server {
     static getBlank(){
         return Server.AxiosInstance().get(Server.URL()+"/blank");
     }
+
+    static addOneTimeQuizUser(username,token){
+        return Server.AxiosInstance().post(Server.URL()+ '/quiz_token',{QuizUserId: username, Token: token});
+    }
+
+    static getOneTimeQuiz(id){
+        return Server.AxiosInstance().get(Server.URL()+ '/quiz_token?quizId='+id);
+    }
 }
 
 export default Server;

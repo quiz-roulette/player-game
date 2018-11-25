@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import { SignInComponent, SignUpComponent, ProfileComponent } from '../index';
+import { SignInComponent, SignUpComponent, ProfileComponent,OneTimeQuizComponent } from '../index';
 import Server from '../API/server';
 
 class AccountComponent extends Component {
@@ -36,6 +36,10 @@ class AccountComponent extends Component {
                     </Tab>
                     <Tab eventKey={2} title="Sign Up">
                         <SignUpComponent />
+                        {/* <h6>Coming Soon</h6> */}
+                    </Tab>
+                    <Tab eventKey={3} title="One Time Quiz(Beta)">
+                        <OneTimeQuizComponent />
                         {/* <h6>Coming Soon</h6> */}
                     </Tab>
                 </Tabs>
