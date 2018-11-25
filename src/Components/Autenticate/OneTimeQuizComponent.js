@@ -35,11 +35,6 @@ class SignInComponent extends Component {
                     localStorage.setItem("u", this.state.Password+'_'+this.state.userName);
                     // localStorage.setItem("p", this.state.Password);
                     // this.setState({ loading: false})
-                    Alert.info('You can change avatar under settings', {
-                        position: 'top-right',
-                        effect: 'slide',
-                        timeout: 'none'
-                    });
                     Server.getOneTimeQuiz(this.state.Password).then((res1) => {
                         this.props.history.push("/quiz/"+res1.data.QuizId+"/"+res1.data.CategoryName);
                     })
