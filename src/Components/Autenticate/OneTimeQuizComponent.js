@@ -23,41 +23,52 @@ class SignInComponent extends Component {
 
     handleLogIn(event) {
         event.preventDefault();
-        this.setState({ loading: true})
+        this.setState({ loading: true })
         console.log(event);
         if (this.state.userName !== "" && this.state.Password !== "") {
-            console.log(this.state);
-            Server.addOneTimeQuizUser(this.state.userName, this.state.Password).then((res) => {
-                console.log(res);
-                if (res.data === true || res.data === "true") {
-                    localStorage.setItem("l", "true");
-                    //Token_Username
-                    localStorage.setItem("u", this.state.Password+'_'+this.state.userName);
-                    // localStorage.setItem("p", this.state.Password);
-                    // this.setState({ loading: false})
-                    Server.getOneTimeQuiz(this.state.Password).then((res1) => {
-                        this.props.history.push("/quiz/"+res1.data.QuizId+"/"+res1.data.CategoryName);
-                    })
-                }
-                else {
-                    this.setState({ loading: false})
+            var format = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+            if (!format.test(this.state.userName)) {
+                console.log(this.state);
+                Server.addOneTimeQuizUser(this.state.userName, this.state.Password).then((res) => {
+                    console.log(res);
+                    if (res.data === true || res.data === "true") {
+                        localStorage.setItem("l", "true");
+                        //Token_Username
+                        localStorage.setItem("u", this.state.Password + '_' + this.state.userName);
+                        // localStorage.setItem("p", this.state.Password);
+                        // this.setState({ loading: false})
+                        Server.getOneTimeQuiz(this.state.Password).then((res1) => {
+                            this.props.history.push("/quiz/" + res1.data.QuizId + "/" + res1.data.CategoryName);
+                        })
+                    }
+                    else {
+                        this.setState({ loading: false })
+                        Alert.error('Either username or password is wrong', {
+                            position: 'top-right',
+                            effect: 'slide',
+                            timeout: 'none'
+                        });
+                    }
+                }).catch((err) => {
+                    this.setState({ loading: false })
                     Alert.error('Either username or password is wrong', {
                         position: 'top-right',
                         effect: 'slide',
                         timeout: 'none'
                     });
-                }
-            }).catch((err) => {
-                this.setState({ loading: false})
-                Alert.error('Either username or password is wrong', {
+                })
+            }
+            else{
+                this.setState({ loading: false })
+                Alert.error('Username cannot contain special characters', {
                     position: 'top-right',
                     effect: 'slide',
                     timeout: 'none'
                 });
-            })
+            }
         }
-        else{
-            this.setState({ loading: false})
+        else {
+            this.setState({ loading: false })
             Alert.error('Username or Password cannot be empty', {
                 position: 'top-right',
                 effect: 'slide',
