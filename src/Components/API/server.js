@@ -144,6 +144,10 @@ class Server {
     static getOneTimeQuiz(id){
         return Server.AxiosInstance().get(Server.URL()+ '/quiz_token?quizId='+id);
     }
+
+    static getQuizUserRank(quizid, quizuserId){
+        return Server.AxiosInstance().get(Server.URL()+ '/GetQuizUserRank?quizid='+quizid+'&quizuserid='+quizuserId);
+    }
 }
 
 export default Server;

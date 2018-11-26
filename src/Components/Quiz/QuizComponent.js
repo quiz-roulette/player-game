@@ -59,10 +59,13 @@ class QuizComponent extends Component {
           /**
            * setting Questionid to -1 due to the render function checks for non zero question id
            */
-          this.setState({
-            questionId: -1,
-            result: res1.data[0].Score
-          });
+          Server.getQuizUserRank(this.state.QuizId, localStorage.getItem('u')).then((res_rank) => {
+            this.setState({
+              questionId: -1,
+              result: res1.data[0].Score,
+              rank: res_rank.data.Rank
+            });
+          })
           return;
         }
         else if (res1.data.length > 0) {
@@ -125,6 +128,17 @@ class QuizComponent extends Component {
         });
         this.props.history.push("/account/");
       }
+    });
+
+    socket.on('update quiz user result', (obj) => {
+      if (obj.QuizId == this.state.QuizId) {
+        Server.getQuizUserRank(this.state.QuizId, this.state.QuizUserId).then((res) => {
+          console.log("Rank", res);
+          this.setState({
+            rank: res.data.Rank
+          })
+        })
+      }
     })
 
   }
@@ -179,7 +193,7 @@ class QuizComponent extends Component {
       if (this.state.counter + 1 < this.state.questionTotal) {
         setTimeout(() => {
           this.setNextQuestion();
-        }, 500); 
+        }, 500);
       } else {
         this.setResults(this.getResults());
       }
@@ -212,6 +226,7 @@ class QuizComponent extends Component {
   }
 
   setResults(result) {
+
     this.setState({ result: this.state.score });
   }
 
@@ -246,7 +261,7 @@ class QuizComponent extends Component {
   renderResult() {
     return (
       <div>
-        <Result quizResult={this.state.result} fact={this.state.fact} />
+        <Result quizResult={this.state.result} fact={this.state.fact} rank={this.state.rank} />
       </div>
     );
   }
