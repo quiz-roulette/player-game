@@ -29,36 +29,46 @@ class SignInComponent extends Component {
             var format = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
             if (!format.test(this.state.userName)) {
                 console.log(this.state);
-                Server.addOneTimeQuizUser(this.state.userName, this.state.Password).then((res) => {
-                    console.log(res);
-                    if (res.data === true || res.data === "true") {
-                        localStorage.setItem("l", "true");
-                        //Token_Username
-                        localStorage.setItem("u", this.state.Password + '_' + this.state.userName);
-                        // localStorage.setItem("p", this.state.Password);
-                        // this.setState({ loading: false})
-                        Server.getOneTimeQuiz(this.state.Password).then((res1) => {
-                            this.props.history.push("/quiz/" + res1.data.QuizId + "/" + res1.data.CategoryName);
-                        })
-                    }
-                    else {
+                try {
+                    Server.addOneTimeQuizUser(this.state.userName, this.state.Password).then((res) => {
+                        console.log(res);
+                        if (res.data === true || res.data === "true") {
+                            localStorage.setItem("l", "true");
+                            //Token_Username
+                            localStorage.setItem("u", this.state.Password + '_' + this.state.userName);
+                            // localStorage.setItem("p", this.state.Password);
+                            // this.setState({ loading: false})
+                            Server.getOneTimeQuiz(this.state.Password).then((res1) => {
+                                this.props.history.push("/quiz/" + res1.data.QuizId + "/" + res1.data.CategoryName);
+                            })
+                        }
+                        else {
+                            this.setState({ loading: false })
+                            Alert.error('Either username or password is wrong', {
+                                position: 'top-right',
+                                effect: 'slide',
+                                timeout: 'none'
+                            });
+                        }
+                    }).catch((err) => {
                         this.setState({ loading: false })
                         Alert.error('Either username or password is wrong', {
                             position: 'top-right',
                             effect: 'slide',
                             timeout: 'none'
                         });
-                    }
-                }).catch((err) => {
+                    })
+                } catch (error) {
                     this.setState({ loading: false })
-                    Alert.error('Either username or password is wrong', {
+                    Alert.error(error, {
                         position: 'top-right',
                         effect: 'slide',
                         timeout: 'none'
                     });
-                })
+                }
+
             }
-            else{
+            else {
                 this.setState({ loading: false })
                 Alert.error('Username cannot contain special characters', {
                     position: 'top-right',
@@ -117,11 +127,11 @@ class SignInComponent extends Component {
                             Token:
                         </Col>
                         <Col sm={9}>
-                            <FormControl type="password" placeholder="Token" disabled={this.state.loading} onChange={this.handlePassword} /><br/>
+                            <FormControl type="password" placeholder="Token" disabled={this.state.loading} onChange={this.handlePassword} /><br />
                             <span className="extranote">Token will be provided by the quiz administrator.</span>
                         </Col>
                     </FormGroup>
-                    <br/>
+                    <br />
                     {/* <FormGroup controlId="formHorizontalPassword">
                         <Col xsHidden componentClass={ControlLabel} sm={3}></Col>
                         <Col xs={6} sm={3}>
