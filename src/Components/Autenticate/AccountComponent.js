@@ -34,14 +34,14 @@ class AccountComponent extends Component {
                     <Tab eventKey={1} title="Sign In">
                         <SignInComponent />
                     </Tab>
-                    <Tab eventKey={2} title="Sign Up">
-                        {/* <SignUpComponent /> */}
-                        <h6>Coming Soon</h6>
-                    </Tab>
-                    <Tab eventKey={3} title="One Time Quiz(Beta)">
+                    <Tab eventKey={2} title="One Time Quiz(Beta)">
                         <OneTimeQuizComponent />
                         {/* <h6>Coming Soon</h6> */}
                     </Tab>
+                    {/* <Tab eventKey={3} title="Sign Up">
+                        <SignUpComponent />
+                        <h6>Coming Soon</h6>
+                    </Tab> */}
                 </Tabs>
             </div>);
     }
