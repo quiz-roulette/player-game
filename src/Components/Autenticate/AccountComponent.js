@@ -35,8 +35,8 @@ class AccountComponent extends Component {
                         <SignInComponent />
                     </Tab>
                     <Tab eventKey={2} title="Sign Up">
-                        <SignUpComponent />
-                        {/* <h6>Coming Soon</h6> */}
+                        {/* <SignUpComponent /> */}
+                        <h6>Coming Soon</h6>
                     </Tab>
                     <Tab eventKey={3} title="One Time Quiz(Beta)">
                         <OneTimeQuizComponent />

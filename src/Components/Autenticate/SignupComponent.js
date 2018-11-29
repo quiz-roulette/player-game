@@ -112,14 +112,14 @@ class SignUpComponent extends Component {
                         </Col>
                     </FormGroup>
 
-                    <FormGroup controlId="formHorizontalText">
+                    {/* <FormGroup controlId="formHorizontalText">
                         <Col componentClass={ControlLabel} sm={3} style={{textAlign: 'left'}}>
                             SIM ID
                 </Col>
                         <Col sm={9}>
                             <FormControl type="text" placeholder="SIM ID" onChange={this.handleuserName} />
                         </Col>
-                    </FormGroup>
+                    </FormGroup> */}
 
                     <FormGroup controlId="formHorizontalPassword">
                         <Col componentClass={ControlLabel} sm={3} style={{textAlign: 'left'}}>
