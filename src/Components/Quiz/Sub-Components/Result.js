@@ -16,7 +16,7 @@ function Result(props) {
     >
       <div style={{ textAlign: "center" }}>
         Your score is: <strong>{props.quizResult}</strong>!<br />
-        Your Rank<sup>*</sup> is: <strong>{props.rank}</strong><br />
+        Your Rank<sup>Beta</sup> is: <strong>{props.rank}</strong><br />
         {props.winner === true ? renderFirework() : <img className="wavehand" src="https://image.flaticon.com/icons/svg/948/948423.svg" height='100' />}
       </div>
       <blockquote className="fact" hidden={props.fact === null}>
