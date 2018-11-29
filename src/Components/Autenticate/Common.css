@@ -97,6 +97,11 @@
   float: right;
 }
 
+.extranote{
+  color: red;
+  font-size: 10px;
+}
+
 /*
 * Below code is for Cross and Tick animation
 */

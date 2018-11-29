@@ -117,18 +117,20 @@ class SignInComponent extends Component {
                             Token:
                         </Col>
                         <Col sm={9}>
-                            <FormControl type="password" placeholder="Token" disabled={this.state.loading} onChange={this.handlePassword} />
+                            <FormControl type="password" placeholder="Token" disabled={this.state.loading} onChange={this.handlePassword} /><br/>
+                            <span className="extranote">Token will be provided by the quiz administrator.</span>
                         </Col>
                     </FormGroup>
-                    <FormGroup controlId="formHorizontalPassword">
+                    <br/>
+                    {/* <FormGroup controlId="formHorizontalPassword">
                         <Col xsHidden componentClass={ControlLabel} sm={3}></Col>
                         <Col xs={6} sm={3}>
-                            {/* <Link to='/forgetPassword'>Forget Password</Link> */}
+                            <Link to='/forgetPassword'>Forget Password</Link>
                         </Col>
                         <Col xs={6} sm={6} className="floatright">
-                            {/* <Link to='/account'>Create Account</Link> */}
+                            <Link to='/account'>Create Account</Link>
                         </Col>
-                    </FormGroup>
+                    </FormGroup> */}
                     <FormGroup>
                         <Col smOffset={3} sm={8}>
                             <Button onClick={this.handleLogIn} disabled={this.state.loading}>{this.state.loading ? "Authenticating..." : "Play"}</Button>
