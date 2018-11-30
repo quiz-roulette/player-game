@@ -39,6 +39,7 @@ class App extends Component {
                                 {/* <Route path="/quizlist" component={QuizListComponent} /> */}
                                 <Route path="/dashboard/:quizid" component={DashboardComponent} />
                                 <Route path="/analytics" component={AnalyticsComponent} />
+                                <Route path="/avatarselection/:redirectURL" component={AvatarSelectionComponent} />
                                 <Redirect from='*' to='/404' />
                             </Switch>
                         </div>

@@ -1,46 +1,78 @@
-import React,{Component} from 'react';
-import {Button} from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import Server from '../API/server'
 import './AvatarSelection.css'
+import Alert from 'react-s-alert';
 
-class AvatarSelectionComponent extends Component{
-    constructor(props){
+class AvatarSelectionComponent extends Component {
+    constructor(props) {
         super(props);
-        this.handleAvatarChange = this.handleAvatarChange.bind(this);
+        const { match: { params } } = props;
+        this.handleOnChangeAvatar = this.handleOnChangeAvatar.bind(this);
+        this.handleAvatarSelection = this.handleAvatarSelection.bind(this);
+
         this.state = {
-            Avatars: []
+            avatars: [],
+            redirectURL: params.redirectURL,
+            selectedAvatar: ""
         }
 
         Server.getAvatars().then((res) => {
             this.setState({
-                Avatars: res.data
+                avatars: res.data
             })
         })
     }
 
-    handleAvatarChange(event){
-        alert(event.target.value);
+    handleAvatarSelection(event) {
+        if(this.state.selectedAvatar == ""){
+            Alert.error('must select atleast one avatar', {
+                position: 'top-right',
+                effect: 'slide',
+                timeout: 'none'
+            });
+        }
+        else{
+            Server.updateUserAvatar(localStorage.getItem('u'),this.state.selectedAvatar).then((res) => {
+                console.log(this.state.redirectURL);
+                console.log("/"+this.state.redirectURL);
+                this.props.history.push(decodeURIComponent("/"+this.state.redirectURL));
+            })
+        }
     }
 
-    render(){
-        const avatars = [];
-        
-        for(var i=0; i<this.state.Avatars.length; i++){
-            avatars.push(<label>
-                <input type="radio" name="avatar" value={this.state.Avatars[i].Image} />
-                <img src={this.state.Avatars[i].Image}/>
-              </label>)
+    handleOnChangeAvatar(url){
+        this.setState({
+            selectedAvatar: url
+        });
+    }
+
+    render() {
+        const rows = [];
+        if (this.state.avatars.length > 0) {
+            this.state.avatars.forEach(element => {
+                rows.push(
+                    <li className="avatarli">
+                        <input className="avatarinput" type='radio' value='1' name='radio' id={element.AvatarName} onChange={() => this.handleOnChangeAvatar(element.Image)} />
+
+                        <label className="avatarlabel" for={element.AvatarName}>
+                            <img src={element.Image} /><br />
+                            {element.AvatarName}
+                        </label>
+                    </li>
+                )
+            });
         }
-        return(
-        <div className="avatarSelection">
-            <h4>Select one of the below avatar:</h4>
-            <br/>
-            <div onChange={this.handleAvatarChange}>
-                {avatars}
-            </div>
-            <br/>
-            <Button className="avatarSelectBtn">Select</Button>
-        </div>)
+        return (
+            <div className="avatarSelection">
+                <h4>Select one of the below avatar:</h4>
+                <br />
+                <ul className="avatarul">
+                    {rows}
+                </ul>
+                <br />
+                <Button className="avatarSelectBtn" onClick={this.handleAvatarSelection}>Select</Button>
+            </div>)
     }
 }
 

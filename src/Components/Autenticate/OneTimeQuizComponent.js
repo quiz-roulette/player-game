@@ -36,10 +36,15 @@ class SignInComponent extends Component {
                             localStorage.setItem("l", "true");
                             //Token_Username
                             localStorage.setItem("u", this.state.Password + '_' + this.state.userName);
+                            localStorage.setItem('qt',this.state.Password);
                             // localStorage.setItem("p", this.state.Password);
                             // this.setState({ loading: false})
+                            
                             Server.getOneTimeQuiz(this.state.Password).then((res1) => {
-                                this.props.history.push("/quiz/" + res1.data.QuizId + "/" + res1.data.CategoryName);
+                                // this.props.history.push("/quiz/" + res1.data.QuizId + "/" + res1.data.CategoryName);
+                                var url = "quiz/" + res1.data.QuizId + "/" + res1.data.CategoryName;
+
+                                this.props.history.push('/avatarselection/'+encodeURIComponent(url));
                             })
                         }
                         else {
