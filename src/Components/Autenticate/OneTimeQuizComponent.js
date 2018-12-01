@@ -15,7 +15,7 @@ class SignInComponent extends Component {
         console.log(this.props.token);
         this.state = {
             userName: "",
-            Password: "",
+            Password: this.props.token,
             loading: false,
             token: this.props.token
         };
@@ -50,7 +50,7 @@ class SignInComponent extends Component {
                         }
                         else {
                             this.setState({ loading: false })
-                            Alert.error('Either username or password is wrong', {
+                            Alert.error('Either username or token is wrong', {
                                 position: 'top-right',
                                 effect: 'slide',
                                 timeout: 'none'
@@ -58,7 +58,7 @@ class SignInComponent extends Component {
                         }
                     }).catch((err) => {
                         this.setState({ loading: false })
-                        Alert.error('Either username or password is wrong', {
+                        Alert.error('Either username or token is wrong', {
                             position: 'top-right',
                             effect: 'slide',
                             timeout: 'none'
@@ -85,7 +85,7 @@ class SignInComponent extends Component {
         }
         else {
             this.setState({ loading: false })
-            Alert.error('Username or Password cannot be empty', {
+            Alert.error('Username or token cannot be empty', {
                 position: 'top-right',
                 effect: 'slide',
                 timeout: 'none'
