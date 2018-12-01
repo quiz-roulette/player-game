@@ -195,7 +195,9 @@ class QuizComponent extends Component {
           this.setNextQuestion();
         }, 500);
       } else {
-        this.setResults(this.getResults());
+        setTimeout(() => {
+          this.setResults(this.getResults());
+        }, 500);
       }
     });
   }
