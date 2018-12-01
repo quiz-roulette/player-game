@@ -31,6 +31,7 @@ class App extends Component {
                                 {/* <Route path="/login" exact component={SignInComponent} />
                             <Route path="/signup" exact component={SignUpComponent} /> */}
                                 <Route path="/account" exact component={AccountComponent} />
+                                <Route path="/account/:token" exact component={AccountComponent} />
                                 <Redirect from="/old-match" to="/will-match" />
                                 <Route path='/forgetPassword' component={ForgetPasswordComponent} />
                                 <Route path="/resetPassword/:uniquecode" component={ResetPasswordComponent} />

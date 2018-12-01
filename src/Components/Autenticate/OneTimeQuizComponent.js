@@ -12,11 +12,12 @@ class SignInComponent extends Component {
         this.handleLogIn = this.handleLogIn.bind(this);
         this.handleuserName = this.handleuserName.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
-
+        console.log(this.props.token);
         this.state = {
             userName: "",
             Password: "",
-            loading: false
+            loading: false,
+            token: this.props.token
         };
 
     }
@@ -132,7 +133,7 @@ class SignInComponent extends Component {
                             Token:
                         </Col>
                         <Col sm={9}>
-                            <FormControl type="password" placeholder="Token" disabled={this.state.loading} onChange={this.handlePassword} /><br />
+                            <FormControl type="text" placeholder="Token" value={this.state.token} disabled={this.state.loading} onChange={this.handlePassword} /><br />
                             <span className="extranote">Token will be provided by the quiz administrator.</span>
                         </Col>
                     </FormGroup>
