@@ -95,7 +95,7 @@ class QuizComponent extends Component {
         Server.getQuizUserAvatar(localStorage.getItem('u')).then((res) => {
           console.log('avatar found', res);
           this.setState({
-            Avatar: res.data
+            avatar: res.data
           })
         })
         setInterval(() => {
