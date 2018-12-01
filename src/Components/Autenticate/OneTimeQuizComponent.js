@@ -15,7 +15,7 @@ class SignInComponent extends Component {
         console.log(this.props.token);
         this.state = {
             userName: "",
-            Password: this.props.token,
+            Password: this.props.token ? this.props.token : "",
             loading: false,
             token: this.props.token
         };
