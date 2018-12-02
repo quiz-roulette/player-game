@@ -9,6 +9,9 @@ class AccountComponent extends Component {
         super(props);
         const { match: { params } } = props;
 
+        if(params && params.token != undefined){
+            localStorage.clear();
+        }
         this.state = {
             defaultActiveKey: 2,
             token: params.token
