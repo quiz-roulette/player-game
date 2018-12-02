@@ -41,7 +41,7 @@ class AccountComponent extends Component {
                     </g>
                     <circle cx="50" cy="50" ng-attr-r="{{config.radiusOut}}" fill="none" ng-attr-stroke="{{config.c1}}" ng-attr-stroke-width="{{config.width}}" r="30" stroke="#ff7c81" stroke-width="5"></circle>
                     <circle cx="50" cy="50" ng-attr-r="{{config.radiusIn}}" ng-attr-fill="{{config.c3}}" ng-attr-stroke="{{config.c2}}" ng-attr-stroke-width="{{config.width}}" r="10" fill="#ffffcb" stroke="#fac090" stroke-width="5"></circle>
-                </svg>ulette</h2>
+                </svg>ulette!</h2>
                 <Tabs defaultActiveKey={this.state.token ? 2 : 1} id="uncontrolled-tab-example">
                     <Tab eventKey={1} title="Sign In">
                         <SignInComponent />
