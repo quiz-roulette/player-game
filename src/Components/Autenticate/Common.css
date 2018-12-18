@@ -16,6 +16,11 @@
   text-align: center;
 }
 
+.btn-custom {
+  background-color: #577ae7;
+  color: white;
+}
+
 @media only screen and (min-width: 400px) {
   .authenticateform{
     width: 95%;
