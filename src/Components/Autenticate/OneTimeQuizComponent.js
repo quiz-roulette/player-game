@@ -27,7 +27,7 @@ class SignInComponent extends Component {
         this.setState({ loading: true })
         console.log(event);
         if (this.state.userName !== "" && this.state.Password !== "") {
-            var format = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+            var format = /[ !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
             if (!format.test(this.state.userName)) {
                 if (this.state.userName.length >= 4) {
                     try {
