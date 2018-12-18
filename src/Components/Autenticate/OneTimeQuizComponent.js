@@ -27,7 +27,7 @@ class SignInComponent extends Component {
         this.setState({ loading: true })
         console.log(event);
         if (this.state.userName !== "" && this.state.Password !== "") {
-            var format = /[ !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+            var format = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
             if (!format.test(this.state.userName)) {
                 if (this.state.userName.length >= 4) {
                     try {
@@ -139,7 +139,7 @@ class SignInComponent extends Component {
 
                     <FormGroup controlId="formHorizontalPassword">
                         <Col componentClass={ControlLabel} sm={3}>
-                            Token:
+                            Token: 
                         </Col>
                         <Col sm={9}>
                             <FormControl type="text" placeholder="Token" value={this.state.token} disabled={this.state.loading} onChange={this.handlePassword} /><br />
@@ -158,7 +158,7 @@ class SignInComponent extends Component {
                     </FormGroup> */}
                     <FormGroup>
                         <Col smOffset={3} sm={8}>
-                            <Button bsStyle="custom" style={{ backgroundColor: "#577ae7" }} onClick={this.handleLogIn} disabled={this.state.loading}>{this.state.loading ? "Authenticating..." : "Play"}</Button>
+                            <Button bsStyle="custom" style={{backgroundColor: "#577ae7"}} onClick={this.handleLogIn} disabled={this.state.loading}>{this.state.loading ? "Authenticating..." : "Play"}</Button>
                         </Col>
                     </FormGroup>
                 </Form>
