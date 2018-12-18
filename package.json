@@ -2,7 +2,6 @@
   "name": "quizroulette",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://shah-smit.github.io/myapp",
   "dependencies": {
     "axios": "^0.18.0",
     "chart.js": "^2.7.2",
