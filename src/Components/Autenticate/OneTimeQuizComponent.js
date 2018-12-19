@@ -143,7 +143,7 @@ class OneTimeQuizComponent extends Component {
                             Username:
                         </Col>
                         <Col sm={9}>
-                            <FormControl type="text" placeholder="Username" disabled={this.state.loading} onChange={this.handleuserName} />
+                            <FormControl type="text" placeholder="Enter your name, or display name that suits you best" disabled={this.state.loading} onChange={this.handleuserName} />
                         </Col>
                     </FormGroup>
 
