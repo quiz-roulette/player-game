@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import { SignInComponent, SignUpComponent, ProfileComponent, OneTimeQuizComponent } from '../index';
 import Server from '../API/server';
+import Alert from 'react-s-alert';
 
 class AccountComponent extends Component {
 
@@ -10,6 +11,7 @@ class AccountComponent extends Component {
         const { match: { params } } = props;
 
         if (params && params.token != undefined) {
+            console.log(params);
             localStorage.clear();
         }
         this.state = {

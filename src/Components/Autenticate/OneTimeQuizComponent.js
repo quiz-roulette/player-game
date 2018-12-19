@@ -6,7 +6,7 @@ import './Common.css';
 import { Link } from 'react-router-dom'
 import Alert from 'react-s-alert';
 
-class SignInComponent extends Component {
+class OneTimeQuizComponent extends Component {
     constructor(props) {
         super(props);
         this.handleLogIn = this.handleLogIn.bind(this);
@@ -20,6 +20,16 @@ class SignInComponent extends Component {
             token: this.props.token
         };
 
+    }
+
+    componentDidUpdate(){
+        if(this.state.token != undefined){
+            Alert.info('Enter username and click play to start', {
+                position: 'top-right',
+                effect: 'slide',
+                timeout: '5000'
+            });
+        }
     }
 
     handleLogIn(event) {
@@ -143,7 +153,7 @@ class SignInComponent extends Component {
                         </Col>
                         <Col sm={9}>
                             <FormControl type="text" placeholder="Token" value={this.state.token} disabled={this.state.loading} onChange={this.handlePassword} /><br />
-                            <span className="extranote">Token will be provided by the quiz administrator.</span>
+                            <span className="extranote" hidden={this.state.token}>Token will be provided by the quiz administrator.</span>
                         </Col>
                     </FormGroup>
                     <br />
@@ -167,4 +177,4 @@ class SignInComponent extends Component {
     }
 }
 
-export default withRouter(SignInComponent);
+export default withRouter(OneTimeQuizComponent);
