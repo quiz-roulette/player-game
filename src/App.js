@@ -45,7 +45,7 @@ class App extends Component {
                             </Switch>
                         </div>
                     </Router>
-                    <Alert stack={{ limit: 3 }} />
+                    <Alert stack={{ limit: 3 }} timeout={5000}/>
                 </div>
             </HttpsRedirect>
         );

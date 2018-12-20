@@ -17,18 +17,19 @@ class OneTimeQuizComponent extends Component {
             userName: "",
             Password: this.props.token ? this.props.token : "",
             loading: false,
-            token: this.props.token
+            token: this.props.token,
+            shownAlert: false
         };
 
     }
 
     componentDidUpdate(){
-        if(this.state.token != undefined){
+        if(this.state.token != undefined && this.state.shownAlert == false){
             Alert.info('Enter username and click play to start', {
                 position: 'top-right',
-                effect: 'slide',
-                timeout: '5000'
+                effect: 'slide'
             });
+            this.setState({ shownAlert: true});
         }
     }
 
