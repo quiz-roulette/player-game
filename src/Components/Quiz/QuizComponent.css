@@ -188,7 +188,39 @@ input[type="radio"] {
 
 .questionimage{
 text-align: center;
+width: 100%;
 }
+
+@media (min-width:320px)  { 
+  .questionimage{
+    width: 100%;
+  }
+}
+@media (min-width:481px)  { 
+  .questionimage{
+    width: 100%;
+  }
+}
+@media (min-width:641px)  { 
+  .questionimage{
+    width: 100%;
+  }
+}
+@media (min-width:961px)  { 
+  .questionimage{
+    width: 100%;
+  }
+}
+@media (min-width:1025px) { 
+  .questionimage{
+    width: 100%;
+  }
+ }
+@media (min-width:1281px) { 
+  .questionimage{
+    width: 100%;
+  }
+ }
 
 .wavehand{
 
