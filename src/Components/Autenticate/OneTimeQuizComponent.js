@@ -26,7 +26,7 @@ class OneTimeQuizComponent extends Component {
     componentDidUpdate(){
         if(this.state.token != undefined && this.state.shownAlert == false){
             Alert.info('Enter username and click play to start', {
-                position: 'top-right',
+                position: 'bottom-right',
                 effect: 'slide'
             });
             this.setState({ shownAlert: true});
