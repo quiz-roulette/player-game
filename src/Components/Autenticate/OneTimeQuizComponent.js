@@ -5,6 +5,7 @@ import Server from '../API/server'
 import './Common.css';
 import { Link } from 'react-router-dom'
 import Alert from 'react-s-alert';
+import { emitOnlineUser } from '../API/socket';
 
 class OneTimeQuizComponent extends Component {
     constructor(props) {
@@ -55,7 +56,7 @@ class OneTimeQuizComponent extends Component {
                                 Server.getOneTimeQuiz(this.state.Password).then((res1) => {
                                     // this.props.history.push("/quiz/" + res1.data.QuizId + "/" + res1.data.CategoryName);
                                     var url = "quiz/" + res1.data.QuizId + "/" + res1.data.CategoryName;
-
+                                    emitOnlineUser({ QuizUserId: localStorage.getItem('u') })
                                     this.props.history.push('/avatarselection/' + encodeURIComponent(url));
                                 })
                             }
