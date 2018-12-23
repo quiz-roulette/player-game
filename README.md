@@ -20,19 +20,19 @@
 ## Screen Grab
 
 - Login
-![login](./screenshots/Screen Shot 151.png)
+![login](screenshots/Screen Shot 151.png)
 
 - Select Avatar
-![login](./screenshots/Screen Shot 152.png)
+![login](screenshots/Screen Shot 152.png)
 
 - Quiz Time
-![login](./screenshots/Screen Shot 153.png)
+![login](screenshots/Screen Shot 153.png)
 
 - Question with Image
-![login](./screenshots/Screen Shot 154.png)
+![login](screenshots/Screen Shot 154.png)
 
 - Result
-![login](./screenshots/Screen Shot 156.png)
+![login](screenshots/Screen Shot 156.png)
 
 ## Contributors
 
