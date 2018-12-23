@@ -97,7 +97,7 @@ class OneTimeQuizComponent extends Component {
             }
             else {
                 this.setState({ loading: false })
-                Alert.error('Username cannot contain special characters', {
+                Alert.error('Username cannot contain special characters(including white space)', {
                     position: 'top-right',
                     effect: 'slide',
                     timeout: 'none'
