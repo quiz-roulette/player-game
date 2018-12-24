@@ -154,7 +154,7 @@ class OneTimeQuizComponent extends Component {
                             Token: 
                         </Col>
                         <Col sm={9}>
-                            <FormControl type="text" placeholder="Token" value={this.state.token} disabled={this.state.loading} onChange={this.handlePassword} /><br />
+                            <FormControl type="text" placeholder="Token" value={this.state.token} disabled={this.state.loading || this.state.token} onChange={this.handlePassword} /><br />
                             <span className="extranote" hidden={this.state.token}>Token will be provided by the quiz administrator.</span>
                         </Col>
                     </FormGroup>
