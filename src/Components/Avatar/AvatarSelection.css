@@ -20,6 +20,10 @@ label > input:checked + .avatarImg{ /* (RADIO CHECKED) IMAGE STYLES */
     text-align: center;
 }
 
+.avatarSelection > Button:hover{
+    color: white;
+}
+
 .avatarul {
     list-style: none;
   }
