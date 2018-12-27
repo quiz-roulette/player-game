@@ -105,7 +105,7 @@ class ProfileComponent extends Component {
                         <input className="avatarinput" type='radio' value='1' name='radio' id={element.AvatarName} onChange={() => this.handleOnChangeAvatar(element.Image)} />
 
                         <label className="avatarlabel" for={element.AvatarName}>
-                            <img src={element.Image} /><br />
+                            <img className="avatarImg" src={element.Image} /><br />
                             {element.AvatarName}
                         </label>
                     </li>
