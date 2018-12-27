@@ -45,6 +45,11 @@ class AvatarSelectionComponent extends Component {
         this.setState({
             selectedAvatar: url
         });
+
+        Alert.info('Click submit to confirm', {
+            position: 'top-right',
+            effect: 'slide'
+        });
     }
 
     render() {
@@ -71,7 +76,7 @@ class AvatarSelectionComponent extends Component {
                     {rows}
                 </ul>
                 <br />
-                <Button className="avatarSelectBtn" onClick={this.handleAvatarSelection}>Select</Button>
+                <Button bsStyle="custom" style={{backgroundColor: "#577ae7"}} onClick={this.handleAvatarSelection}>Submit</Button>
             </div>)
     }
 }
