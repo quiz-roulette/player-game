@@ -6,6 +6,9 @@ import Server from '../API/server'
 import './QuizComponent.css';
 import { Link } from 'react-router-dom'
 import Alert from 'react-s-alert';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class QuizComponent extends Component {
 
   constructor(props) {
@@ -32,7 +35,8 @@ class QuizComponent extends Component {
       questionTotal: 0,
       endpoint: "https://axperience.herokuapp.com/",
       avatar: "https://axperienceapp.azurewebsites.net/avatar/bee",
-      fact: null
+      fact: null,
+      streak: 0
     };
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
 
@@ -170,9 +174,28 @@ class QuizComponent extends Component {
     const socket = socketIOClient(this.state.endpoint)
     var updatedAnswersCount = this.state.score;
     var newScore = 0;
-    if (answer !== -1 && Number.parseInt(answer) === this.state.CorrectChoice.find(x => x.QuestionId === this.state.questionId).ChoiceId)
+    if (answer !== -1 && Number.parseInt(answer) === this.state.CorrectChoice.find(x => x.QuestionId === this.state.questionId).ChoiceId) {
       newScore = 250;
+      this.setState((state, props) => {
+        return {
+          streak: state.streak + 1
+        };
+      });
+    }
+    else {
+      this.setState({
+        streak: 0
+      })
+    }
 
+    if (this.state.streak >= 5) {
+      toast.info("Answering Streak +50 points", {
+        position: toast.POSITION.BOTTOM_CENTER
+      });
+      this.setState({
+        streak: 0
+      })
+    }
     var obj = {
       QuizId: this.state.QuizId,
       QuizUserId: localStorage.getItem('u'),
@@ -234,20 +257,23 @@ class QuizComponent extends Component {
 
   renderQuiz() {
     return (
-      <Quiz
-        answer={this.state.answer}
-        answerOptions={this.state.answerOptions}
-        questionId={this.state.questionId}
-        question={this.state.question}
-        questionTotal={this.state.questionTotal}
-        result={this.state.score}
-        image={this.state.image}
-        onAnswerSelected={this.handleAnswerSelected}
-        counter={this.state.counter}
-        timer={this.state.timer}
-        avatar={this.state.avatar}
-        answerSelected={this.state.answerSelected}
-      />
+      <div>
+        <Quiz
+          answer={this.state.answer}
+          answerOptions={this.state.answerOptions}
+          questionId={this.state.questionId}
+          question={this.state.question}
+          questionTotal={this.state.questionTotal}
+          result={this.state.score}
+          image={this.state.image}
+          onAnswerSelected={this.handleAnswerSelected}
+          counter={this.state.counter}
+          timer={this.state.timer}
+          avatar={this.state.avatar}
+          answerSelected={this.state.answerSelected}
+        />
+        <ToastContainer autoClose={3000} />
+      </div>
     );
   }
 
