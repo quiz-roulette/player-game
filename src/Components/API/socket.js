@@ -14,4 +14,8 @@ function emitOnlineUser(user){
     socket.emit('user at waiting page',user);
 }
 
-export { subscribeToOnlineUser, subscribeToResult, emitOnlineUser};
+function emitUserRank(userid, rank, quizId){
+  socket.emit('quiz user rank',{ QuizUserId: userid, Rank: rank, QuizId: quizId});
+}
+
+export { subscribeToOnlineUser, subscribeToResult, emitOnlineUser, emitUserRank};

@@ -5,7 +5,7 @@ import { Grid, Row, Col, Button, Table } from 'react-bootstrap'
 import socketIOClient from 'socket.io-client'
 import Server from '../API/server'
 import ProgressBarComponent from '../ProgressBarComponent/ProgressBarComponent'
-import { subscribeToResult, subscribeToOnlineUser } from '../API/socket';
+import { subscribeToResult, subscribeToOnlineUser,emitUserRank } from '../API/socket';
 import ideate from '../../assest/ideate.gif'
 const users = [];
 
@@ -61,6 +61,10 @@ class DashboardComponent extends Component {
                             Results: res.data,
                             QuestionCount: res1.data[0].Count
                         }));
+
+                        for(var el=0; el < res.data.length; el++){
+                            emitUserRank(res.data[el].OriginalUserId,el+1,res.data[el].QuizId);
+                        }
                     })
                 }
                 this.setState({ IsQueryServer: false});

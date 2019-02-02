@@ -145,6 +145,15 @@ class QuizComponent extends Component {
       }
     })
 
+    socket.on('quiz user rank',(obj) => {
+      console.log(obj);
+      if(obj.QuizId == this.state.QuizId && obj.QuizUserId == this.state.QuizUserId){
+        this.setState({
+          rank: obj.Rank
+        })
+      }
+    })
+
   }
 
   shuffleArray(array) {
@@ -237,8 +246,7 @@ class QuizComponent extends Component {
       image: this.state.Questions[questionCounter].ImageUrl,
       answerOptions: this.state.Choices.filter(x => x.QuestionId === this.state.Questions[questionCounter].QuestionId),
       answer: -1,
-      answerSelected: -1,
-      extraMessage: this.random(2,50)+'% answered correctly'
+      answerSelected: -1
     });
   }
 
@@ -256,11 +264,11 @@ class QuizComponent extends Component {
   }
 
   setResults(result) {
-
     this.setState({ result: this.state.score });
   }
 
   renderQuiz() {
+    const rank = this.state.rank ? 'your current rank: '+this.state.rank : null
     return (
       <div className="innerContainer">
         <Quiz
@@ -276,7 +284,7 @@ class QuizComponent extends Component {
           timer={this.state.timer}
           avatar={this.state.avatar}
           answerSelected={this.state.answerSelected}
-          extraMessage={this.state.extraMessage}
+          extraMessage={rank}
         />
         <ToastContainer autoClose={3000} />
       </div>
