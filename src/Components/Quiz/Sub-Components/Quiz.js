@@ -41,6 +41,7 @@ function Quiz(props) {
           </Row>
         </Grid>
       </div>
+      { props.extraMessage != null ? <span className="extraMessage">{props.extraMessage}</span>: ""}
     </div>
   );
 }

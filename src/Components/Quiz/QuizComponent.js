@@ -237,8 +237,13 @@ class QuizComponent extends Component {
       image: this.state.Questions[questionCounter].ImageUrl,
       answerOptions: this.state.Choices.filter(x => x.QuestionId === this.state.Questions[questionCounter].QuestionId),
       answer: -1,
-      answerSelected: -1
+      answerSelected: -1,
+      extraMessage: this.random(2,50)+'% answered correctly'
     });
+  }
+
+  random(min,max){
+    return Math.floor(Math.random() * (+max - +min)) + +min;
   }
 
   getResults() {
@@ -257,7 +262,7 @@ class QuizComponent extends Component {
 
   renderQuiz() {
     return (
-      <div>
+      <div className="innerContainer">
         <Quiz
           answer={this.state.answer}
           answerOptions={this.state.answerOptions}
@@ -271,6 +276,7 @@ class QuizComponent extends Component {
           timer={this.state.timer}
           avatar={this.state.avatar}
           answerSelected={this.state.answerSelected}
+          extraMessage={this.state.extraMessage}
         />
         <ToastContainer autoClose={3000} />
       </div>
