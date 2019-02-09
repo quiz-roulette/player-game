@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import { SignInComponent, SignUpComponent, ProfileComponent, OneTimeQuizComponent } from '../index';
+import { SignInComponent, SignUpComponent, ProfileComponent, OneTimeQuizComponent,SimLoginComponent } from '../index';
 import Server from '../API/server';
 import Alert from 'react-s-alert';
 
@@ -16,7 +16,8 @@ class AccountComponent extends Component {
         }
         this.state = {
             defaultActiveKey: 2,
-            token: params.token
+            token: params.token,
+            sim: params.sim
         }
 
         Server.getBlank().then((res) => {
@@ -60,7 +61,11 @@ class AccountComponent extends Component {
                         <SignInComponent />
                     </Tab>
                     <Tab eventKey={2} title="One Time Quiz(Beta)">
-                        <OneTimeQuizComponent token={this.state.token} />
+                        {
+                            this.state.sim ? 
+                            <SimLoginComponent token={this.state.token} /> :
+                            <OneTimeQuizComponent token={this.state.token} />
+                        }
                         {/* <h6>Coming Soon</h6> */}
                     </Tab>
                     {/* <Tab eventKey={3} title="Sign Up">

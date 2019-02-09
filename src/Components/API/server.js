@@ -29,6 +29,11 @@ class Server {
         return Server.AxiosInstance().post(Server.URL()+"/addFrontEndQuizUser",{QuizUserId: username, Password: password});
     }
 
+    static addSIMQuizUser(name, simid, clubname,token){
+        console.log({Name: name, SIMID: simid, ClubName: clubname, Token: token });
+        return Server.AxiosInstance().post(Server.URL()+"/addSIMQuizUser",{Name: name, SIMID: simid, ClubName: clubname, Token: token });
+    }
+
     static getAvatars(){
         return Server.AxiosInstance().get(Server.URL()+'/avatar');
     }
