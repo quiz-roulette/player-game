@@ -268,7 +268,7 @@ class QuizComponent extends Component {
   }
 
   renderQuiz() {
-    const rank = this.state.rank ? 'your current rank: '+this.state.rank : null
+    const rank = this.state.rank ? 'Your Current Rank: '+this.state.rank : null
     return (
       <div className="innerContainer">
         <Quiz
