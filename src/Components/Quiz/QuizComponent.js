@@ -145,9 +145,9 @@ class QuizComponent extends Component {
       }
     })
 
-    socket.on('quiz user rank',(obj) => {
+    socket.on('quiz user rank', (obj) => {
       console.log(obj);
-      if(obj.QuizId == this.state.QuizId && obj.QuizUserId == this.state.QuizUserId){
+      if (obj.QuizId == this.state.QuizId && obj.QuizUserId == this.state.QuizUserId) {
         this.setState({
           rank: obj.Rank
         })
@@ -250,7 +250,7 @@ class QuizComponent extends Component {
     });
   }
 
-  random(min,max){
+  random(min, max) {
     return Math.floor(Math.random() * (+max - +min)) + +min;
   }
 
@@ -268,7 +268,7 @@ class QuizComponent extends Component {
   }
 
   renderQuiz() {
-    const rank = this.state.rank ? 'Your Current Rank: '+this.state.rank : null
+    const rank = this.state.rank ? 'Your Current Rank: ' + this.state.rank : null
     return (
       <div className="innerContainer">
         <Quiz
@@ -310,11 +310,18 @@ class QuizComponent extends Component {
 
   renderLoading() {
     return (
-      <div className="loading-center">
-        {/* <img src={loadinggif} height="300px" width="700px"/> */}
-        {/* <img src={this.state.avatar}/><br/>
-        <h5>Loading...</h5> */}
+      // <div className="loading-center">
+      //    <img src={loadinggif} height="300px" width="700px"/> 
+      //    <img src={this.state.avatar}/><br/>
+      //   <h5>Loading...</h5> 
+      <div>
+        <div class="centered-loading">
+          <div class="blob-1"></div>
+          <div class="blob-2"></div>
+        </div>
+        <span class="centered-loading-text">loading...</span>
       </div>
+      // </div>
     );
   }
 
