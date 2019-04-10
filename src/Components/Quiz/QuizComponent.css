@@ -212,7 +212,7 @@ input[type="radio"] {
     position: absolute;
     bottom: 0;
     left: 0;
-    background: rgb(87, 122, 231);
+    background: #577ae7;
     width: 100%;
     padding: 3%;
     font-size: 140%;
