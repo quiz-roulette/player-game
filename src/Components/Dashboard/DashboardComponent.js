@@ -7,6 +7,9 @@ import Server from '../API/server'
 import ProgressBarComponent from '../ProgressBarComponent/ProgressBarComponent'
 import { subscribeToResult, subscribeToOnlineUser,emitUserRank } from '../API/socket';
 import ideate from '../../assest/ideate.gif'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const users = [];
 
 class DashboardComponent extends Component {
@@ -27,7 +30,16 @@ class DashboardComponent extends Component {
         this.update();
 
         subscribeToResult((err, result) => {
-            this.update();
+            console.log(result);
+            if(result.QuizId == this.state.QuizId){
+                if(result.Score != 0){
+                    var tempUser = result.QuizUserId.split('_')[1];
+                    toast.info(tempUser+" scored "+result.Score, {
+                        position: toast.POSITION.BOTTOM_LEFT
+                      });
+                    this.update();
+                }
+            }
         });
 
         subscribeToOnlineUser((err, result) => {
@@ -100,6 +112,7 @@ class DashboardComponent extends Component {
                 </Row>
                 {this.state.Results.length > 0 ? (this.state.View === 'LIST' ? this.renderList() : this.renderTable()) : <img src={ideate} className="waiting-results" />}
                 <br />
+                <ToastContainer autoClose={3000} />
                 <p className="footernote">The winner is based on the algorithm to choose the best time and score.</p>
             </div>)
     }
