@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Alert from 'react-s-alert';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import loadinggif from '../../assest/searching.gif';
 class QuizComponent extends Component {
 
   constructor(props) {
@@ -310,17 +310,15 @@ class QuizComponent extends Component {
 
   renderLoading() {
     return (
-      // <div className="loading-center">
-      //    <img src={loadinggif} height="300px" width="700px"/> 
-      //    <img src={this.state.avatar}/><br/>
-      //   <h5>Loading...</h5> 
-      <div>
-        <div class="centered-loading">
-          <div class="blob-1"></div>
-          <div class="blob-2"></div>
-        </div>
-        <span class="centered-loading-text">loading...</span>
+      <div className="loading-center">
+         {/* <img src={loadinggif} height="300px" width="700px"/>  */}
       </div>
+      //   <div class="centered-loading">
+      //     <div class="blob-1"></div>
+      //     <div class="blob-2"></div>
+      //   </div>
+      //   <span class="centered-loading-text">loading...</span>
+      // </div>
       // </div>
     );
   }
