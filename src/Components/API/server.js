@@ -1,5 +1,55 @@
 import axios from 'axios';
 
+const avatarsPath = process.env.PUBLIC_URL + '/avatars/';
+
+const avatars = [
+    {
+        "AvatarName": "Bee",
+        "Image": "https://axperienceapp.azurewebsites.net/avatar/bee",
+        "LocalUrl":avatarsPath+"bee.gif"
+    },
+    {
+        "AvatarName": "Bird",
+        "Image": "https://axperienceapp.azurewebsites.net/avatar/bird",
+        "LocalUrl":avatarsPath+"bird.gif"
+    },
+    {
+        "AvatarName": "Chameleon",
+        "Image": "https://axperienceapp.azurewebsites.net/avatar/crocodile",
+        "LocalUrl":avatarsPath+"crocodile.gif"
+    },
+    {
+        "AvatarName": "Climb",
+        "Image": "https://axperienceapp.azurewebsites.net/avatar/climb",
+        "LocalUrl":avatarsPath+"climb.gif"
+    },
+    {
+        "AvatarName": "fox",
+        "Image": "https://axperienceapp.azurewebsites.net/avatar/fox",
+        "LocalUrl":avatarsPath+"fox.gif"
+    },
+    {
+        "AvatarName": "Horse",
+        "Image": "https://axperienceapp.azurewebsites.net/avatar/horsenew",
+        "LocalUrl":avatarsPath+"horsenew.gif"
+    },
+    {
+        "AvatarName": "Marker",
+        "Image": "https://axperienceapp.azurewebsites.net/avatar/marker",
+        "LocalUrl":avatarsPath+"marker.gif"
+    },
+    {
+        "AvatarName": "Walk",
+        "Image": "https://axperienceapp.azurewebsites.net/avatar/walk",
+        "LocalUrl":avatarsPath+"walk.gif"
+    },
+    {
+        "AvatarName": "WUQ",
+        "Image": "https://axperienceapp.azurewebsites.net/avatar/wuq",
+        "LocalUrl":avatarsPath+"wuq.gif"
+    }
+];
+
 class Server {
 
     static AxiosInstance(){
@@ -35,7 +85,14 @@ class Server {
     }
 
     static getAvatars(){
-        return Server.AxiosInstance().get(Server.URL()+'/avatar');
+        return new Promise((resolve, reject) => {
+            console.log(avatars);
+            //sending similiar to what Azure will send
+            var obj = {
+                data: avatars
+            }
+            resolve(obj);
+        })
     }
 
     static getQuizUserSummary(userid){

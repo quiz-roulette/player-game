@@ -61,7 +61,7 @@ class AvatarSelectionComponent extends Component {
                         <input className="avatarinput" type='radio' value='1' name='radio' id={element.AvatarName} onChange={() => this.handleOnChangeAvatar(element.Image)} />
 
                         <label className="avatarlabel" for={element.AvatarName}>
-                            <img className="avatarImg" src={element.Image} /><br />
+                            <img className="avatarImg" src={element.LocalUrl} /><br />
                             {element.AvatarName}
                         </label>
                     </li>
