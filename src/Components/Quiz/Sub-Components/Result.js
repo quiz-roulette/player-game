@@ -22,6 +22,7 @@ function Result(props) {
       <blockquote className="fact" hidden={props.fact === null}>
         <p>{props.fact != null ? "Fun Fact: "+props.fact : ""}</p>
       </blockquote>
+      <a href="https://saythanks.io/to/shah-smit">Say Thanks!</a>
     </ReactCSSTransitionGroup>
   );
 
