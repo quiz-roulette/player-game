@@ -154,6 +154,12 @@ class QuizComponent extends Component {
       }
     })
 
+    socket.on('new question', (result) => {
+      if (result.QuizId === this.state.QuizId) {
+        this.setNextQuestionControlled(result)
+      }
+    })
+
   }
 
   shuffleArray(array) {
@@ -250,6 +256,21 @@ class QuizComponent extends Component {
     });
   }
 
+  setNextQuestionControlled(question) {
+    const counter = this.state.counter + 1;
+    const questionCounter = this.state.questionCounter + 1;
+    this.setState({
+      counter: counter,
+      questionCounter: questionCounter,
+      questionId: question.QuestionId,
+      question: question.Text,
+      image: question.ImageUrl,
+      answerOptions: question.Choices,
+      answer: -1,
+      answerSelected: -1
+    });
+  }
+
   random(min, max) {
     return Math.floor(Math.random() * (+max - +min)) + +min;
   }
@@ -311,7 +332,7 @@ class QuizComponent extends Component {
   renderLoading() {
     return (
       <div className="loading-center">
-         {/* <img src={loadinggif} height="300px" width="700px"/>  */}
+        {/* <img src={loadinggif} height="300px" width="700px"/>  */}
       </div>
       //   <div class="centered-loading">
       //     <div class="blob-1"></div>
