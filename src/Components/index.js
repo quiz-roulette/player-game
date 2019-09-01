@@ -6,6 +6,7 @@ import ResetPasswordComponent from './Autenticate/ResetPasswordComponent'
 import HomeComponent from './Home/HomeComponent'
 import NotFoundComponent from './NotFound/NotFoundComponent'
 import QuizComponent from './Quiz/QuizComponent'
+import QuizControlledComponent from './QuizControlled/QuizControlledComponent'
 import AvatarSelectionComponent from './Avatar/AvatarSelectionComponent'
 import QuizListComponent from './Quiz/QuizListComponent'
 import DashboardComponent from './Dashboard/DashboardComponent'
@@ -16,6 +17,7 @@ import AnalyticsComponent from './Analytics/AnalyticsComponent'
 import QuizUserSummaryComponent from './QuizUserSummary/QuizUserSummaryComponent'
 import OneTimeQuizComponent from './Autenticate/OneTimeQuizComponent'
 import SimLoginComponent from './Autenticate/SimLoginComponent'
+import CatalogueComponent from './Catalogue/CatalogueComponent'
 
 export{
     SignInComponent,
@@ -26,6 +28,7 @@ export{
     HomeComponent,
     NotFoundComponent,
     QuizComponent,
+    QuizControlledComponent,
     AvatarSelectionComponent,
     QuizListComponent,
     DashboardComponent,
@@ -35,5 +38,6 @@ export{
     AnalyticsComponent,
     QuizUserSummaryComponent,
     OneTimeQuizComponent,
-    SimLoginComponent
+    SimLoginComponent,
+    CatalogueComponent
 }
