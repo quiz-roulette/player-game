@@ -29,9 +29,6 @@ class QuizControlledComponent extends Component {
       answerSelected: -1,
       result: 0,
       score: 0,
-      Questions: [],
-      Choices: [],
-      CorrectChoice: [],
       timer: 0,
       questionTotal: 0,
       endpoint: "https://axperience.herokuapp.com/",
@@ -51,71 +48,15 @@ class QuizControlledComponent extends Component {
   }
 
   componentWillMount() {
-    // const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));
-    console.log("counter", this.state.Questions.length);
 
-    Server.getQuizByUserIdAndQuizId(localStorage.getItem('u'), this.state.QuizId).then((res) => {
-      res[0].data = this.shuffleArray(res[0].data);
-      console.log(res);
-      console.log(this.state.QuizId);
-      Server.getQuizLogSummationForUserByQuiz(localStorage.getItem('u'), this.state.QuizId).then((res1) => {
-        console.log(res1);
-        if (res[0].data.length === 0) {
-          /**
-           * setting Questionid to -1 due to the render function checks for non zero question id
-           */
-          Server.getQuizUserRank(this.state.QuizId, localStorage.getItem('u')).then((res_rank) => {
-            this.setState({
-              questionId: -1,
-              result: res1.data[0].Score,
-              rank: res_rank.data.Rank
-            });
-          })
-          return;
-        }
-        else if (res1.data.length > 0) {
-          var quizlog = res1.data[0];
-          this.setState({
-            counter: quizlog.QuestionCount,
-            avatar: quizlog.Avatar,
-            timer: quizlog.TimeTaken,
-            score: quizlog.Score,
-            questionTotal: quizlog.QuestionCount
-          })
-        }
-        this.setState((prevState, props) => ({
-          Questions: res[0].data,
-          Choices: res[1].data,
-          CorrectChoice: res[2].data,
-          questionTotal: res[0].data.length + prevState.questionTotal
-        }));
-
-        this.setState({
-          question: this.state.Questions[0].Text,
-          questionId: this.state.Questions[0].QuestionId,
-          answerOptions: this.state.Choices.filter(x => x.QuestionId === this.state.Questions[0].QuestionId),
-          image: this.state.Questions[0].ImageUrl,
-        });
-
-        Server.getQuizUserAvatar(localStorage.getItem('u')).then((res) => {
-          console.log('avatar found', res);
-          this.setState({
-            avatar: res.data
-          })
-        })
-        setInterval(() => {
-          this.setState((prevState, props) => {
-            return { timer: prevState.timer + 1 };
-          });
-        }, 1000);
+    //Added - Controlled
+    Server.getQuizUserAvatar(localStorage.getItem('u')).then((res) => {
+      console.log('avatar found', res);
+      this.setState({
+        avatar: res.data
       })
-    }).catch((err) => {
-      Alert.error('Unable to set up quiz', {
-        position: 'bottom-right',
-        effect: 'slide',
-        timeout: 'none'
-      });
     })
+    //Added - End
 
     const socket = socketIOClient(this.state.endpoint)
     //Expecting {QuizId: quizid}
@@ -163,25 +104,6 @@ class QuizControlledComponent extends Component {
 
   }
 
-  shuffleArray(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-  };
-
   handleAnswerSelected(event) {
     this.setUserAnswer(event.currentTarget.value);
   }
@@ -190,28 +112,28 @@ class QuizControlledComponent extends Component {
     const socket = socketIOClient(this.state.endpoint)
     var updatedAnswersCount = this.state.score;
     var newScore = 0;
-    if (answer !== -1 && Number.parseInt(answer) === this.state.CorrectChoice.find(x => x.QuestionId === this.state.questionId).ChoiceId) {
+    if (answer !== -1 && Number.parseInt(answer) === this.state.CorrectChoiceId) {
       newScore = 250;
-      this.setState((state, props) => {
-        return {
-          streak: state.streak + 1
-        };
-      });
+      // this.setState((state, props) => {
+      //   return {
+      //     streak: state.streak + 1
+      //   };
+      // });
     }
     else {
-      this.setState({
-        streak: 0
-      })
+      // this.setState({
+      //   streak: 0
+      // })
     }
 
-    if (this.state.streak >= 5) {
-      toast.info("Answering Streak +50 points", {
-        position: toast.POSITION.BOTTOM_CENTER
-      });
-      this.setState({
-        streak: 0
-      })
-    }
+    // if (this.state.streak >= 5) {
+    //   toast.info("Answering Streak +50 points", {
+    //     position: toast.POSITION.BOTTOM_CENTER
+    //   });
+    //   this.setState({
+    //     streak: 0
+    //   })
+    // }
     var obj = {
       QuizId: this.state.QuizId,
       QuizUserId: localStorage.getItem('u'),
@@ -241,22 +163,6 @@ class QuizControlledComponent extends Component {
     });
   }
 
-  setNextQuestion() {
-    const counter = this.state.counter + 1;
-    const questionCounter = this.state.questionCounter + 1;
-
-    this.setState({
-      counter: counter,
-      questionCounter: questionCounter,
-      questionId: this.state.Questions[questionCounter].QuestionId,
-      question: this.state.Questions[questionCounter].Text,
-      image: this.state.Questions[questionCounter].ImageUrl,
-      answerOptions: this.state.Choices.filter(x => x.QuestionId === this.state.Questions[questionCounter].QuestionId),
-      answer: -1,
-      answerSelected: -1
-    });
-  }
-
   setNextQuestionControlled(question) {
     const counter = this.state.counter + 1;
     const questionCounter = this.state.questionCounter + 1;
@@ -268,7 +174,8 @@ class QuizControlledComponent extends Component {
       image: question.ImageUrl,
       answerOptions: question.Choices,
       answer: -1,
-      answerSelected: -1
+      answerSelected: -1,
+      correctAnswer: question.CorrectChoiceId
     });
   }
 

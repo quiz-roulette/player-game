@@ -154,11 +154,11 @@ class QuizComponent extends Component {
       }
     })
 
-    socket.on('new question', (result) => {
-      if (result.QuizId === this.state.QuizId) {
-        this.setNextQuestionControlled(result)
-      }
-    })
+    // socket.on('new question', (result) => {
+    //   if (result.QuizId === this.state.QuizId) {
+    //     // this.setNextQuestionControlled(result)
+    //   }
+    // })
 
   }
 
@@ -256,20 +256,20 @@ class QuizComponent extends Component {
     });
   }
 
-  setNextQuestionControlled(question) {
-    const counter = this.state.counter + 1;
-    const questionCounter = this.state.questionCounter + 1;
-    this.setState({
-      counter: counter,
-      questionCounter: questionCounter,
-      questionId: question.QuestionId,
-      question: question.Text,
-      image: question.ImageUrl,
-      answerOptions: question.Choices,
-      answer: -1,
-      answerSelected: -1
-    });
-  }
+  // setNextQuestionControlled(question) {
+  //   const counter = this.state.counter + 1;
+  //   const questionCounter = this.state.questionCounter + 1;
+  //   this.setState({
+  //     counter: counter,
+  //     questionCounter: questionCounter,
+  //     questionId: question.QuestionId,
+  //     question: question.Text,
+  //     image: question.ImageUrl,
+  //     answerOptions: question.Choices,
+  //     answer: -1,
+  //     answerSelected: -1
+  //   });
+  // }
 
   random(min, max) {
     return Math.floor(Math.random() * (+max - +min)) + +min;
