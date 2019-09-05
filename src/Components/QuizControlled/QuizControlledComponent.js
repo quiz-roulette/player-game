@@ -134,6 +134,7 @@ class QuizControlledComponent extends Component {
     //     streak: 0
     //   })
     // }
+
     var obj = {
       QuizId: this.state.QuizId,
       QuizUserId: localStorage.getItem('u'),
@@ -147,20 +148,25 @@ class QuizControlledComponent extends Component {
     Server.addQuizLog(obj).then((res) => { console.log("added") });
     socket.emit('update quiz user result', obj)
     this.setState({
-      score: updatedAnswersCount,
-      answer: this.state.CorrectChoice.find(x => x.QuestionId === this.state.questionId).ChoiceId,
-      answerSelected: Number.parseInt(answer)
-    }, () => {
-      if (this.state.counter + 1 < this.state.questionTotal) {
-        setTimeout(() => {
-          this.setNextQuestion();
-        }, 500);
-      } else {
-        setTimeout(() => {
-          this.setResults(this.getResults());
-        }, 500);
-      }
-    });
+      questionId: 0,
+      waitingPage: true
+    })
+    clearInterval(this.interval);
+    // this.setState({
+    //   score: updatedAnswersCount,
+    //   answer: this.state.CorrectChoice.find(x => x.QuestionId === this.state.questionId).ChoiceId,
+    //   answerSelected: Number.parseInt(answer)
+    // }, () => {
+    //   if (this.state.counter + 1 < this.state.questionTotal) {
+    //     setTimeout(() => {
+    //       this.setNextQuestion();
+    //     }, 500);
+    //   } else {
+    //     setTimeout(() => {
+    //       this.setResults(this.getResults());
+    //     }, 500);
+    //   }
+    // });
   }
 
   setNextQuestionControlled(question) {
@@ -175,8 +181,24 @@ class QuizControlledComponent extends Component {
       answerOptions: question.Choices,
       answer: -1,
       answerSelected: -1,
-      correctAnswer: question.CorrectChoiceId
+      correctAnswer: question.CorrectChoiceId,
+      timer: question.CountDownTimer
     });
+
+    this.interval = setInterval(() => {
+      if (this.state.timer == 0) {
+        this.setState({
+          questionId: 0,
+          waitingPage: true
+        })
+        clearInterval(this.interval);
+      }
+      else {
+        this.setState((prevState, props) => {
+          return { timer: prevState.timer - 1 };
+        });
+      }
+    }, 1000);
   }
 
   random(min, max) {
@@ -252,14 +274,25 @@ class QuizControlledComponent extends Component {
     );
   }
 
+  renderWaitingPage(){
+    return (<div>
+      It is a waiting page, probably other users have yet to answer the question!
+    </div>);
+  }
+
   render() {
-    if (this.state.questionId != 0) {
+    //if waiting show loading
+    //if timer up, show score
+    //if new question show question.
+    //if ended, show result
+    if (this.state.waitingPage == false && this.state.questionId != 0) {
       if (this.state.result) {
         return this.renderResult();
       }
       else return this.renderQuiz();
     }
-    else return this.renderLoading();
+    else if (this.state.waitingPage) return this.renderWaitingPage();
+    else return (<div>Interim Results</div>)
     // return (
     //   <div className="Quiz">
     //     {this.state.result ? this.renderResult() : this.renderQuiz()}
