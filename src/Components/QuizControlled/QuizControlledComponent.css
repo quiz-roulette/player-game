@@ -14,6 +14,12 @@
     font-size: large;
 }
 
+.titlequiz{
+    font-size: large;
+    font-style: bold;
+    margin-left: 43%;
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);

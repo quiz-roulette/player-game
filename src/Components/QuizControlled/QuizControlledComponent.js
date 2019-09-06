@@ -20,6 +20,7 @@ const SOCKET_STOP_QUIZ = "stop quiz"
 const SOCKET_UPDATE_QUIZ_USER_RESULT = "update quiz user result"
 const SOCKET_QUIZ_USER_RANK = "quiz user rank"
 const SOCKET_NEW_QUESTION = "new question"
+const SOCKET_STOP_QUESTION = "stop question"
 
 class QuizControlledComponent extends Component {
 
@@ -76,7 +77,7 @@ class QuizControlledComponent extends Component {
 
       var isEnded = this.state.QuizId === obj.QuizId ? true : false;
       this.setState((prevState, props) => {
-        return { QuizEnded: isEnded, status: FINAL_SCORE};
+        return { QuizEnded: isEnded, status: FINAL_SCORE };
       });
       if (isEnded) {
         //alert?
@@ -105,10 +106,21 @@ class QuizControlledComponent extends Component {
 
     socket.on('new question', (result) => {
       if (result.QuizId === this.state.QuizId) {
-        this.setNextQuestionControlled(result)
+        console.log("RESULT")
+        console.log(result);
+        this.setNextQuestionControlled(result.Question)
       }
     })
 
+    socket.on('stop question', (result) => {
+      if (result.QuizId === this.state.QuizId) {
+        this.setState({
+          questionId: 0,
+          status: In_BETWEEN_SCORE
+        })
+        clearInterval(this.interval);
+      }
+    })
   }
 
   handleAnswerSelected(event) {
@@ -183,8 +195,8 @@ class QuizControlledComponent extends Component {
       counter: counter,
       questionCounter: questionCounter,
       questionId: question.QuestionId,
-      question: question.Text,
-      image: question.ImageUrl,
+      question: question.QuestionText,
+      image: question.QuestionImageURL,
       answerOptions: question.Choices,
       answer: -1,
       answerSelected: -1,
@@ -230,6 +242,7 @@ class QuizControlledComponent extends Component {
     const rank = this.state.rank ? 'Your Current Rank: ' + this.state.rank : null
     return (
       <div className="innerContainer">
+        <span className="titlequiz">Quiz: {this.state.QuizId}</span>
         <Quiz
           answer={this.state.answer}
           answerOptions={this.state.answerOptions}
@@ -282,23 +295,23 @@ class QuizControlledComponent extends Component {
     );
   }
 
-  renderWaitingPage(){
+  renderWaitingPage() {
     return (<div>
       It is a waiting page, probably other users have yet to answer the question!
     </div>);
   }
 
-  renderInterimScore(){
-    return (<div>In between score</div>);
+  renderInterimScore() {
+    return (<div>In between score {this.state.Score}</div>);
   }
 
   render() {
-    if(this.state.status == WAITING_TO_START) return this.renderLoading();
-    else if(this.state.status == QUESTION_RECEIVED) return this.renderQuiz(); 
-    else if(this.state.status == ANSWERED_AND_WAITING) return this.renderWaitingPage();    
-    else if(this.state.status == In_BETWEEN_SCORE) return this.renderInterimScore();
-    else if(this.state.status == FINAL_SCORE) return this.renderResult();
-    else return (<div>Invalid Status Found</div>);                                                    
+    if (this.state.status == WAITING_TO_START) return this.renderLoading();
+    else if (this.state.status == QUESTION_RECEIVED) return this.renderQuiz();
+    else if (this.state.status == ANSWERED_AND_WAITING) return this.renderWaitingPage();
+    else if (this.state.status == In_BETWEEN_SCORE) return this.renderInterimScore();
+    else if (this.state.status == FINAL_SCORE) return this.renderResult();
+    else return (<div>Invalid Status Found</div>);
   }
 
 }

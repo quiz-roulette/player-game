@@ -27,13 +27,13 @@ function Quiz(props) {
       transitionName="example"
     >
       <div key={props.questionId}>
-        <Progress score={props.result} counter={props.counter} total={props.questionTotal} avatar={props.avatar} />
+        {/* <Progress score={props.result} counter={props.counter} total={props.questionTotal} avatar={props.avatar} />
         <QuestionCount
           counter={props.counter}
           total={props.questionTotal}
           result={props.result}
           timer={props.timer}
-        />
+        /> */}
         <Question content={props.question} image={props.image} />
         <Grid>
           <Row className="show-grid">

@@ -55,7 +55,7 @@ class OneTimeQuizComponent extends Component {
 
                                 Server.getOneTimeQuiz(this.state.Password).then((res1) => {
                                     // this.props.history.push("/quiz/" + res1.data.QuizId + "/" + res1.data.CategoryName);
-                                    var url = "quiz/" + res1.data.QuizId + "/" + res1.data.CategoryName;
+                                    var url = "quizcontrolled/" + res1.data.QuizId + "/" + res1.data.CategoryName;
                                     emitOnlineUser({ QuizUserId: localStorage.getItem('u') })
                                     this.props.history.push('/avatarselection/' + encodeURIComponent(url));
                                 })
