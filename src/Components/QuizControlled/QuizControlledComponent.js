@@ -10,6 +10,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import loadinggif from '../../assest/searching.gif';
 
+const WAITING_TO_START = 'waiting_to_start';
+const QUESTION_RECEIVED = 'question_received';
+const ANSWERED_AND_WAITING = 'answered_and_waiting';
+const In_BETWEEN_SCORE = 'in_between_score';
+const FINAL_SCORE = 'final_score';
+
 class QuizControlledComponent extends Component {
 
   constructor(props) {
@@ -34,7 +40,8 @@ class QuizControlledComponent extends Component {
       endpoint: "https://axperience.herokuapp.com/",
       avatar: "https://axperienceapp.azurewebsites.net/avatar/bee",
       fact: null,
-      streak: 0
+      streak: 0,
+      status: WAITING_TO_START
     };
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
 
@@ -281,23 +288,11 @@ class QuizControlledComponent extends Component {
   }
 
   render() {
-    //if waiting show loading
-    //if timer up, show score
-    //if new question show question.
-    //if ended, show result
-    if (this.state.waitingPage == false && this.state.questionId != 0) {
-      if (this.state.result) {
-        return this.renderResult();
-      }
-      else return this.renderQuiz();
-    }
-    else if (this.state.waitingPage) return this.renderWaitingPage();
-    else return (<div>Interim Results</div>)
-    // return (
-    //   <div className="Quiz">
-    //     {this.state.result ? this.renderResult() : this.renderQuiz()}
-    //   </div>
-    // );
+    if(this.state.status == WAITING_TO_START) return (<div>Waiting to start</div>);
+    else if(this.state.status == QUESTION_RECEIVED) return (<div>new Question received</div>); 
+    else if(this.state.status == ANSWERED_AND_WAITING) return (<div>waiting for other to answer</div>);    
+    else if(this.state.status == In_BETWEEN_SCORE) return (<div>In between score</div>);
+    else if(this.state.status == FINAL_SCORE) return (<div>final score view</div>);                                                       
   }
 
 }
