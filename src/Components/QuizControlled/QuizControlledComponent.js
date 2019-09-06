@@ -16,6 +16,11 @@ const ANSWERED_AND_WAITING = 'answered_and_waiting';
 const In_BETWEEN_SCORE = 'in_between_score';
 const FINAL_SCORE = 'final_score';
 
+const SOCKET_STOP_QUIZ = "stop quiz"
+const SOCKET_UPDATE_QUIZ_USER_RESULT = "update quiz user result"
+const SOCKET_QUIZ_USER_RANK = "quiz user rank"
+const SOCKET_NEW_QUESTION = "new question"
+
 class QuizControlledComponent extends Component {
 
   constructor(props) {
@@ -71,15 +76,10 @@ class QuizControlledComponent extends Component {
 
       var isEnded = this.state.QuizId === obj.QuizId ? true : false;
       this.setState((prevState, props) => {
-        return { QuizEnded: isEnded };
+        return { QuizEnded: isEnded, status: FINAL_SCORE};
       });
       if (isEnded) {
-        Alert.info('Quiz has been ended by Admin', {
-          position: 'top-right',
-          effect: 'slide',
-          timeout: 'none'
-        });
-        this.props.history.push("/account/");
+        //alert?
       }
     });
 
@@ -156,7 +156,7 @@ class QuizControlledComponent extends Component {
     socket.emit('update quiz user result', obj)
     this.setState({
       questionId: 0,
-      waitingPage: true
+      status: ANSWERED_AND_WAITING
     })
     clearInterval(this.interval);
     // this.setState({
@@ -189,14 +189,15 @@ class QuizControlledComponent extends Component {
       answer: -1,
       answerSelected: -1,
       correctAnswer: question.CorrectChoiceId,
-      timer: question.CountDownTimer
+      timer: question.CountDownTimer,
+      status: QUESTION_RECEIVED
     });
 
     this.interval = setInterval(() => {
       if (this.state.timer == 0) {
         this.setState({
           questionId: 0,
-          waitingPage: true
+          status: In_BETWEEN_SCORE
         })
         clearInterval(this.interval);
       }
@@ -287,12 +288,17 @@ class QuizControlledComponent extends Component {
     </div>);
   }
 
+  renderInterimScore(){
+    return (<div>In between score</div>);
+  }
+
   render() {
-    if(this.state.status == WAITING_TO_START) return (<div>Waiting to start</div>);
-    else if(this.state.status == QUESTION_RECEIVED) return (<div>new Question received</div>); 
-    else if(this.state.status == ANSWERED_AND_WAITING) return (<div>waiting for other to answer</div>);    
-    else if(this.state.status == In_BETWEEN_SCORE) return (<div>In between score</div>);
-    else if(this.state.status == FINAL_SCORE) return (<div>final score view</div>);                                                       
+    if(this.state.status == WAITING_TO_START) return this.renderLoading();
+    else if(this.state.status == QUESTION_RECEIVED) return this.renderQuiz(); 
+    else if(this.state.status == ANSWERED_AND_WAITING) return this.renderWaitingPage();    
+    else if(this.state.status == In_BETWEEN_SCORE) return this.renderInterimScore();
+    else if(this.state.status == FINAL_SCORE) return this.renderResult();
+    else return (<div>Invalid Status Found</div>);                                                    
   }
 
 }
