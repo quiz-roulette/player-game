@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Server from '../API/server'
-import { Table, thead, Col, FormControl, ControlLabel, Button } from 'react-bootstrap';
+import { Table, thead, Col, FormControl, FormLabel, Button } from 'react-bootstrap';
 import './QuizUserSummaryComponent.css'
 class QuizUserSummaryComponent extends Component {
 

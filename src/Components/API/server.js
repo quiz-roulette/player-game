@@ -214,6 +214,10 @@ class Server {
     static getQuizUserRank(quizid, quizuserId){
         return Server.AxiosInstance().get(Server.URL()+ '/GetQuizUserRank?quizid='+quizid+'&quizuserid='+quizuserId);
     }
+
+    static getPublicQuiz(){
+        return Server.AxiosInstance().get(Server.URL()+ '/getPublicQuiz');
+    }
 }
 
 export default Server;
