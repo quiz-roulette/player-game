@@ -18,7 +18,7 @@ import QuizUserSummaryComponent from './QuizUserSummary/QuizUserSummaryComponent
 import OneTimeQuizComponent from './Autenticate/OneTimeQuizComponent'
 import SimLoginComponent from './Autenticate/SimLoginComponent'
 import CatalogueComponent from './Catalogue/CatalogueComponent'
-
+import ControlledQuizLoginComponent from './Autenticate/ControlledQuizLoginComponent'
 export{
     SignInComponent,
     SignUpComponent,
@@ -39,5 +39,6 @@ export{
     QuizUserSummaryComponent,
     OneTimeQuizComponent,
     SimLoginComponent,
-    CatalogueComponent
+    CatalogueComponent,
+    ControlledQuizLoginComponent
 }

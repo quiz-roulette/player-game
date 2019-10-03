@@ -7,18 +7,19 @@ import { Link } from 'react-router-dom'
 import Alert from 'react-s-alert';
 import { emitOnlineUser } from '../API/socket';
 
-class OneTimeQuizComponent extends Component {
+class ControlledQuizLoginComponent extends Component {
     constructor(props) {
         super(props);
+        const { match: { params } } = props;
         this.handleLogIn = this.handleLogIn.bind(this);
         this.handleuserName = this.handleuserName.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
         console.log(this.props.token);
         this.state = {
             userName: "",
-            Password: this.props.token ? this.props.token : "",
+            Password: params.token ? params.token : "",
             loading: false,
-            token: this.props.token,
+            token: params.token,
             shownAlert: false
         };
 
@@ -55,7 +56,7 @@ class OneTimeQuizComponent extends Component {
 
                                 Server.getOneTimeQuiz(this.state.Password).then((res1) => {
                                     // this.props.history.push("/quiz/" + res1.data.QuizId + "/" + res1.data.CategoryName);
-                                    var url = "quiz/" + res1.data.QuizId + "/" + res1.data.CategoryName;
+                                    var url = "quizcontrolled/" + res1.data.QuizId + "/" + res1.data.CategoryName;
                                     emitOnlineUser({ QuizUserId: localStorage.getItem('u') })
                                     this.props.history.push('/avatarselection/' + encodeURIComponent(url));
                                 })
@@ -149,7 +150,7 @@ class OneTimeQuizComponent extends Component {
                         </Col>
                     </FormGroup>
 
-                    <FormGroup controlId="formHorizontalPassword">
+                    {/* <FormGroup controlId="formHorizontalPassword">
                         <Col componentClass={ControlLabel} sm={3}>
                             Token: 
                         </Col>
@@ -157,7 +158,7 @@ class OneTimeQuizComponent extends Component {
                             <FormControl type="text" placeholder="Token" value={this.state.token} disabled={this.state.loading || this.state.token} onChange={this.handlePassword} /><br />
                             <span className="extranote" hidden={this.state.token}>Token will be provided by the quiz administrator.</span>
                         </Col>
-                    </FormGroup>
+                    </FormGroup> */}
                     <br />
                     {/* <FormGroup controlId="formHorizontalPassword">
                         <Col xsHidden componentClass={ControlLabel} sm={3}></Col>
@@ -179,4 +180,4 @@ class OneTimeQuizComponent extends Component {
     }
 }
 
-export default withRouter(OneTimeQuizComponent);
+export default withRouter(ControlledQuizLoginComponent);
