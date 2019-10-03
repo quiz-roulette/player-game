@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect, withRouter } from 'react-router-dom';
-import { AccountComponent, AnalyticsComponent, QuizComponent, AvatarSelectionComponent, QuizListComponent, NotFoundComponent, SignUpComponent, CalendarComponent, ForgetPasswordComponent, ResetPasswordComponent, HomeComponent, DashboardComponent, QuizControlledComponent, CatalogueComponent } from './Components'
+import { AccountComponent, AnalyticsComponent, QuizComponent, AvatarSelectionComponent, QuizListComponent,ControlledQuizLoginComponent, NotFoundComponent, SignUpComponent, CalendarComponent, ForgetPasswordComponent, ResetPasswordComponent, HomeComponent, DashboardComponent, QuizControlledComponent, CatalogueComponent } from './Components'
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
@@ -43,6 +43,7 @@ class App extends Component {
                                 <Route path="/dashboard/:quizid" component={DashboardComponent} />
                                 <Route path="/analytics" component={AnalyticsComponent} />
                                 <Route path="/avatarselection/:redirectURL" component={AvatarSelectionComponent} />
+                                <Route path="/controlledquiz/:token" component={ControlledQuizLoginComponent}/>
                                 <Redirect from='*' to='/404' />
                             </Switch>
                         </div>
