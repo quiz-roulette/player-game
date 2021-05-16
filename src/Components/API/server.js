@@ -62,6 +62,16 @@ class Server {
             mode: 'no-cors'});
     }
 
+    static AnotherAxiosInstance(){
+        return axios.create({
+            //baseURL: 'https://digitaltrackerserver.azurewebsites.net',
+            baseURL: "http://localhost:33000",
+            headers: { 
+                "Access-Control-Allow-Origin" : "*"
+            },
+            mode: 'no-cors'});
+    }
+
     static URL() {
         return "";
     }
@@ -134,7 +144,8 @@ class Server {
     }
 
     static addQuizLog(quizlog){
-        return Server.AxiosInstance().post(Server.URL()+'/quizlog',quizlog);
+        console.log("quizlog >>> ", quizlog)
+        return Server.AnotherAxiosInstance().post(Server.URL()+'/quizlog',quizlog);
     }
 
     static getQuizLog(quizId){

@@ -43,3 +43,29 @@
 
 - [Smit](https://github.com/shah-smit)
 - [Xerxes](https://github.com/XXerxesG)
+
+
+## Dockerization
+
+Step 1 - Build Image
+
+```docker
+docker build --no-cache -t quiz-roulette/player-game . -f Dockerfile
+```
+
+Step 2 - Run the Image
+
+docker run \
+    -itd \
+    --rm \
+    -v ${PWD}:/app \
+    -v /app/node_modules \
+    -p 32000:3000 \
+    -e CHOKIDAR_USEPOLLING=true \
+    quiz-roulette/player-game:latest
+
+docker rmi $(docker images -f "dangling=true" -q)
+
+
+
+Step 3 - Run in KubeCtl

@@ -13,7 +13,7 @@ class QuizListComponent extends Component {
 
         this.state = {
             QuizList: [],
-            endpoint: "https://axperience.herokuapp.com/",
+            endpoint: "http://localhost:30100/",
             loading: false,
             SocketQuizIdList: []
         }

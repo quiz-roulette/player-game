@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import update from 'react-addons-update';
 import { Quiz, Result } from './Sub-Components'
-import socketIOClient from 'socket.io-client'
+import socketIOClient from 'socket.io-client/dist/socket.io.js'
 import Server from '../API/server'
 import './QuizComponent.css';
 import { Link } from 'react-router-dom'
@@ -33,7 +33,7 @@ class QuizComponent extends Component {
       CorrectChoice: [],
       timer: 0,
       questionTotal: 0,
-      endpoint: "https://axperience.herokuapp.com/",
+      endpoint: "http://localhost:30100/",
       avatar: "https://axperienceapp.azurewebsites.net/avatar/bee",
       fact: null,
       streak: 0

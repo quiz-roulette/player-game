@@ -1,6 +1,6 @@
 import openSocket from 'socket.io-client';
 
-const socket = openSocket("https://axperience.herokuapp.com/");
+const socket = openSocket("http://localhost:30100/");
 
 function subscribeToResult(cb) {
   socket.on('update quiz user result', result => cb(null, result));
