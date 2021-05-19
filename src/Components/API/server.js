@@ -110,7 +110,7 @@ class Server {
     }
 
     static getQuizUserAvatar(userid){
-        return Server.AxiosInstance().get(Server.URL()+'/getQuizUserAvatar?QuizUserId='+userid);
+        return Server.AnotherAxiosInstance().get(Server.URL()+'/getQuizUserAvatar?QuizUserId='+userid);
     }
 
     static getQuizList(){
@@ -126,21 +126,21 @@ class Server {
     }
 
     static getQuizById(id){
-        var x = Server.AxiosInstance().get(Server.URL()+'/question?userid='+id);
-        var y = Server.AxiosInstance().get(Server.URL()+'/choice');
-        var z = Server.AxiosInstance().get(Server.URL()+'/correctchoice');
+        var x = Server.AnotherAxiosInstance().get(Server.URL()+'/question?userid='+id);
+        var y = Server.AnotherAxiosInstance().get(Server.URL()+'/choice');
+        var z = Server.AnotherAxiosInstance().get(Server.URL()+'/correctchoice');
         return Promise.all([x, y, z]);
     }
 
     static getQuizByUserIdAndQuizId(userid,quizid){
-        var x = Server.AxiosInstance().get(Server.URL()+'/question?userid='+userid+'&quizid='+quizid);
-        var y = Server.AxiosInstance().get(Server.URL()+'/choice');
-        var z = Server.AxiosInstance().get(Server.URL()+'/correctchoice');
+        var x = Server.AnotherAxiosInstance().get(Server.URL()+'/question?userid='+userid+'&quizid='+quizid);
+        var y = Server.AnotherAxiosInstance().get(Server.URL()+'/choice');
+        var z = Server.AnotherAxiosInstance().get(Server.URL()+'/correctchoice');
         return Promise.all([x, y, z]);
     }
 
     static getQuizLogSummationForUserByQuiz(userid,quizid){
-        return Server.AxiosInstance().get(Server.URL()+'/getQuizLogSummationForUserByQuiz?quizid='+quizid+'&userid='+userid);
+        return Server.AnotherAxiosInstance().get(Server.URL()+'/getQuizLogSummationForUserByQuiz?quizid='+quizid+'&userid='+userid);
     }
 
     static addQuizLog(quizlog){
@@ -203,7 +203,7 @@ class Server {
     }
 
     static getRandomFact(){
-        return Server.AxiosInstance().get(Server.URL()+"/getRandomFact");
+        return Server.AnotherAxiosInstance().get(Server.URL()+"/getRandomFact");
     }
 
     static getBlank(){
@@ -223,7 +223,7 @@ class Server {
     }
 
     static getQuizUserRank(quizid, quizuserId){
-        return Server.AxiosInstance().get(Server.URL()+ '/GetQuizUserRank?quizid='+quizid+'&quizuserid='+quizuserId);
+        return Server.AnotherAxiosInstance().get(Server.URL()+ '/GetQuizUserRank?quizid='+quizid+'&quizuserid='+quizuserId);
     }
 
     static getPublicQuiz(){
