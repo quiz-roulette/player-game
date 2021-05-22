@@ -164,7 +164,7 @@ class Server {
 
     //At the moment it only updates avatar
     static updateUserAvatar(userId, avatarImage){
-        return Server.AxiosInstance().patch(Server.URL()+'/quizuser',{QuizUserId: userId, Avatar: avatarImage})
+        return Server.AnotherAxiosInstance().patch(Server.URL()+'/quizuser',{QuizUserId: userId, Avatar: avatarImage})
     }
 
     static sendReport(id){
@@ -215,11 +215,11 @@ class Server {
         if(badwordregex.test(username)){
             throw "Username not available"
         }
-        return Server.AxiosInstance().post(Server.URL()+ '/quiz_token',{QuizUserId: username, Token: token});
+        return Server.AnotherAxiosInstance().post(Server.URL()+ '/quiz_token',{QuizUserId: username, Token: token});
     }
 
     static getOneTimeQuiz(id){
-        return Server.AxiosInstance().get(Server.URL()+ '/quiz_token?quizId='+id);
+        return Server.AnotherAxiosInstance().get(Server.URL()+ '/quiz_token?quizId='+id);
     }
 
     static getQuizUserRank(quizid, quizuserId){
