@@ -65,7 +65,7 @@ class Server {
     static AnotherAxiosInstance(){
         return axios.create({
             //baseURL: 'https://digitaltrackerserver.azurewebsites.net',
-            baseURL: "http://localhost:33000",
+            baseURL: process.env.REACT_APP_LEGACY_SERVICE_URL,
             headers: { 
                 "Access-Control-Allow-Origin" : "*"
             },
