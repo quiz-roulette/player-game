@@ -33,7 +33,7 @@ class QuizComponent extends Component {
       CorrectChoice: [],
       timer: 0,
       questionTotal: 0,
-      endpoint: "http://localhost:30100/",
+      endpoint: process.env.REACT_APP_SOCKET_IO_URL,
       avatar: "https://axperienceapp.azurewebsites.net/avatar/bee",
       fact: null,
       streak: 0

@@ -13,7 +13,7 @@ class QuizListComponent extends Component {
 
         this.state = {
             QuizList: [],
-            endpoint: "http://localhost:30100/",
+            endpoint: process.env.REACT_APP_SOCKET_IO_URL,
             loading: false,
             SocketQuizIdList: []
         }

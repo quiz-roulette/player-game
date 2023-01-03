@@ -1,6 +1,6 @@
 import openSocket from 'socket.io-client';
 
-const socket = openSocket("http://localhost:30100/");
+const socket = openSocket(process.env.REACT_APP_SOCKET_IO_URL);
 
 function subscribeToResult(cb) {
   socket.on('update quiz user result', result => cb(null, result));

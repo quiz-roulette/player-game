@@ -51,7 +51,7 @@ Step 1 - Build Image
 
 ```docker
 docker build --no-cache -t quiz-roulette/player-game . -f Dockerfile
-docker build --no-cache -t quizroulette/player-game:v1.0.0 .
+docker build -t quizroulette/player-game:v1.0.0 .
 docker push quizroulette/player-game:v1.0.0
 ```
 
